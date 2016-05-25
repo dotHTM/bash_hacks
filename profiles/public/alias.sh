@@ -7,7 +7,7 @@
 alias portprep="xcode-select --install; sudo xcodebuild -license"
 
 alias qbashedit="nano ~/.bashrc"
-alias sbashedit="subl ~/.bashrc"
+alias sbashedit="subl ~/.bashrc ~/.profileFiles"
 alias duh="du -h -d 1"
 alias lsa="ls -lha"
 alias lsaf="clear; lsa; ls -la *"

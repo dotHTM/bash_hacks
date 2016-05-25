@@ -9,7 +9,10 @@ export LSCOLORS=ehgxfxcxbxExDxBxBxbhbh
 pathsList="/opt/local/bin
 /opt/local/sbin
 /usr/local/bin
-/Applications/Sublime\ Text.app/Contents/SharedSupport/bin"
+/Applications/Sublime\ Text.app/Contents/SharedSupport/bin
+$baseDir/..
+$baseDir/../Downloaders
+$baseDir/../Webcams"
 
 # for anPath in $pathsList; do
 while read anPath; do
