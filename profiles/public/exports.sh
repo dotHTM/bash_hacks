@@ -10,9 +10,18 @@ pathsList="/opt/local/bin
 /opt/local/sbin
 /usr/local/bin
 /Applications/Sublime\ Text.app/Contents/SharedSupport/bin
-$baseDir/..
-$baseDir/../Downloaders
-$baseDir/../Webcams"
+"
+
+hacksPaths="amuse
+docker
+filer
+web
+web/downloaders
+web/webcams"
+
+for anPath in $hacksPaths; do
+	export PATH="$baseDir/../$anPath${PATH+:}${PATH}"
+done
 
 # for anPath in $pathsList; do
 while read anPath; do
