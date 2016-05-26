@@ -10,7 +10,7 @@ rm ~/.bash_profile
 touch ~/.bashrc
 ln ~/.bashrc ~/.profile
 ln ~/.bashrc ~/.bash_profile
-ln -s $baseDir ~/.profileFiles
+
 
 echo "## Bash hacks profile
 # source $baseDir/bashrc.sh" >> ~/.bashrc
