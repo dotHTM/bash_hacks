@@ -9,6 +9,7 @@ export LSCOLORS=ehgxfxcxbxExDxBxBxbhbh
 pathsList="/opt/local/bin
 /opt/local/sbin
 /usr/local/bin
+/usr/local/sbin
 /Applications/Sublime\ Text.app/Contents/SharedSupport/bin
 "
 
