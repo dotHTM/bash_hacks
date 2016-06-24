@@ -20,10 +20,12 @@ main (){
 	username=`readFile $settingsFile | grep "username" | perl -pe "s/.*=//gi"`
 	password=`readFile $settingsFile | grep "password" | perl -pe "s/.*=//gi"`
 	csrfTokenFormFieldName=`readFile $settingsFile | grep "csrfTokenFormFieldName" | perl -pe "s/.*=//gi"`
+	pathFilterText=`readFile $settingsFile | grep "pathFilterText" | perl -pe "s/.*=//gi"`
 	
 	echo $username
 	echo $password
 	echo $csrfTokenFormFieldName
+	echo $pathFilterText
 }
 
 promptSettings () {
@@ -37,9 +39,13 @@ promptSettings () {
 	read -p "  > " -s password
 	echo "password=$password" >> $settingsFile
 	echo
+	echo "  -  -  -  -"
 	echo "CSRF Token Form Field Name:"
 	read -p "  > " csrfTokenFormFieldName
 	echo "csrfTokenFormFieldName=$csrfTokenFormFieldName" >> $settingsFile
+	echo "Path Filter Text"
+	read -p "  > " pathFilterText
+	echo "pathFilterText=$pathFilterText" >> $settingsFile
 	echo "----------------"
 	
 }
