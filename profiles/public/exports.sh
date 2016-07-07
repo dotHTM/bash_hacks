@@ -50,3 +50,7 @@ export PERL_MM_OPT="INSTALL_BASE=/Users/$USER/perl5"
 # - Set Nano as the default editor
 export EDITOR=/usr/bin/nano
 
+edsubl(){
+	export EDITOR="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
+}
+
