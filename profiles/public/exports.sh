@@ -13,7 +13,7 @@ pathsList="/opt/local/bin
 /Applications/Sublime\ Text.app/Contents/SharedSupport/bin
 "
 
-hacksPaths="/
+hacksPaths="/.
 amuse
 docker
 filer
