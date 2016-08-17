@@ -4,15 +4,25 @@
 
 baseDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-rm ~/.profile
-rm ~/.bash_profile
+cd ~/
 
-touch ~/.bashrc
-ln ~/.bashrc ~/.profile
-ln ~/.bashrc ~/.bash_profile
+if [[ ! -e .profile.bak && ! -e .bash_profile.bak ]]; then
 
+	mv .profile .profile.bak
+	mv .bash_profile .bash_profile.bak
 
-echo "## Bash hacks profile
-# source $baseDir/bashrc.sh" >> ~/.bashrc
+	touch .bashrc
+	ln .bashrc .profile
+	ln .bashrc .bash_profile
 
-echo "It would be a good idea to look at your .bashrc file and verify it's contents"
+	echo "## Bash hacks profile
+	# source $baseDir/bashrc.sh" >> ~/.bashrc
+
+	echo "It would be a good idea to look at your .bashrc file and verify it's contents"
+
+else
+	echo "
+Have you already run this installer?
+You have backups you may want to compare/cleanup before proceeding.
+"
+fi
