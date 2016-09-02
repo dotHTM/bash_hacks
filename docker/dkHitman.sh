@@ -13,7 +13,7 @@ done
 
 echo "== Volumes =="
 for i in $(docker volume ls -q); do
-	docker volume rm -f $i
+	docker volume rm $i
 done
 
 
