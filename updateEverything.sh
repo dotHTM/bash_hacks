@@ -2,24 +2,33 @@
 #
 # 
 
-echo
-echo "==== ports ===="
-sudo /opt/local/bin/port selfupdate
-sudo /opt/local/bin/port upgrade outdated
 
-echo
-echo "==== brew ===="
-/usr/local/bin/brew update
-/usr/local/bin/brew upgrade
+if [[ -e "/opt/local/bin/port" ]]; then
+	echo
+	echo "==== port ===="
+	sudo /opt/local/bin/port selfupdate
+	sudo /opt/local/bin/port upgrade outdated
+fi
 
-echo
-echo "==== gem ===="
-/usr/local/bin/gem update --system
-/usr/local/bin/gem update
+if [[ -e "/usr/local/bin/brew" ]]; then
+	echo
+	echo "==== brew ===="
+	/usr/local/bin/brew update
+	/usr/local/bin/brew upgrade
+fi
 
-echo
-echo "==== npm ===="
-/usr/local/bin/npm update -g
+if [[ -e "/usr/local/bin/gem" ]]; then
+	echo
+	echo "==== gem ===="
+	/usr/local/bin/gem update --system
+	/usr/local/bin/gem update
+fi
+
+if [[ -e "/usr/local/bin/npm" ]]; then
+	echo
+	echo "==== npm ===="
+	/usr/local/bin/npm update -g
+fi
 
 echo
 echo "==== apple ===="
@@ -27,4 +36,6 @@ echo "==== apple ===="
 
 
 echo
+
+
 
