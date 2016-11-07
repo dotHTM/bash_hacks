@@ -3,15 +3,21 @@
 # 
 
 
-# - Lazy
-alias portprep="xcode-select --install; sudo xcodebuild -license"
+# Lazy commands
 
+alias rcreload="source ~/.bashrc"
 alias qbashedit="nano ~/.bashrc"
-alias sbashedit="subl ~/.bashrc --project $baseDir/../bash_hacks.sublime-project"
+alias xcprep="xcode-select --install; sudo xcodebuild -license"
+
 alias duh="du -h -d 1"
 alias lsa="ls -lha"
 alias lsaf="clear; lsa; ls -la *"
-# alias twopen="open -a /Applications/BBedit.app/ "
+
 alias qlynx="cd ~/Downloads/; lynx -cookie_file=/tmp/lynxcookie -accept_all_cookies; rm /tmp/lynxcookie"
-alias primedocker="/Applications/Docker/Docker\ Quickstart\ Terminal.app/Contents/Resources/Scripts/start.sh"
+
+# Sublime Text Helpers
+alias sbashedit="subl ~/.bashrc --project $baseDir/../bash_hacks.sublime-project"
+
+alias subproj="subl --project *.sublime-project"
+alias shost="subl -n /etc/hosts"
 
