@@ -21,3 +21,16 @@ alias sbashedit="subl ~/.bashrc --project $baseDir/../bash_hacks.sublime-project
 alias subproj="subl --project *.sublime-project"
 alias shost="subl -n /etc/hosts"
 
+
+
+# Date fun
+alias dateiso="date \"+%Y%m%d\""
+alias timeiso="date \"+%Y%m%d-%H%M%S\""
+
+
+# Note taking
+
+alias fhist="history > `date '+%Y%m%d_%s'`.hist.$USER.txt"
+
+
+
