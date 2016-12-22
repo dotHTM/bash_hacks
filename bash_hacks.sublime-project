@@ -1,17 +1,19 @@
 {
 	"folders": [
 	{
-		"name": "~",
+		"name": "~ bash",
 		"path": "~",
 		"file_include_patterns": [
 			".bashrc",
 			".bash_profile",
 			".profile",
+			".*"
 		],
 		"folder_exclude_patterns": [
 			"*"
 		]
 	},
+
 	{
 		"path": "./profiles"
 	},
