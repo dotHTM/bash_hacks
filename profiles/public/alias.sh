@@ -7,13 +7,14 @@
 
 alias rcreload="source ~/.bashrc"
 alias qbashedit="nano ~/.bashrc"
-alias xcprep="xcode-select --install; sudo xcodebuild -license"
+alias xcprep="xcode-select --install && sudo xcodebuild -license"
 
 alias duh="du -h -d 1"
+alias ll="ls -lh"
 alias lsa="ls -lha"
 alias lsaf="clear; lsa; ls -la *"
 
-alias qlynx="cd ~/Downloads/; lynx -cookie_file=/tmp/lynxcookie -accept_all_cookies; rm /tmp/lynxcookie"
+alias qlynx="cd ~/Downloads/ && lynx -cookie_file=/tmp/lynxcookie -accept_all_cookies && rm /tmp/lynxcookie"
 
 # Sublime Text Helpers
 alias sbashedit="subl ~/.bashrc --project $baseDir/../bash_hacks.sublime-project"
