@@ -1,27 +1,34 @@
 {
-	"folders": [
-	{
-		"name": "~ bash",
-		"path": "~",
-		"file_include_patterns": [
-			".bashrc",
-			".bash_profile",
-			".profile",
-			".*"
-		],
-		"folder_exclude_patterns": [
-			"*"
-		]
-	},
-
-	{
-		"path": "./profiles"
-	},
-	{
-		"path": ".",
-		"folder_exclude_patterns": [
-			"profiles",
-			".git"
-		]
-	}, ]
+	"folders":
+	[
+		{
+			"file_include_patterns":
+			[
+				".bashrc",
+				".bash_profile",
+				".profile",
+				".*"
+			],
+			"folder_exclude_patterns":
+			[
+				"*"
+			],
+			"name": "~ bash",
+			"path": "~"
+		},
+		{
+			"path": "profiles"
+		},
+		{
+			"folder_exclude_patterns":
+			[
+				"profiles",
+				".git"
+			],
+			"path": "."
+		},
+		{
+			"path": "~/Documents/config"
+		}
+	]
 }
