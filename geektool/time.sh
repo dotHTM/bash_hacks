@@ -5,5 +5,8 @@
 
 
 
-date "+%A%n%Y-%m-%d%n  %H:%M:%S%n %z"
-date -u "+  %H:%M:%S%n %z%n%s"
+date    "+%A%n%Y-%m-%d"
+date    "+ L %H:%M:%S %z"
+date -u "+ U %H:%M:%S %z"
+date    "+ %s"
+
