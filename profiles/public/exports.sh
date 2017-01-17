@@ -13,7 +13,7 @@ pathsList="/opt/local/bin
 /Applications/Sublime\ Text.app/Contents/SharedSupport/bin
 "
 
-hacksPaths="/.
+hacksPaths=".
 amuse
 docker
 filer
@@ -22,7 +22,7 @@ web/downloaders
 web/webcams"
 
 for anPath in $hacksPaths; do
-	export PATH="$baseDir/../$anPath${PATH+:}${PATH}"
+	export PATH="$profileDir/../$anPath${PATH+:}${PATH}"
 done
 
 # for anPath in $pathsList; do

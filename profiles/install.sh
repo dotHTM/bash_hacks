@@ -2,7 +2,7 @@
 #
 # 
 
-baseDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+profileDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 cd ~/
 
@@ -16,7 +16,7 @@ if [[ ! -e .profile.bak && ! -e .bash_profile.bak ]]; then
 	ln .bashrc .bash_profile
 
 	echo "## Bash hacks profile
-	# source $baseDir/bashrc.sh" >> ~/.bashrc
+	# source $profileDir/bashrc.sh" >> ~/.bashrc
 
 	echo "It would be a good idea to look at your .bashrc file and verify it's contents"
 

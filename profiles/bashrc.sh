@@ -2,14 +2,20 @@
 #
 # 
 
-baseDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+profileDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-secondaryList='public
-private'
+secondaryProfileDir='public
+private
+plugins'
 
-for secondaryDir in $secondaryList; do
-	for anFile in `find $baseDir/$secondaryDir -iname "*.sh"`; do
-		source $anFile
+shellFileTypes='sh
+bash'
+
+for secondaryDir in $secondaryProfileDir; do
+	for anFileType in $shellFileTypes; do
+		for anFile in `find $profileDir/$secondaryDir -iname "*.$anFileType"`; do
+			source $anFile
+		done
 	done
 done
 

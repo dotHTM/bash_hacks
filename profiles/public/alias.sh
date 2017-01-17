@@ -18,7 +18,7 @@ alias qlynx="cd ~/Downloads/ && lynx -cookie_file=/tmp/lynxcookie -accept_all_co
 
 ### Sublime Text Helpers
 
-alias sbashedit="subl ~/.bashrc --project $baseDir/../bash_hacks.sublime-project"
+alias sbashedit="subl ~/.bashrc --project $profileDir/../bash_hacks.sublime-project"
 alias shost="subl -n /etc/hosts"
 
 ## Open a Sublime Text project file here or at some path

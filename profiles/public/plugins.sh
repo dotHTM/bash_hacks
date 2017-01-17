@@ -2,10 +2,21 @@
 #
 # 
 
+
+
+# updates
+shell_update_plugins(){
+	mkdir -p $profileDir/plugins
+	cd $profileDir/plugins
+	curl -O https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+}
+
+
+
 # git Stuff
 
-if [ -f ./plugins/.git-completion.bash ]; then
-	source ./plugins/.git-completion.bash
+if [ -f $profileDir/plugins/git-completion.bash ]; then
+	source $profileDir/plugins/git-completion.bash
 fi
 # if [ -f ~/.git-prompt.sh ]; then
 # 	source ~/.git-prompt.sh
