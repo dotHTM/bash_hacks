@@ -18,11 +18,7 @@ echo '
 '
 
 printf "\a"
+sleep .5
 printf "\a"
+sleep .5
 printf "\a"
-sleep 1
-printf "\a"
-printf "\a"
-printf "\a"
-
-

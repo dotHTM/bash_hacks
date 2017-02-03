@@ -16,7 +16,19 @@ alias lsaf="clear; lsa; ls -la *"
 
 alias qlynx="cd ~/Downloads/ && lynx -cookie_file=/tmp/lynxcookie -accept_all_cookies && rm /tmp/lynxcookie"
 
-### Sublime Text Helpers
+# Git 
+
+alias gdiff="git difftool"
+alias gstat="git status"
+alias gadd="git add"
+
+# Logs
+
+alias glbranch="git log --graph --oneline --all --decorate"
+alias glstat="git log --stat -5"
+
+
+# Sublime Text Helpers
 
 alias sbashedit="subl ~/.bashrc --project $profileDir/../bash_hacks.sublime-project"
 alias shost="subl -n /etc/hosts"
@@ -46,5 +58,44 @@ alias timeiso="date \"+%Y%m%d-%H%M%S\""
 
 alias fhist="history > `date '+%Y%m%d_%s'`.hist.$USER.txt"
 
+### Useful functions
 
+looping(){
+	timeToWait=$1 && shift
+	commandToExec=$1 && shift
+	
+	while :; do
+		$commandToExec
+		sleep $timeToWait
+	done
+	
+}
 
+## Search a file(s)
+# searchFile [-d] "quoted/path/to/*.files" "(search|strings or words)" ["additional pattern to match"]
+searchFile() {
+	if [[ $1 == "-d" ]]; then
+		shift
+		debug=true
+	fi
+	inputPath=$1 && shift
+	grepString=$1 && shift
+	additionalString=$1 && shift
+	
+	if [[ -n $additionalString ]]; then
+		highlightString="(${grepString}|${additionalString})"
+	else
+		highlightString="(${grepString})"
+	fi
+	highlightString=`echo ${highlightString} | perl -pe "s/\\//\\\\\\\\\//gi"`
+	perlString="s/(`echo ${highlightString}`)/`tput setaf 1`\1`tput sgr0`/gi"
+	
+	if [[ $debug ]]; then
+		echo "inputPath       = "$inputPath
+		echo "grepString      = "$grepString
+		echo "perlString      = "$perlString
+		echo "highlightString = "$highlightString
+		echo "---- ---- ---- ---- ---- ---- ---- ---- "
+	fi
+	cat $inputPath | grep -E "$grepString" | perl -pe "$perlString"
+}
