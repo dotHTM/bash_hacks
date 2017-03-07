@@ -22,3 +22,7 @@ fi
 # 	source ~/.git-prompt.sh
 # 	PS1="[ \u @ \h : \W$(__git_ps1) ]"
 # fi
+
+
+# # bash completion
+# [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion

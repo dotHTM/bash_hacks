@@ -31,6 +31,7 @@ alias glstat="git log --stat -5"
 # Sublime Text Helpers
 
 alias sbashedit="subl ~/.bashrc --project $profileDir/../bash_hacks.sublime-project"
+alias smlcedit="subl ~/.bashrc --project $profileDir/../../machete-line-commands/machete-line-commands.sublime-project"
 alias shost="subl -n /etc/hosts"
 
 ## Open a Sublime Text project file here or at some path
@@ -68,8 +69,20 @@ looping(){
 		$commandToExec
 		sleep $timeToWait
 	done
-	
 }
+
+
+## Save the results of a command to a variable, and save it so it can be recalled later
+
+tmpCache=""
+cacheCommand(){
+	inputCommand="$*"
+	tmpCache=`$inputCommand`
+	echo $tmpCache
+}
+
+alias ccmd="cacheCommand"
+alias ecmd="echo \$tmpCache"
 
 ## Search a file(s)
 # searchFile [-d] "quoted/path/to/*.files" "(search|strings or words)" ["additional pattern to match"]

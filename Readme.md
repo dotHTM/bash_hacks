@@ -17,6 +17,13 @@ Publicly distributable elements of my bash profile are available for your use or
 3. Run `install.sh`
 4. Check your `.bashrc` file for correctness.
 
+### macOS Termainal Color themes
+
+In the `profile` directory is a `color` directory for macOS Termainal.
+
+- **Kimbie.terminal**
+    - inspired by the work of [Kimbie for TextMate & Sublime Text](https://github.com/idleberg/Kimbie.tmTheme)
+
 ### Updates
 
 TBD later
