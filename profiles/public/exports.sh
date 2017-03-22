@@ -20,8 +20,10 @@ web
 web/downloaders
 web/webcams"
 
+export hackParentPath="${profileDir}/../"
+
 for anPath in $hacksPaths; do
-	export PATH="$profileDir/../$anPath${PATH+:}${PATH}"
+	export PATH="${hackParentPath}${anPath}${PATH+:}${PATH}"
 done
 
 # for anPath in $pathsList; do
