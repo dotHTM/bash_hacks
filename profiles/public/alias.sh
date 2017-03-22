@@ -16,6 +16,13 @@ alias lsaf="clear; lsa; ls -la *"
 
 alias qlynx="cd ~/Downloads/ && lynx -cookie_file=/tmp/lynxcookie -accept_all_cookies && rm /tmp/lynxcookie"
 
+playground(){
+	testDir="${HOME}/priv/test/"
+	cd $testDir
+	mkdir -p ${testDir}
+	subl ${testDir}
+}
+
 # Git 
 
 alias gdiff="git difftool"
