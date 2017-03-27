@@ -11,8 +11,8 @@
 			}
 			*{
 				text-shadow:
-				 -2px -2px  2px #8888,
-				  0px  0px 16px #000;
+				-2px -2px  2px #8888,
+				0px  0px 16px #000;
 			}
 			table, p{ margin-left: 4rem;}
 			.gutter{ width: 1rem; }
@@ -33,11 +33,14 @@
 			.UNIX_TIME      { color: lime;   }
 			.CALENDARHEAD   { color: #ddd;   }
 			.CALENDARLIST   { color: red;    }
-			.CALENDARLEFT   { color: #777;   }
+			.CALENDARLEFT   { color: #555;
+							text-shadow: -1px -1px  4px #bbb,
+				0px  0px 8px #000;  }
 			.CALENDARTODAY  { color: gold;   }
 			.CALENDARRIGHT  { color: #bbb;   }
-			.USERLIST       { color: #777;   }
-			
+			.USERLIST       { color: #555;
+											text-shadow:				 -1px -1px  4px #bbb,
+				0px  0px 8px #000; }
 		</style>
 	</head>
 	<body>
@@ -47,15 +50,15 @@
 <pre><span class="CALENDARHEAD"><TMPL_VAR NAME=CALENDARHEAD></span>
 <span class="CALENDARLIST"><TMPL_VAR NAME=CALENDARLIST></span><span class="CALENDARLEFT"><TMPL_VAR NAME=CALENDARLEFT></span><span class="CALENDARTODAY"><TMPL_VAR NAME=CALENDARTODAY></span><span class="CALENDARRIGHT"><TMPL_VAR NAME=CALENDARRIGHT></span></pre>
 <pre><span class="header">Uptime:</span>  <span class="TIME"><TMPL_VAR NAME=TIME></span>
-         <span class="USERCOUNT"><TMPL_VAR NAME=USERCOUNT></span></pre>
+<span class="USERCOUNT"><TMPL_VAR NAME=USERCOUNT></span></pre>
 <pre><span class="header">Load Averages:</span>
-    <span class="LOAD_AVERAGES"><TMPL_VAR NAME=LOAD_AVERAGES></span></pre>
+<span class="LOAD_AVERAGES"><TMPL_VAR NAME=LOAD_AVERAGES></span></pre>
 <pre><span class="DAY"><TMPL_VAR NAME=DAY></span>
-      <span class="DATE"><TMPL_VAR NAME=DATE></span> <span class="JULIAN"><TMPL_VAR NAME=JULIAN></span></pre>
-<pre><span class="header">Loc:</span>    <span class="LOCAL_TIME"><TMPL_VAR NAME=LOCAL_TIME></span> <span class="LOCAL_TIME_ZONE"><TMPL_VAR NAME=LOCAL_TIME_ZONE></span>
+      <span class="DATE"><TMPL_VAR NAME=DATE></span>   <span class="JULIAN"><TMPL_VAR NAME=JULIAN></span></pre>
+<pre><span class="header">Local:</span>  <span class="LOCAL_TIME"><TMPL_VAR NAME=LOCAL_TIME></span> <span class="LOCAL_TIME_ZONE"><TMPL_VAR NAME=LOCAL_TIME_ZONE></span>
 <span class="header">UTC:</span>    <span class="UTC_TIME"><TMPL_VAR NAME=UTC_TIME></span> <span class="UTC_TIME_ZONE"><TMPL_VAR NAME=UTC_TIME_ZONE></span>
 <span class="header">Unix:</span> <span class="UNIX_TIME"><TMPL_VAR NAME=UNIX_TIME></span></pre>
-		
+
 <pre><span class="USERLIST"><TMPL_VAR NAME=USERLIST></span></pre>
 		
 	</body>

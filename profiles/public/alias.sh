@@ -119,3 +119,28 @@ searchFile() {
 	fi
 	cat $inputPath | grep -E "$grepString" | perl -pe "$perlString"
 }
+
+quickSshfs(){
+	connection=$1 && shift
+	mountPoint=$1 && shift
+	volumeName=$1 && shift
+	
+	if [[ -z $volumeName ]]; then
+		volumeName=`echo $connection | cut -d "@" -f 2 | tr ":/." "_--"`
+	fi
+	
+	if [[ -n $connection && -n $mountPoint ]]; then
+		mkdir -p ${mountPoint}
+		umount ${mountPoint}
+		
+		sshfs ${connection} \
+		${mountPoint} \
+		-o auto_cache \
+		-o volname=$volumeName
+	else
+		echo "Usage: quickSshfs [user@]server.com /path/to/mountPoint [volumeName]"
+	fi
+	
+	
+}
+
