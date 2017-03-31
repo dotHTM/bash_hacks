@@ -5,17 +5,16 @@
 			"file_include_patterns":
 			[
 				".*",
-				".*/*",
+				".*/*"
 			],
 			"folder_include_patterns":
 			[
 				".*",
-				".*/*",
+				".*/*"
 			],
 			"name": "~/.*",
 			"path": "~"
 		},
-
 		{
 			"path": "profiles"
 		},
