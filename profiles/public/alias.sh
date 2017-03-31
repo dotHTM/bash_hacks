@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# 
+#
 
 
 ### Lazy commands
@@ -14,6 +14,10 @@ alias ll="ls -lh"
 alias lsa="ls -lha"
 alias lsaf="clear; lsa; ls -la *"
 
+mkcd(){
+	mkdir -p $1 && cd $1
+}
+
 alias qlynx="cd ~/Downloads/ && lynx -cookie_file=/tmp/lynxcookie -accept_all_cookies && rm /tmp/lynxcookie"
 
 playground(){
@@ -23,7 +27,7 @@ playground(){
 	subl ${testDir}
 }
 
-# Git 
+# Git
 
 alias gdiff="git difftool"
 alias gstat="git status"
@@ -48,9 +52,9 @@ subproj() {
 	if [[ -n $1 ]]; then
 		myPath=$1 && shift
 	fi
-	
+
 	foundProjects=`find ${myPath} -d 1 -iname "*.sublime-project"`
-	
+
 	if [[ -z $foundProjects ]]; then
 		echo "No files found for filter '*.sublime-project'"
 	else
@@ -71,7 +75,7 @@ alias fhist="history > `date '+%Y%m%d_%s'`.hist.$USER.txt"
 looping(){
 	timeToWait=$1 && shift
 	commandToExec=$1 && shift
-	
+
 	while :; do
 		$commandToExec
 		sleep $timeToWait
@@ -101,7 +105,7 @@ searchFile() {
 	inputPath=$1 && shift
 	grepString=$1 && shift
 	additionalString=$1 && shift
-	
+
 	if [[ -n $additionalString ]]; then
 		highlightString="(${grepString}|${additionalString})"
 	else
@@ -109,7 +113,7 @@ searchFile() {
 	fi
 	highlightString=`echo ${highlightString} | perl -pe "s/\\//\\\\\\\\\//gi"`
 	perlString="s/(`echo ${highlightString}`)/`tput setaf 1`\1`tput sgr0`/gi"
-	
+
 	if [[ $debug ]]; then
 		echo "inputPath       = "$inputPath
 		echo "grepString      = "$grepString
@@ -124,15 +128,15 @@ quickSshfs(){
 	connection=$1 && shift
 	mountPoint=$1 && shift
 	volumeName=$1 && shift
-	
+
 	if [[ -z $volumeName ]]; then
 		volumeName=`echo $connection | cut -d "@" -f 2 | tr ":/." "_--"`
 	fi
-	
+
 	if [[ -n $connection && -n $mountPoint ]]; then
 		mkdir -p ${mountPoint}
 		umount ${mountPoint}
-		
+
 		sshfs ${connection} \
 		${mountPoint} \
 		-o auto_cache \
@@ -140,7 +144,15 @@ quickSshfs(){
 	else
 		echo "Usage: quickSshfs [user@]server.com /path/to/mountPoint [volumeName]"
 	fi
-	
-	
 }
+
+dockSpacerTile() {
+	defaults write \
+		com.apple.dock \
+		persistent-apps \
+		-array-add '{"tile-type"="spacer-tile";}'
+	killall Dock
+}
+
+
 
