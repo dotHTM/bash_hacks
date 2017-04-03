@@ -24,8 +24,8 @@ my $LOAD_AVERAGES = $systemUptimeResult =~ /load averages: (.*)/ ? $1 : '';
 my $CALENDAR = `cal` ;
 chop $CALENDAR;
 
-my $todaysDate            = `date "+%d"`;
-chop $todaysDate;
+my $todaysDate            = `date "+%e"`;
+$todaysDate = $todaysDate =~ /(\d+)/ ? $1 : '';
 
 my $headDate = $CALENDAR =~ /(.*)\nSu/ ? $1 : '';
 my $dayList = $CALENDAR =~ /(Su.*Sa)/ ? $1 : '';
