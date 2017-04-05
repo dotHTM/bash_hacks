@@ -45,22 +45,26 @@ alias sbashedit="subl ~/.bashrc --project $profileDir/../bash_hacks.sublime-proj
 alias smlcedit="subl ~/.bashrc --project $profileDir/../../machete-line-commands/machete-line-commands.sublime-project"
 alias shost="subl -n /etc/hosts"
 
-## Open a Sublime Text project file here or at some path
-#   subproj [../path/that/contains/a/project/]
-subproj() {
+
+## open files using a filter and a command
+#    openFilteredFiles "<filter string>" "<command string>" [../path/]
+#  Be sure to quote the filter and command strings
+openFilteredFiles(){
+		filterString="$1" && shift
+	commandString="$1" && shift
 	myPath="."
-	if [[ -n $1 ]]; then
-		myPath=$1 && shift
+	if [[ -n "$1" ]]; then
+		myPath="$1" && shift
 	fi
 
-	foundProjects=`find ${myPath} -d 1 -iname "*.sublime-project"`
-
-	if [[ -z $foundProjects ]]; then
-		echo "No files found for filter '*.sublime-project'"
-	else
-		subl --project ${myPath}/*.sublime-project
+	if [[ -z `find "${myPath}" -d 1 -iname $filterString -exec $commandString {} \;` ]]; then
+		echo "No files found for filter '$filterString'"
 	fi
 }
+
+## Open a Sublime Text project file here or at some path
+#   subproj [../path/that/contains/a/project/]
+alias subproj='openFilteredFiles  "*.sublime-project" "subl --project" '
 
 ### Date fun
 alias dateiso="date \"+%Y%m%d\""
@@ -133,6 +137,11 @@ quickSshfs(){
 		volumeName=`echo $connection | cut -d "@" -f 2 | tr ":/." "_--"`
 	fi
 
+	if [[ -z $mountPoint ]]; then
+		mountPoint="/tmp/$volumeName"
+	fi
+
+
 	if [[ -n $connection && -n $mountPoint ]]; then
 		mkdir -p ${mountPoint}
 		umount ${mountPoint}
@@ -142,7 +151,8 @@ quickSshfs(){
 		-o auto_cache \
 		-o volname=$volumeName
 	else
-		echo "Usage: quickSshfs [user@]server.com /path/to/mountPoint [volumeName]"
+		echo "Usage: quickSshfs [user@]server.com [/path/to/mountPoint [volumeName]]"
+		echo "    If [/path/to/mountPoint] is ommitted, then /tmp will be the parent folder to the mounted file system."
 	fi
 }
 
