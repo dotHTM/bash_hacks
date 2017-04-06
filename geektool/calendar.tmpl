@@ -7,8 +7,7 @@
 				font-size: 2rem;
 				font-family: "SFMono-Regular";
 				line-height: 1.2em;
-				margin-top:    .33rem;
-				margin-bottom: .33rem;
+				margin: .33rem;
 			}
 			*{
 				text-shadow:
@@ -23,35 +22,34 @@
 
 			pre{
 				box-shadow:
-				   2px  2px 8px #fff8 inset,
-				  -2px -2px 8px #0008 inset;
+				   2px  2px 4px #fff6 inset,
+				  -2px -2px 4px #0006 inset;
 				padding: .5rem;
 				background: #0006;
 				border-radius: .75rem;
 			}
 
-			.CALENDARHEAD   { color: #eee;    }
-			.CALENDARLIST   { color: red;     }
-			.CALENDARLEFT   { color: #bbb;    }
+			.header         { color: white;    }
 
-			.CALENDARTODAY  { color: gold;    }
-			.CALENDARRIGHT  { color: #eee;    }
+			.CALENDARLIST   { color: red;      }
+			.CALENDARLEFT   { color: darkgrey; }
+			.CALENDARTODAY  { color: gold;     }
+			.CALENDARRIGHT  { color: white;    }
 
-			.header         { color: #fff;    }
-			.TIME           { color: lime;    }
-			.USERCOUNT      { color: gold;    }
+			.UPTIME         { color: lime;     }
+			.USERCOUNT      { color: gold;     }
 
-			.LOAD_AVERAGES  { color: aqua;    }
+			.LOAD_AVERAGES  { color: aqua;     }
 
-			.DAY            { color: #bbb;    }
-			.DATE           { color: red;     }
-			.JULIAN         { color: tomato;     }
+			.DAY            { color: darkgrey; }
+			.DATE           { color: red;      }
+			.JULIAN         { color: tomato;   }
 
-			.TIME           { color: yellow;  }
-			.TIME_ZONE      { color: khaki;   }
-			.UNIX_TIME      { color: lime;    }
+			.TIME           { color: yellow;   }
+			.TIME_ZONE      { color: khaki;    }
+			.UNIX_TIME      { color: lime;     }
 
-			.USERLIST       { color: #bbb;    }
+			.USERLIST       { color: darkgrey; }
 
 		</style>
 	</head>
@@ -59,18 +57,19 @@
 
 		<!-- <span class="RAW"><TMPL_VAR NAME=RAW></span> -->
 
-<pre><span class="CALENDARHEAD"><TMPL_VAR NAME=CALENDARHEAD></span>
+<pre><span class="header"><TMPL_VAR NAME=CALENDARHEAD></span>
 <span class="CALENDARLIST"><TMPL_VAR NAME=CALENDARLIST></span><span class="CALENDARLEFT"><TMPL_VAR NAME=CALENDARLEFT></span><span class="CALENDARTODAY"><TMPL_VAR NAME=CALENDARTODAY></span><span class="CALENDARRIGHT"><TMPL_VAR NAME=CALENDARRIGHT></span></pre>
 
-<pre><span class="header">Uptime:</span> <span class="TIME"><TMPL_VAR NAME=TIME></span>
+<pre><span class="header">Uptime:</span> <span class="UPTIME"><TMPL_VAR NAME=TIME></span>
         <span class="USERCOUNT"><TMPL_VAR NAME=USERCOUNT></span></pre>
 
 <pre><span class="header">Load Averages:</span>
         <span class="LOAD_AVERAGES"><TMPL_VAR NAME=LOAD_AVERAGES></span></pre>
 
 <pre><span class="DAY"><TMPL_VAR NAME=DAY></span>
-      <span class="DATE"><TMPL_VAR NAME=DATE></span>   <span class="JULIAN"><TMPL_VAR NAME=JULIAN></span>
-<span class="header">Local:</span>  <span class="TIME"><TMPL_VAR NAME=LOCAL_TIME></span> <span class="TIME_ZONE"><TMPL_VAR NAME=LOCAL_TIME_ZONE></span>
+      <span class="DATE"><TMPL_VAR NAME=DATE></span>   <span class="JULIAN"><TMPL_VAR NAME=JULIAN></span></pre>
+
+<pre><span class="header">Local:</span>  <span class="TIME"><TMPL_VAR NAME=LOCAL_TIME></span> <span class="TIME_ZONE"><TMPL_VAR NAME=LOCAL_TIME_ZONE></span>
 <span class="header">UTC:</span>    <span class="TIME"><TMPL_VAR NAME=UTC_TIME></span> <span class="TIME_ZONE"><TMPL_VAR NAME=UTC_TIME_ZONE></span>
 <span class="header">Unix:</span> <span class="UNIX_TIME"><TMPL_VAR NAME=UNIX_TIME></span></pre>
 
