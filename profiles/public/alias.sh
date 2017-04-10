@@ -129,8 +129,8 @@ searchFile() {
 
 quickSshfs(){
 	connection=$1 && shift
-	mountPoint=$1 && shift
 	volumeName=$1 && shift
+	mountPoint=$1 && shift
 
 	if [[ -z $volumeName ]]; then
 		volumeName=`echo $connection | cut -d "@" -f 2 | tr ":/." "_--"`
@@ -150,7 +150,7 @@ quickSshfs(){
 		-o auto_cache \
 		-o volname=$volumeName
 	else
-		echo "Usage: quickSshfs [user@]server.com [/path/to/mountPoint [volumeName]]"
+		echo "Usage: quickSshfs [user@]server.com [volumeName [/path/to/mountPoint]]"
 		echo "    If [/path/to/mountPoint] is ommitted, then /tmp will be the parent folder to the mounted file system."
 	fi
 }
