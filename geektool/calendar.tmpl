@@ -1,98 +1,98 @@
 <html>
-	<head>
-		<title>Calendar</title>
-		<style>
-			body, pre{
-				color: #0006;
-				font-size: 2rem;
-				font-family: "SFMono-Regular";
-				line-height: 1.2em;
-				margin: .33rem;
-			}
-			*{
-				text-shadow:
-		2px   2px  3px #0007,
-		-2px  -2px  3px #0007,
-		-2px   2px  3px #0007,
-		2px  -2px  3px #0007;
-			}
-			table, p{ margin-left: 4rem;}
-			.gutter{ width: 1rem; }
-			.RAW{  }
-			pre{
-				box-shadow:
-				2px  2px 4px #fff6 inset,
-				-2px -2px 4px #0006 inset;
-				padding: .5rem 1rem;
-				background: #0006;
-				border-radius: .75rem;
-			}
-			.contentWrapper {display: block}
-			.narrowWrapper {display: inline-block}
-			.preCalendar   {padding: .5rem 1.5rem;}
+  <head>
+    <title>Calendar</title>
+    <style>
+      body, pre{
+        color: #0006;
+        font-size: 2rem;
+        font-family: "SFMono-Regular";
+        line-height: 1.2em;
+        margin: .33rem 0;
+      }
+      *{
+        text-shadow:
+           2px   2px  3px #0007,
+          -2px  -2px  3px #0007,
+          -2px   2px  3px #0007,
+           2px  -2px  3px #0007;
+      }
+      table, p{ margin-left: 4rem;  }
+      .gutter{ width: 1rem;         }
+      .RAW{}
+      .contentBox{
+        box-shadow:
+           2px  2px 4px #fff6 inset,
+          -2px -2px 4px #0006 inset;
+        padding: .5rem 1rem;
+        background: #0006;
+        border-radius: .75rem;
+      }
+      .contentWrapper { display:     block                 }
+      .narrowWrapper  { display:     inline-block          }
+      .centerWrapper  { margin:      0 auto;               }
+      .preCalendar    { padding:     .5rem 1.5rem;         }
 
-			.header         { color: white;    }
+      .header         { color:       white;                }
 
-			.CALENDARLIST   { color: red;      }
-			.CALENDARLEFT   { color: darkgrey; }
-			.CALENDARTODAY  { color: gold;     }
-			.CALENDARRIGHT  { color: white;    }
+      .CALENDARLIST   { color:       red;                  }
+      .CALENDARLEFT   { color:       darkgrey;             }
+      .CALENDARTODAY  { color:       gold;                 }
+      .CALENDARRIGHT  { color:       white;                }
 
-			.UPTIME         { color: springgreen;     }
+      .UPTIME         { color:       springgreen;          }
 
-			.LOAD_AVERAGES  { color: aqua;     }
+      .LOAD_AVERAGES  { color:       aqua;                 }
 
-			.DAY            { color: red; }
-			.JULIAN         { color: khaki; }
-			.DATE           { color: gold;      }
+      .DAY            { color:       red;                  }
+      .JULIAN         { color:       khaki;                }
+      .DATE           { color:       gold;                 }
 
-			.TIME           { color: gold;   }
-			.TIME_ZONE      { color: khaki;    }
-			.UTC_DATE       { color: mediumslateblue;   }
-			.UTC_TIME       { color: dodgerblue;   }
-			.UTC_TIME_ZONE  { color: deepskyblue;   }
-			.UNIX_TIME      { color: lime;     }
+      .TIME           { color:       gold;                 }
+      .TIME_ZONE      { color:       khaki;                }
+      .UTC_DATE       { color:       mediumslateblue;      }
+      .UTC_TIME       { color:       dodgerblue;           }
+      .UTC_TIME_ZONE  { color:       deepskyblue;          }
+      .UNIX_TIME      { color:       lime;                 }
 
-			.USERCOUNT      { color: white;}
-			.USERLIST       { color: skyblue;
-												margin-top: .5rem;
-												margin-left: 2rem;
-												display: block;}
-		</style>
-	</head>
-	<body>
-	<!-- <div class="contentWrapper">
-			<div class="narrowWrapper">
-<pre><span class="header"><TMPL_VAR NAME=RAW>:</span>
-			</div>
-		</div> -->
-		<div class="contentWrapper">
-			<div class="narrowWrapper">
+      .USERCOUNT      { color:       white;                }
+      .USERLIST       { color:       skyblue;
+                        margin-top:  .5rem;
+                        margin-left: 2rem;
+                        display:     block;                }
+    </style>
+  </head>
+  <body>
+    <!-- <div class="contentWrapper">
+          <div class="narrowWrapper">
+        <pre><span class="header"><TMPL_VAR NAME=RAW>:</span>
+      </div>
+    </div> -->
+    <div class="contentWrapper">
+      <div class="narrowWrapper">
+        <div class="contentBox">
+          <div class="centerWrapper">
 <pre class="preCalendar"><span class="header"><TMPL_VAR NAME=CALENDARHEAD></span>
 <span class="CALENDARLIST"><TMPL_VAR NAME=CALENDARLIST></span><span class="CALENDARLEFT"><TMPL_VAR NAME=CALENDARLEFT></span><span class="CALENDARTODAY"><TMPL_VAR NAME=CALENDARTODAY></span><span class="CALENDARRIGHT"><TMPL_VAR NAME=CALENDARRIGHT></span></pre>
-			</div>
-		</div>
-		<div class="contentWrapper">
-			<div class="narrowWrapper">
-<pre><span class="header">Uptime:</span> <span class="UPTIME"><TMPL_VAR NAME=TIME></span></pre>
-<pre><span class="header">Load Averages:</span>
+          </div>
+        </div>
+<pre class="contentBox"><span class="header">Uptime:</span> <span class="UPTIME"><TMPL_VAR NAME=TIME></span></pre>
+<pre class="contentBox"><span class="header">Load Averages:</span>
   <span class="LOAD_AVERAGES"><TMPL_VAR NAME=LOAD_AVERAGES></span></pre>
-<pre><span class="DAY"><TMPL_VAR NAME=DAY></span>   <span class="JULIAN"><TMPL_VAR NAME=JULIAN></span>
+<pre class="contentBox"><span class="DAY"><TMPL_VAR NAME=DAY></span>   <span class="JULIAN"><TMPL_VAR NAME=JULIAN></span>
   <span class="DATE"><TMPL_VAR NAME=DATE></span></pre>
-			</div>
-		</div>
-		<div class="contentWrapper">
-			<div class="narrowWrapper">
-<pre><span class="header">Local:</span>       <span class="TIME"><TMPL_VAR NAME=LOCAL_TIME></span> <span class="TIME_ZONE"><TMPL_VAR NAME=LOCAL_TIME_ZONE></span>
+      </div>
+    </div>
+    <div class="contentWrapper">
+      <div class="narrowWrapper">
+<pre class="contentBox"><span class="header">Local:</span>       <span class="TIME"><TMPL_VAR NAME=LOCAL_TIME></span> <span class="TIME_ZONE"><TMPL_VAR NAME=LOCAL_TIME_ZONE></span>
 <span class="header">UTC:</span>   <span class="UTC_DATE"><TMPL_VAR NAME=UTC_DATE></span> <span class="UTC_TIME"><TMPL_VAR NAME=UTC_TIME></span> <span class="UTC_TIME_ZONE"><TMPL_VAR NAME=UTC_TIME_ZONE></span>
 <span class="header">Unix:</span>      <span class="UNIX_TIME"><TMPL_VAR NAME=UNIX_TIME></span></pre>
-			</div>
-		</div>
-		<div class="contentWrapper">
-			<div class="narrowWrapper">
-<pre><span class="USERCOUNT"><TMPL_VAR NAME=USERCOUNT>:</span>
+      </div>
+    </div>
+    <div class="contentWrapper">
+      <div class="narrowWrapper">
+<pre class="contentBox"><span class="USERCOUNT"><TMPL_VAR NAME=USERCOUNT>:</span>
 <span class="USERLIST"><TMPL_VAR NAME=USERLIST></span></pre>
-			</div>
-
-	</body>
-</html>
+      </div>
+    </body>
+  </html>
