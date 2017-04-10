@@ -1,13 +1,14 @@
 #!/bin/bash
+#  alias.sh
 #
-#
-
 
 ### Lazy commands
-
 alias rcreload="source ~/.bashrc"
 alias qbashedit="nano ~/.bashrc"
 alias xcprep="xcode-select --install && sudo xcodebuild -license"
+
+alias cdprofile="cd $profileDir && pwd"
+alias cdbh="cd $profileDir/.. && pwd"
 
 alias duh="du -h -d 1"
 alias ll="ls -lh"
@@ -22,8 +23,7 @@ alias qlynx="cd ~/Downloads/ && lynx -cookie_file=/tmp/lynxcookie -accept_all_co
 
 playground(){
 	testDir="${HOME}/priv/test/"
-	cd $testDir
-	mkdir -p ${testDir}
+	mkdir $testDir
 	subl ${testDir}
 }
 
@@ -88,7 +88,6 @@ looping(){
 
 
 ## Save the results of a command to a variable, and save it so it can be recalled later
-
 tmpCache=""
 cacheCommand(){
 	inputCommand="$*"
@@ -163,6 +162,3 @@ dockSpacerTile() {
 		-array-add '{"tile-type"="spacer-tile";}'
 	killall Dock
 }
-
-
-
