@@ -23,7 +23,7 @@ alias qlynx="cd ~/Downloads/ && lynx -cookie_file=/tmp/lynxcookie -accept_all_co
 
 playground(){
 	testDir="${HOME}/priv/test/"
-	mkdir $testDir
+	mkcd $testDir
 	subl ${testDir}
 }
 
@@ -127,33 +127,6 @@ searchFile() {
 	cat $inputPath | grep -E "$grepString" | perl -pe "$perlString"
 }
 
-quickSshfs(){
-	connection=$1 && shift
-	volumeName=$1 && shift
-	mountPoint=$1 && shift
-
-	if [[ -z $volumeName ]]; then
-		volumeName=`echo $connection | cut -d "@" -f 2 | tr ":/." "_--"`
-	fi
-
-	if [[ -z $mountPoint ]]; then
-		mountPoint="/tmp/$volumeName"
-	fi
-
-
-	if [[ -n $connection && -n $mountPoint ]]; then
-		mkdir -p ${mountPoint}
-		umount ${mountPoint}
-
-		sshfs ${connection} \
-		${mountPoint} \
-		-o auto_cache \
-		-o volname=$volumeName
-	else
-		echo "Usage: quickSshfs [user@]server.com [volumeName [/path/to/mountPoint]]"
-		echo "    If [/path/to/mountPoint] is ommitted, then /tmp will be the parent folder to the mounted file system."
-	fi
-}
 
 dockSpacerTile() {
 	defaults write \

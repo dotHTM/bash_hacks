@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# 
+#
 
 export CLICOLOR=1
 export LSCOLORS=ehgxfxcxbxExDxBxBxbhbh
@@ -17,6 +17,8 @@ amuse
 docker
 filer
 web
+util
+reference
 web/downloaders
 web/webcams"
 
