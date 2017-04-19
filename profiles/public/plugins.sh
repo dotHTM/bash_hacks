@@ -2,9 +2,6 @@
 # plugins.sh
 
 
-
-
-
 # updates
 shell_update_plugins(){
 	mkdir -p $profileDir/plugins

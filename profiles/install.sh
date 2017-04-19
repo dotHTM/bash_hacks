@@ -16,8 +16,9 @@ if [[ ! -e .profile.bak && ! -e .bash_profile.bak ]]; then
 	ln .bashrc .bash_profile
 
 	echo "## Bash hacks profile
+  # export PrivateBASHRCPath=\$HOME/Documents/config/private_profile
 	# source $profileDir/bashrc.sh
-  # export PrivateBASHRCPath=" >> ~/.bashrc
+  " >> ~/.bashrc
 
 	echo "It would be a good idea to look at your .bashrc file and verify it's contents"
 

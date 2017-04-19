@@ -1,9 +1,6 @@
 #!/bin/bash
 # exports.sh
 
-
-
-
 export CLICOLOR=1
 export LSCOLORS=ehgxfxcxbxExDxBxBxbhbh
 
