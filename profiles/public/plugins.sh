@@ -1,6 +1,7 @@
 #!/bin/bash
-#
-# 
+# plugins.sh
+
+
 
 
 

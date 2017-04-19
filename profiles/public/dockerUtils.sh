@@ -1,6 +1,8 @@
 #!/bin/bash
-#
-# 
+# dockerUtils.sh
+
+
+
 
 # Docker Toolbox on Mac
 alias primedocker="/Applications/Docker/Docker\ Quickstart\ Terminal.app/Contents/Resources/Scripts/start.sh"
