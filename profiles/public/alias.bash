@@ -135,3 +135,11 @@ dockSpacerTile() {
 		-array-add '{"tile-type"="spacer-tile";}'
 	killall Dock
 }
+
+
+function bakThisUp() {
+  inputFiles=$@
+  for thisfile in $inputFiles; do
+    cp "$thisfile" "$thisfile.bak-`date "+%Y-%m-%d_%H-%M-%S"`"
+  done
+}
