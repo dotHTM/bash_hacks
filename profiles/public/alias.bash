@@ -15,6 +15,8 @@ alias ll="ls -lh"
 alias lsa="ls -lha"
 alias lsaf="clear; lsa; ls -la *"
 
+alias sourceTreeOpen="open ./ -a /Applications/SourceTree.app"
+
 mkcd(){
 	mkdir -p $1 && cd $1
 }
