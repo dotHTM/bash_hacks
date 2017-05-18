@@ -17,7 +17,9 @@ if [[ -n $inputFileName ]]; then
   cp -an "${hackParentPath}/dev/template_project" "./"
   mv "template_project" "${inputFileName}"
   cd "./${inputFileName}"
+  mv "template_project.sublime-project" "${inputFileName}.sublime-project"
   git init
+  mv ./config ./.git/config
   git commit --allow-empty -m "empty init"
   
 else
