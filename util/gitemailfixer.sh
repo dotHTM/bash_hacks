@@ -24,7 +24,7 @@ shift $((OPTIND-1))
 
 if [[ -n $OLD_EMAIL && -n $CORRECT_EMAIL && -n $CORRECT_NAME ]]; then
 
-git filter-branch --env-filter "
+git filter-branch -f --env-filter "
 if [ \"\$GIT_COMMITTER_EMAIL\" = \"$OLD_EMAIL\" ]
 then
     export GIT_COMMITTER_NAME=\"$CORRECT_NAME\"
