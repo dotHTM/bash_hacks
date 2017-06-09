@@ -23,7 +23,7 @@ tput_theme3color="\[`tput setaf 3`\]"
 
 boldPrompt(){
 	tput init
-	export PS1="${tput_theme1color}${tput_bold}[${tput_nrml} ${tput_theme3color}\u${tput_nrml} ${tput_theme1color}${tput_bold}@${tput_nrml} ${tput_theme3color}${tput_undl}\h${tput_nrml} ${tput_theme1color}${tput_bold}:${tput_nrml} \W ${tput_theme1color}${tput_bold}]${tput_nrml}\n  ${tput_theme2color}${tput_bold}>${tput_nrml} "
+	export PS1="${tput_theme1color}${tput_bold}[${tput_nrml} ${tput_theme3color}\u${tput_nrml} ${tput_theme1color}${tput_bold}@${tput_nrml} ${tput_theme3color}${tput_undl}\h${tput_nrml} ${tput_theme1color}${tput_bold}:${tput_nrml} \W ${tput_theme1color}${tput_bold}]${tput_nrml} ${tput_theme2color}${tput_bold}>${tput_nrml} "
 }
 
 boldPrompt
