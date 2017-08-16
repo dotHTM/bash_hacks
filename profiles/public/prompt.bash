@@ -21,9 +21,11 @@ tput_theme3color="\[`tput setaf 3`\]"
 # export PS1="    ${bold}[${nrml} \u ${bold}@${nrml} ${undl}\h${nrml} ${bold}:${nrml} \W ${bold}]${nrml}\n  ${bold}>${nrml} "
 
 
+newlineSeperator=""
+
 boldPrompt(){
 	tput init
-	export PS1="${tput_theme1color}${tput_bold}[${tput_nrml} ${tput_theme3color}\u${tput_nrml} ${tput_theme1color}${tput_bold}@${tput_nrml} ${tput_theme3color}${tput_undl}\h${tput_nrml} ${tput_theme1color}${tput_bold}:${tput_nrml} \W ${tput_theme1color}${tput_bold}]${tput_nrml} ${tput_theme2color}${tput_bold}>${tput_nrml} "
+	export PS1="${tput_theme1color}${tput_bold}[${tput_nrml} ${tput_theme3color}\u${tput_nrml} ${tput_theme1color}${tput_bold}@${tput_nrml} ${tput_theme3color}${tput_undl}\h${tput_nrml} ${tput_theme1color}${tput_bold}:${tput_nrml} \W ${tput_theme1color}${tput_bold}]${tput_nrml}${newlineSeperator} ${tput_theme2color}${tput_bold}>${tput_nrml} "
 }
 
 boldPrompt

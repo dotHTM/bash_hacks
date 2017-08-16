@@ -58,3 +58,6 @@ edsubl(){
 	export EDITOR="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 }
 
+# gem
+
+export GEM_HOME="~/.gem"
