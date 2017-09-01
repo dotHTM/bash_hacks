@@ -1,4 +1,4 @@
-#!/usr/local/bin/perl
+#!/usr/bin/perl
 # calendar.pl
 #   Description
 #
@@ -12,26 +12,28 @@ use Getopt::Std ;
 my %opts ;
 getopts ( 'hdvno', \%opts ) ;
 
-our $help_mode    = $opts{ 'h' } ;
-our $debug_mode   = $opts{ 'd' } ;
+our $help_mode  = $opts{ 'h' } ;
+our $debug_mode = $opts{ 'd' } ;
 
-our $dryRun_mode  = $opts{ 'n' } ;
-our $output_mode  = $opts{ 'o' } ;
+our $dryRun_mode = $opts{ 'n' } ;
+our $output_mode = $opts{ 'o' } ;
 
 if ( $help_mode ) {
-        print "Usage: $0 -hdno\n" ;
-        print join (
-                     "\n\t",
-                     (
-                        "Options:",        "-h\thelp_mode",
-                        "-d\tget debug messages",
-                        "-n\tdon't print to screen", "-o\toutupt to file"
-                     )
-        ) ;
+    print "Usage: $0 -hdno\n" ;
+    print join (
+        "\n\t",
+        (
+            "Options:",
+            "-h\thelp_mode",
+            "-d\tget debug messages",
+            "-n\tdon't print to screen",
+            "-o\toutupt to file"
+        )
+    ) ;
 
-        print "\n" ;
+    print "\n" ;
 
-        exit 0 ;
+    exit 0 ;
 }
 
 open OUTPUTFILE, ">./cal.html" ;
@@ -39,20 +41,21 @@ open OUTPUTFILE, ">./cal.html" ;
 use HTML::Template ;
 
 # open the html template
-my $template = HTML::Template->new ( filename =>
-                  '/Users/cramerm/Projects/github/bash_hacks/geektool/calendar.tmpl' ) ;
+my $template =
+    HTML::Template->new (
+    filename => '/Users/cramerm/Projects/github/bash_hacks/geektool/calendar.tmpl' ) ;
 
 sub debugMessage($$) {
-        my ( $key, $value ) = @_ ;
-        my $breakLine = "" ;
-        $breakLine = "\n" if ( $value =~ /\n/ ) ;
-        print "$key => $breakLine'$value'\n\n" if $debug_mode ;
+    my ( $key, $value ) = @_ ;
+    my $breakLine = "" ;
+    $breakLine = "\n" if ( $value =~ /\n/ ) ;
+    print "$key => $breakLine'$value'\n\n" if $debug_mode ;
 }
 
 sub passTemplateKV($ $) {
-        my ( $key, $value ) = @_ ;
-        debugMessage $key, $value ;
-        $template->param ( $key => $value ) ;
+    my ( $key, $value ) = @_ ;
+    debugMessage $key, $value ;
+    $template->param ( $key => $value ) ;
 }
 
 my $systemUptimeResult = `uptime` ;
@@ -60,10 +63,10 @@ my $systemUptimeResult = `uptime` ;
 debugMessage "systemUptimeResult", $systemUptimeResult ;
 
 my $TIME          = $systemUptimeResult =~ /^.*?up (.*?), \d+ user/ ? $1 : '' ;
-my $USERCOUNT     = $systemUptimeResult =~ /(\d+ users?), /     ? $1 : '' ;
+my $USERCOUNT     = $systemUptimeResult =~ /(\d+ users?), /         ? $1 : '' ;
 my $LOAD_AVERAGES = $systemUptimeResult =~ /load averages: (.*)/    ? $1 : '' ;
 
-my $CALENDAR = `cal` ;
+my $CALENDAR = `cal -h` ;
 chop $CALENDAR ;
 
 my $todaysDate = `date "+%e"` ;
@@ -126,3 +129,4 @@ passTemplateKV ( "UNIX_TIME",       $UNIX_TIME ) ;
 print $template->output unless $dryRun_mode ;
 
 print OUTPUTFILE $template->output if $output_mode ;
+
