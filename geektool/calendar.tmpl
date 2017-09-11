@@ -62,37 +62,73 @@
     </style>
   </head>
   <body>
-   <!--  <div class="contentWrapper">
-          <div class="narrowWrapper">
-        <pre><span class="header"><TMPL_VAR NAME=RAW>:</span>
-      </div>
-    </div> -->
+    
+<!-- RAW VALUES     
+RAW:             <TMPL_VAR NAME=RAW>
+
+CALENDARHEAD:    <TMPL_VAR NAME=CALENDARHEAD>
+CALENDARLIST:    <TMPL_VAR NAME=CALENDARLIST>
+CALENDARLEFT:    <TMPL_VAR NAME=CALENDARLEFT>
+CALENDARTODAY:   <TMPL_VAR NAME=CALENDARTODAY>
+CALENDARRIGHT:   <TMPL_VAR NAME=CALENDARRIGHT>
+
+TIME:            <TMPL_VAR NAME=TIME>
+
+USERCOUNT:       <TMPL_VAR NAME=USERCOUNT>
+USERLIST:        <TMPL_VAR NAME=USERLIST>
+
+LOAD_AVERAGES:   <TMPL_VAR NAME=LOAD_AVERAGES>
+
+DAY:             <TMPL_VAR NAME=DAY>
+DATE:            <TMPL_VAR NAME=DATE>
+JULIAN:          <TMPL_VAR NAME=JULIAN>
+
+LOCAL_TIME:      <TMPL_VAR NAME=LOCAL_TIME>
+LOCAL_TIME_ZONE: <TMPL_VAR NAME=LOCAL_TIME_ZONE>
+
+UTC_TIME:        <TMPL_VAR NAME=UTC_TIME>
+UTC_DATE:        <TMPL_VAR NAME=UTC_DATE>
+UTC_TIME_ZONE:   <TMPL_VAR NAME=UTC_TIME_ZONE>
+
+UNIX_TIME:       <TMPL_VAR NAME=UNIX_TIME>
+-->
+    
     <div class="contentWrapper">
       <div class="narrowWrapper">
+
+<!-- Calendar Matrix -->
         <div class="contentBox">
           <div class="centerWrapper">
 <pre class="preCalendar"><span class="header"><TMPL_VAR NAME=CALENDARHEAD></span>
 <span class="CALENDARLIST"><TMPL_VAR NAME=CALENDARLIST></span><span class="CALENDARLEFT"><TMPL_VAR NAME=CALENDARLEFT></span><span class="CALENDARTODAY"><TMPL_VAR NAME=CALENDARTODAY></span><span class="CALENDARRIGHT"><TMPL_VAR NAME=CALENDARRIGHT></span></pre>
           </div>
         </div>
+        
+<!-- Uptime -->
 <pre class="contentBox"><span class="header">Uptime:</span> <span class="UPTIME"><TMPL_VAR NAME=TIME></span></pre>
+
+<!-- Load Average -->
 <pre class="contentBox"><span class="header">Load Averages:</span>
   <span class="LOAD_AVERAGES"><TMPL_VAR NAME=LOAD_AVERAGES></span></pre>
+
+<!-- Day & Date, Julian -->
 <pre class="contentBox"><span class="DAY"><TMPL_VAR NAME=DAY></span>   <span class="JULIAN"><TMPL_VAR NAME=JULIAN></span>
   <span class="DATE"><TMPL_VAR NAME=DATE></span></pre>
-      </div>
-    </div>
-    <div class="contentWrapper">
-      <div class="narrowWrapper">
+
+<!-- Local, UTC, & Unix Time -->
 <pre class="contentBox"><span class="header">Local:</span>       <span class="TIME"><TMPL_VAR NAME=LOCAL_TIME></span> <span class="TIME_ZONE"><TMPL_VAR NAME=LOCAL_TIME_ZONE></span>
 <span class="header">UTC:</span>   <span class="UTC_DATE"><TMPL_VAR NAME=UTC_DATE></span> <span class="UTC_TIME"><TMPL_VAR NAME=UTC_TIME></span> <span class="UTC_TIME_ZONE"><TMPL_VAR NAME=UTC_TIME_ZONE></span>
 <span class="header">Unix:</span>      <span class="UNIX_TIME"><TMPL_VAR NAME=UNIX_TIME></span></pre>
+
       </div>
     </div>
     <div class="contentWrapper">
       <div class="narrowWrapper">
+
+<!-- User count and list -->
 <pre class="contentBox"><span class="USERCOUNT"><TMPL_VAR NAME=USERCOUNT>:</span>
 <span class="USERLIST"><TMPL_VAR NAME=USERLIST></span></pre>
+
       </div>
     </body>
   </html>
