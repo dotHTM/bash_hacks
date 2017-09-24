@@ -43,7 +43,7 @@ use HTML::Template ;
 # open the html template
 my $template =
     HTML::Template->new (
-    filename => '/Users/cramerm/Projects/github/bash_hacks/geektool/calendar.tmpl' ) ;
+    filename => 'calendar.tmpl' ) ;
 
 sub debugMessage($$) {
     my ( $key, $value ) = @_ ;
@@ -74,7 +74,7 @@ $todaysDate = $todaysDate =~ /(\d+)/ ? $1 : '' ;
 
 my $headDate  = $CALENDAR =~ /(.*)\nSu/                    ? $1 : '' ;
 my $dayList   = $CALENDAR =~ /(Su.*Sa)/                    ? $1 : '' ;
-my $leftDays  = $CALENDAR =~ /Sa((.*\n?)+\ )$todaysDate\b/ ? $1 : '' ;
+my $leftDays  = $CALENDAR =~ /Sa((.*\n?)+\ ?)$todaysDate\b/ ? $1 : '' ;
 my $rightDays = $CALENDAR =~ /\b$todaysDate(\ (.*\n?)+)/   ? $1 : '' ;
 my $userList  = `who` ;
 
