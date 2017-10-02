@@ -74,8 +74,8 @@ $todaysDate = $todaysDate =~ /(\d+)/ ? $1 : '' ;
 
 my $headDate  = $CALENDAR =~ /(.*)\nSu/                    ? $1 : '' ;
 my $dayList   = $CALENDAR =~ /(Su.*Sa)/                    ? $1 : '' ;
-my $leftDays  = $CALENDAR =~ /Sa((.*\n?)+\ ?)$todaysDate\b/ ? $1 : '' ;
-my $rightDays = $CALENDAR =~ /\b$todaysDate(\ (.*\n?)+)/   ? $1 : '' ;
+my $leftDays  = $CALENDAR =~ /Sa((.*\n?)+\ ?)\b$todaysDate\b/ ? $1 : '' ;
+my $rightDays = $CALENDAR =~ /\b$todaysDate\b(\ (.*\n?)+)/   ? $1 : '' ;
 my $userList  = `who` ;
 
 my $DAY = `date "+%A"` ;
