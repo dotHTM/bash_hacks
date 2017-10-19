@@ -12,6 +12,13 @@
 				".*",
 				".*/*"
 			],
+			"folder_exclude_patterns":
+			[
+				".Trash*",
+				".cisco",
+				".cpanm",
+				".wine",
+			],
 			"name": "~/.*",
 			"path": "~"
 		},
