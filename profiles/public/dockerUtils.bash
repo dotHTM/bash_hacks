@@ -18,6 +18,8 @@ dke(){
 	docker exec -ti `docker ps -l -q` "$command"
 }
 
+alias dcompose=`which docker-compose`
+
 alias dcu="docker-compose up"
 alias dcb="docker-compose build"
 alias dcd="docker-compose down"
