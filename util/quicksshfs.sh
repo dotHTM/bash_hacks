@@ -17,6 +17,7 @@ usage() {
   echo "    -h    Print this help"
   echo
   echo "    -u    unmount"
+  echo "    -f    force unmount with diskutil"
   echo "    -m    mount disks"
   echo "    -o    Open in Sublime Text"
   echo "    -s    Open an ssh connection to the host"
@@ -24,8 +25,8 @@ usage() {
   exit 1
 }
 
-while getopts "hr:v:p:umosd" intputOptions; do
-  case "${intputOptions}" in
+while getopts "hr:v:p:umosdf" inputOptions; do
+  case "${inputOptions}" in
     h) usage ;;                ##
     ##
     r) connection=${OPTARG} ;; ##
@@ -33,6 +34,7 @@ while getopts "hr:v:p:umosd" intputOptions; do
     p) mountPoint=${OPTARG} ;; ##
     ##
     u) unmountMode=1 ;;        ##
+    f) forceUnmountMode=1 ;;   ##
     m) mount_mode=1 ;;         ##
     o) openInSublime=1 ;;      ##
     s) shellOpen=1 ;;          ##
@@ -50,10 +52,10 @@ perlRemotePath=`echo ${connection} | perl -pe "s/.*://gi"`
 
 
 
-if [[ $connection == $remoteSansColon ]]; then echo "Incorrect remote format"; usage;fi ##
-if [[ -z "${connection}" ]]; then echo "No connection specified"; usage; fi             ##
-if [[ -z "${perlRemoteHost}" ]]; then echo "No remote Host specified"; usage; fi        ##
-if [[ -z "${perlRemotePath}" ]]; then echo "No remote Path specified"; usage; fi        ##
+if [[ $connection == $remoteSansColon ]]; then echo "Incorrect remote format"; usage; fi ##
+if [[ -z "${connection}" ]]; then echo "No connection specified"; usage; fi              ##
+if [[ -z "${perlRemoteHost}" ]]; then echo "No remote Host specified"; usage; fi         ##
+if [[ -z "${perlRemotePath}" ]]; then echo "No remote Path specified"; usage; fi         ##
 ##
 
 if [[ -z $volumeName ]]; then
@@ -68,8 +70,12 @@ fi
 
 ## Action modes
 
-if (( $unmountMode )); then
-  umount ${mountPoint}
+if (( $forceUnmountMode )); then 
+  diskutil unmount force ${mountPoint} 
+else
+  if (( $unmountMode )); then
+    umount ${mountPoint} 
+  fi
 fi
 
 if (( $mount_mode )); then
