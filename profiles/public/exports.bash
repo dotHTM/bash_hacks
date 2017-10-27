@@ -13,6 +13,7 @@ pathsList="/opt/local/bin
 
 hacksPaths=".
 amuse
+dev
 docker
 filer
 web
