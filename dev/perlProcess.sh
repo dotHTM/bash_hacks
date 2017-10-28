@@ -9,7 +9,7 @@ if [[ -n $someFile ]]; then
 
     criticSeverity=1
     criticBrevityFormat=' %f at <%l:%c> ::  %m, %e (%s)\\n'
-    criticVerboseFormat='## %m <%l:%c> (%s)\\n\\n```perl\\n%r\\n```\\n\\n%d\\n\\n**Policy modules**\\n```perl\\n%p\\n```\\n> %e\\n\\n'
+    criticVerboseFormat='## %m <%l:%c> (%s)\\n\\n```perl\\n%r\\n```\\n\\n%d\\n\\n**Policy module:**\\n\\n`%P`\\n\\n> %e\\n\\n'
 
     perltidy -b $someFile
     perlcritic -$criticSeverity --verbose 4 $someFile

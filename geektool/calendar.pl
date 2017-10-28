@@ -28,14 +28,14 @@ my $output_mode  = $opts{'o'};
 if ($help_mode) {
     say "Usage: $PROGRAM_NAME -hdno";
     say join
-      "\n\t",
-      (
+        "\n\t",
+        (
         'Options:',
         "-h\thelp_mode",
         "-d\tget debug messages",
         "-n\tdon't print to screen",
         "-o\toutupt to file"
-      );
+        );
 
     exit 0;
 }
@@ -47,10 +47,11 @@ my $template = HTML::Template->new( filename => 'calendar.tmpl' );
 
 my $system_uptime_result = `uptime`;
 
-my $uptime_time = $system_uptime_result =~ /^.*?up (.*?), \d+ user/ ? $1 : $EMPTY;
+my $uptime_time
+    = $system_uptime_result =~ /^.*?up (.*?), \d+ user/ ? $1 : $EMPTY;
 my $usercount = $system_uptime_result =~ /(\d+ users?), / ? $1 : $EMPTY;
-my $load_averages =
-  $system_uptime_result =~ /load averages: (.*)/ ? $1 : $EMPTY;
+my $load_averages
+    = $system_uptime_result =~ /load averages: (.*)/ ? $1 : $EMPTY;
 
 my $calendar = `cal -h`;
 chop $calendar;
@@ -71,6 +72,35 @@ my $user_list  = `who`;
 my $last_reboot = `who -b`;
 chop $last_reboot;
 
+sub pad_str {
+    my ( $padding_char, $input, $length, $after ) = @_;
+    if ( length $padding_char == 1 && $input && $length ) {
+        if ( length $input < $length ) {
+            my $next_input = $padding_char . $input;
+            if ($after) { $next_input = $input . $padding_char; }
+            return pad_str( $padding_char, $next_input, $length, $after );
+        }
+        return $input;
+    }
+    return;
+}
+
+sub chop_str {
+    my ($input_string) = @_;
+    if ($input_string){
+        return substr $input_string, 0, (length $input_string) - 1 ;
+    }
+    return;
+}
+
+sub chomp_str {
+    my ($input_string) = @_;
+    if ($input_string){
+        return substr $input_string, 1, (length $input_string) ;
+    }
+    return;
+}
+
 my %data_hash = (
     'RAW'             => $system_uptime_result,
     'CALENDARHEAD'    => $head_date,
@@ -78,7 +108,7 @@ my %data_hash = (
     'CALENDARLEFT'    => $left_days,
     'CALENDARTODAY'   => $tp_localtime->mday,
     'CALENDARRIGHT'   => $right_days,
-    'TIME'            => "this", #$uptime_time,
+    'TIME'            => $uptime_time,
     'USERCOUNT'       => $usercount,
     'USERLIST'        => $user_list,
     'LOAD_AVERAGES'   => $load_averages,
@@ -86,11 +116,12 @@ my %data_hash = (
     'DATE'            => $tp_localtime->date,
     'JULIAN'          => $tp_localtime->yday,
     'LOCAL_TIME'      => $tp_localtime->time,
-    'LOCAL_TIME_ZONE' => $tp_localtime->tzoffset,
+    'LOCAL_TIME_ZONE' => chop_str($tp_localtime->tzoffset ),
     'UTC_TIME'        => $tp_gmtime->time,
-    'UTC_DATE'        => $tp_gmtime->date,
-    'UTC_TIME_ZONE'   => $tp_gmtime->tzoffset,
-    'UNIX_TIME'       => $tp_gmtime->epoch,
+    'UTC_DATE'        => pad_str( 0, $tp_localtime->mon, 2 ) . "-"
+        . pad_str( 0, $tp_localtime->mday, 2 ),
+    'UTC_TIME_ZONE' => $tp_gmtime->tzoffset,
+    'UNIX_TIME'     => $tp_gmtime->epoch,
 );
 
 foreach my $key ( keys %data_hash ) {
