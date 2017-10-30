@@ -1,7 +1,11 @@
 #!/bin/bash
 # prompt.sh
 
-export PS1="[ \u @ \h : \W ] \! > "
+
+plainPrompt(){
+    export PS1="[ \u @ \h : \W ] \! > "
+}
+
 
 tput init
 tput_bold="\[`tput bold`\]"
@@ -13,6 +17,7 @@ tput_nrml="\[`tput sgr0`\]"
 tput_theme1color="\[`tput setaf 1`\]"
 tput_theme2color="\[`tput setaf 2`\]"
 tput_theme3color="\[`tput setaf 3`\]"
+tput_theme4color="\[`tput setaf 6`\]"
 # tput_plaincolor="\[`tput setaf 7`\]"
 
 
@@ -21,16 +26,20 @@ tput_theme3color="\[`tput setaf 3`\]"
 # export PS1="    ${bold}[${nrml} \u ${bold}@${nrml} ${undl}\h${nrml} ${bold}:${nrml} \W ${bold}]${nrml}\n  ${bold}>${nrml} "
 
 
+if [[ -n $VANITY_HOSTNAME ]]; then bashHostNameReplacement=$VANITY_HOSTNAME
+else bashHostNameReplacement="\h"
+fi
+
 commandLineDeliminator=" "
 
 dullPrompt(){
     tput init
-export PS1="[ \u @ \h : \W ]${commandLineDeliminator}\! > "
+export PS1="[ \u @ ${bashHostNameReplacement} : \W ]${commandLineDeliminator}\! > "
 }
 
 boldPrompt(){
 	tput init
-	export PS1="${tput_theme1color}${tput_bold}[${tput_nrml} ${tput_theme3color}\u${tput_nrml} ${tput_theme1color}${tput_bold}@${tput_nrml} ${tput_theme3color}${tput_undl}\h${tput_nrml} ${tput_theme1color}${tput_bold}:${tput_nrml} \W ${tput_theme1color}${tput_bold}]${tput_nrml}${commandLineDeliminator}${tput_theme2color}${tput_bold}\! >${tput_nrml} "
+	export PS1="${tput_theme1color}${tput_bold}[${tput_nrml} ${tput_theme3color}\u${tput_nrml} ${tput_theme1color}${tput_bold}@${tput_nrml} ${tput_theme4color}${tput_undl}${bashHostNameReplacement}${tput_nrml} ${tput_theme1color}${tput_bold}:${tput_nrml} \W ${tput_theme1color}${tput_bold}]${tput_nrml}${commandLineDeliminator}${tput_theme2color}${tput_bold}\! >${tput_nrml} "
 }
 
 shortPrompt(){
@@ -38,5 +47,3 @@ shortPrompt(){
     export PS1="${tput_theme1color}${tput_bold}[${tput_nrml} ${tput_theme1color}${tput_bold}:${tput_nrml} \W ${tput_theme1color}${tput_bold}]${tput_nrml}${commandLineDeliminator}${tput_theme2color}${tput_bold}\! >${tput_nrml} "
 }
 
-
-dullPrompt
