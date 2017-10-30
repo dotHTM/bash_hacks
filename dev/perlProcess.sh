@@ -19,22 +19,9 @@ if [[ -n $someFile ]]; then
         | perl -pe "s/\\\`(.*?)(\S)'/\\\`\1\2\\\`/gmi" \
         > $someOutputFilePath
 
-
-
     # subl $someOutputFilePath
     open -a "/Applications/Marked 2.app" $someOutputFilePath
 
     perl -c $someFile
 
 fi
-
-
-
-        # | perl -pe "s/^> (.*?)\\\`(.*?)'/> \1\\\`(.*?)\\\`/gmi" \
-        # | perl -pe "s/^> (.*?)\\\`(.*?)'/> \1\\\`(.*?)\\\`/gmi" \
-        # | perl -pe "s/^> (.*?)\\\`(.*?)'/> \1\\\`(.*?)\\\`/gmi" \
-        # | perl -pe "s/^> (.*?)\\\`(.*?)'/> \1\\\`(.*?)\\\`/gmi" \
-        # | perl -pe "s/^> (.*?)\\\`(.*?)'/> \1\\\`(.*?)\\\`/gmi" \
-        # | perl -pe "s/^> (.*?)\\\`(.*?)'/> \1\\\`(.*?)\\\`/gmi" \
-        # | perl -pe "s/^> (.*?)\\\`(.*?)'/> \1\\\`(.*?)\\\`/gmi" \
-        # | perl -pe "s/^> (.*?)\\\`(.*?)'/> \1\\\`(.*?)\\\`/gmi" \
