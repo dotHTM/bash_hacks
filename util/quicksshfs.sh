@@ -19,14 +19,15 @@ usage() {
   echo "    -u    unmount"
   echo "    -f    force unmount with diskutil"
   echo "    -m    mount disks"
-  echo "    -o    Open in Sublime Text"
+  echo "    -o    Open in Sublime Text in the current open Project window"
+  echo "    -n    Open in Sublime Text in a New window (overrides above)"
   echo "    -l    return the path to the mount point (overrides shell connection)"
   echo "    -s    Open an ssh connection to the host"
 
   exit 1
 }
 
-while getopts "hr:v:p:umosdfl" inputOptions; do
+while getopts "hr:v:p:umosndfl" inputOptions; do
   case "${inputOptions}" in
     h) usage ;;                ##
     ##
@@ -38,6 +39,7 @@ while getopts "hr:v:p:umosdfl" inputOptions; do
     f) forceUnmountMode=1 ;;   ##
     m) mount_mode=1 ;;         ##
     o) openInSublime=1 ;;      ##
+    n) openInSublimeNewWindow=1 ;;      ##
     l) openInLocalShell=1 ;;      ##
     s) shellOpen=1 ;;          ##
     d) DEBUG_MODE=1;;          ##
@@ -86,7 +88,9 @@ if (( $mount_mode )); then
   -o volname=$volumeName
 fi
 
-if (( $openInSublime )); then
+if (( $openInSublimeNewWindow )); then
+  subl -n $mountPoint
+elif (( $openInSublime )); then
   subl -a $mountPoint
 fi
 
