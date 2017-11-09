@@ -22,15 +22,15 @@ reference
 web/downloaders
 web/webcams"
 
-export hackParentPath="${profileDir}/../"
+export hackParentPath="${profileDir/\/profiles*}"
 
 for anPath in $hacksPaths; do
-	export PATH="${hackParentPath}${anPath}${PATH+:}${PATH}"
+	path_add_element "${hackParentPath}/${anPath}"
 done
 
 # for anPath in $pathsList; do
 while read anPath; do
-	export PATH="$anPath${PATH+:}${PATH}"
+	path_add_element "$anPath"
 done <<< "$pathsList"
 
 
