@@ -62,3 +62,11 @@ edsubl(){
 # gem
 
 export GEM_HOME="~/.gem"
+
+# other utility settings
+
+export GREP_OPTIONS='--color=auto'
+export GREP_COLOR='1;31'
+
+
+
