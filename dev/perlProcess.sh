@@ -3,7 +3,7 @@
 
 criticSeverity=$1 && shift
 criticKISFormat='(%s)<%l:%c> '
-criticBrevityFormat='f:%f l:%l c:%c m:(%s) %m\r'
+criticBrevityFormat='f:%f l:%l c:%c m:CRITIC: (%s) %m\r'
 criticVerboseFormat='## %m <%l:%c> (%s)\\n\\n```perl\\n%r\\n```\\n\\n%d\\n\\n**Policy module:**\\n\\n`%P`\\n\\n> %e\\n\\n'
 
 main(){
@@ -12,13 +12,12 @@ main(){
 
 
     if [[ -n $someFile ]]; then
-        check_syntax_formatted \
+        check_syntax \
         && do_tidy && critic_returnValue=`critic_step` 
         echo "$critic_returnValue"
         
         if [[  "$critic_returnValue" == *"source OK"* ]]  ; then 
-            underlined_echo "> Running script - $someFile" '-'
-            perl $someFile
+            run_script
         fi
     fi
 }
@@ -31,13 +30,21 @@ underlined_echo(){
 }
 
 check_syntax(){
-    perl -c $someFile
+    perl -c $someFile 2>/tmp/Error 
+    cat /tmp/Error | syntax_error_formatted "SYNTAX: "
 }
 
-check_syntax_formatted(){
-    perl -c $someFile 2>&1 \
-    | perl -pe 's|\n|xxxLINExxx|' | perl -pe 's|xxxLINExxx\s+|, |' | perl -pe 's|xxxLINExxx|\n|g' \
-    | perl -pe 's|^(.*) at (.*) line (\d+)(,.*)(?:(?:\n    )(.*))?|f:\2 l:\3 c:1 m:\1\4 \5|gmi'
+run_script(){
+    underlined_echo "> Running script - $someFile" '-'
+    perl $someFile 2>/tmp/Error
+    cat /tmp/Error | syntax_error_formatted "RUN: "
+    # subl /tmp/Error 
+}
+
+syntax_error_formatted(){
+    error_source=$1 && shift
+    perl -pe 's|\n|xxxLINExxx|' | perl -pe 's|xxxLINExxx\s+|, |' | perl -pe 's|xxxLINExxx|\n|g' \
+    | perl -pe "s|^(.*) at (.*) line (\d+)([,\.].*)(?:(?:\n    )(.*))?|f:\2 l:\3 c:1 m:$error_source\1\4 \5|gmi"
 }
 
 do_tidy(){
