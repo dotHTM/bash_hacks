@@ -53,10 +53,10 @@ do_tidy(){
 
 critic_step(){
     # critic_KIS
-    brief=`critic_brief`
-    echo $brief
+    critic_brief > $someOutputFilePath
+    cat $someOutputFilePath
     
-    if [[ $brief == *" source OK"* ]]; then
+    if [[ `cat $someOutputFilePath` == *" source OK"* ]]; then
         echo
     else
         critic_markdown
