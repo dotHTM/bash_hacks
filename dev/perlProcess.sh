@@ -15,11 +15,19 @@ main(){
         check_syntax \
         && do_tidy && critic_returnValue=`critic_step` 
         echo "$critic_returnValue"
+        overlined_echo "Critic Severity => $criticSeverity" "-"
         
         if [[  "$critic_returnValue" == *"source OK"* ]]  ; then 
             run_script
         fi
     fi
+}
+
+overlined_echo(){
+    message=$1 && shift
+    character=$1 && shift
+    echo $message | perl -pe "s/./$character/gi"
+    echo $message
 }
 
 underlined_echo(){
