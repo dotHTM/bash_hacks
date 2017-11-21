@@ -1,7 +1,8 @@
 #!/bin/bash
 #
 
-profileDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+profileDir=$( cd $( dirname ${BASH_SOURCE[0]} ) && pwd )
 
 path_add_element(){
     until [ -z "$1" ]; do
@@ -14,7 +15,9 @@ path_add_element(){
     done
 }
 
-for anFile in `find $profileDir/public -iname "*.bash"`; do
+if [[ -n $profileDir ]]; then
+
+    for anFile in `find $profileDir/public -iname "*.bash"`; do
   # echo $anFile
   source $anFile
 done
@@ -43,4 +46,6 @@ dedupe_paths(){
         unset old_PATH x
     fi
 }
+
+fi
 

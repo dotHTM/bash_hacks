@@ -2,7 +2,7 @@
 #
 #
 
-profileDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+profileDir=$( cd $( dirname ${BASH_SOURCE[0]} ) && pwd )
 
 cd ~/
 
