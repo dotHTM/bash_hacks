@@ -17,9 +17,9 @@ main(){
         echo "$critic_returnValue"
         overlined_echo "Critic Severity => $criticSeverity" "-"
         
-        if [[  "$critic_returnValue" == *"source OK"* ]]  ; then 
-            run_script
-        fi
+        # if [[  "$critic_returnValue" == *"source OK"* ]]  ; then 
+            # run_script
+        # fi
     fi
 }
 
