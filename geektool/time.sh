@@ -7,9 +7,11 @@ colorEnabled=1
 
 # systemUptime=`uptime`
 
-
 tputColors(){
-	
+	if [[ -z "$TERM" ]]; then
+		export TERM="dumb"
+	fi
+
 	tput_nrml=`tput sgr0`
 	tput_dim=`tput dim`
 	tput_bold=`tput bold`
@@ -25,7 +27,6 @@ tputColors(){
 	tput_magenta=`tput setaf 5`
 	tput_cyan=`tput setaf 6`
 	tput_white=`tput setaf 7`
-	
 }
 
 

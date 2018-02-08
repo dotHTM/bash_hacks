@@ -12,7 +12,7 @@ tumblrURL=$1
 mkdir -p $tumblrURL
 cd $tumblrURL
 
-wget -mpNHk --random-wait -e robots=off -D .media.tumblr.com,$tumblrURL -R "*avatar*","*\?*","*_[0-9][0-9][0-9].*" http://$tumblrURL -o wgetLog.txt
+wget -mpNHk --random-wait -e robots=off -D .media.tumblr.com,$tumblrURL -R "*avatar*","*\?*","*_[0-9][0-9][0-9].*" http://$tumblrURL 
 
 ## ,"*.gif"
 

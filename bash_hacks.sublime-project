@@ -7,20 +7,20 @@
 				".*",
 				".*/*"
 			],
-			"folder_include_patterns":
-			[
-				".*",
-				".*/*"
-			],
 			"folder_exclude_patterns":
 			[
 				".Trash*",
 				".cisco",
 				".cpanm",
-				".wine",
+				".wine"
+			],
+			"folder_include_patterns":
+			[
+				".*",
+				".*/*"
 			],
 			"name": "~/.*",
-			"path": "~"
+			"path": "/Users/cramerm"
 		},
 		{
 			"path": "profiles"
@@ -34,7 +34,7 @@
 			"path": "."
 		},
 		{
-			"path": "~/Documents/config"
+			"path": "/Users/cramerm/Documents/config"
 		}
 	]
 }

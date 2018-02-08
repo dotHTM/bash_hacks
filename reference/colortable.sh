@@ -2,8 +2,8 @@
 # colortable.sh
 #   
 
-if [[ -n $TERM ]]; then
-	export TERM="xterm-256color"
+if [[ -z "$TERM" ]]; then
+	export TERM="dumb"
 fi
 
 tput init
@@ -17,7 +17,6 @@ for i in `seq -w 0 255`; do
 		j=0
 		k="  0"
 	fi
-
 	echo -n "`tput setab $j` $k `tput sgr0`"
 	echo -n "`tput setaf $j` $k `tput sgr0`"
 
@@ -27,5 +26,6 @@ for i in `seq -w 0 255`; do
 	fi 
 done
 echo
+
 
 
