@@ -1,4 +1,3 @@
-#!/bin/bash
 # exports.sh
 
 export CLICOLOR=1

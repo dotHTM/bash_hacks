@@ -1,6 +1,3 @@
-#!/bin/bash
-#
-
 
 profileDir=$( cd $( dirname ${BASH_SOURCE[0]} ) && pwd )
 

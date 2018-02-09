@@ -1,4 +1,3 @@
-#!/bin/bash
 # dockerUtils.sh
 
 # Docker Toolbox on Mac

@@ -1,4 +1,3 @@
-#!/bin/bash
 # depreciated.sh
 
 # These aliases have been depreciated, they will produce an error message and exit.

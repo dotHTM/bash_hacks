@@ -1,0 +1,91 @@
+
+
+### THIS IS STILL A HECKING MESS!!!
+
+declare -A named_colors=(
+                         ["black"]=0
+                         ["red"]=1
+                         ["green"]=2
+                         ["yellow"]=3
+                         ["blue"]=4
+                         ["purple"]=5
+                         ["cyan"]=6
+                         ["white"]=7
+                         ["bright_black"]=8
+                         ["bright_red"]=9
+                         ["bright_green"]=10
+                         ["bright_yellow"]=11
+                         ["bright_blue"]=12
+                         ["bright_purple"]=13
+                         ["bright_cyan"]=14
+                         ["bright_white"]=15
+                         )
+
+inRange_invd(){
+    myMax=$1 && shift
+    myInt=$1 && shift
+    if [[ "$myInt" -lt "0" ]]; then
+        resultInt=0
+    elif [[ "$myInt" -ge "$myMax" ]]; then
+        resultInt=$(( $myMax - 1 ))
+    else
+        resultInt=$myInt
+    fi
+    echo $resultInt
+}
+
+rgb_color(){
+    red_component=$1 && shift
+    green_component=$1 && shift
+    blue_component=$1 && shift
+    
+    red_component=`inRange_invd 6 $red_component`
+    green_component=`inRange_invd 6 $green_component`
+    blue_component=`inRange_invd 6 $blue_component`
+    
+    colorCode=$(( 16 + $blue_component + 6 * $green_component + 6 * 6 * $red_component ))
+    echo $colorCode
+}
+
+named_color(){
+    myInputString=$1 && shift
+    colorCode=`inRange_invd 16 ${named_colors[$myInputString]}`
+    echo $colorCode
+}
+
+# color_fore `rgb_color 2 2 2`
+# color_fore `named_color green`
+color_fore(){
+    colorCode=$1 && shift
+    echo `tput setaf $colorCode`
+}
+
+# color_back `rgb_color 2 2 2`
+# color_back `named_color green`
+color_back(){
+    colorCode=$1 && shift
+    echo `tput setab $colorCode`
+}
+
+
+wrap_color(){
+    echo "\[$1\]"
+}
+
+
+## feature shortcuts
+if [[ -n $PS1 ]]; then
+    tput init
+    tput_bold=`tput bold`
+    tput_undl=`tput smul`
+    tput_revE=`tput rev`
+    tput_blnk=`tput blink`
+    tput_nrml=`tput sgr0`
+fi 
+
+declare -A theme=(
+                  ["bracket"]=`named_color red`$tput_bold
+                  ["user"]=`rgb_color 5 3 0`
+                  ["hostname"]=`named_color yellow`$tput_undl
+                  ["prompt"]=`named_color green`
+                  )
