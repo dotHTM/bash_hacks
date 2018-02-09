@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 # dkFullReset.sh
 
 echo "== Containers =="

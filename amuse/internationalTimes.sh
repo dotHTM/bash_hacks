@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 
 zones='America/Los_Angeles
 America/Chicago

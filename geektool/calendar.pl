@@ -18,7 +18,7 @@ my $EMPTY = '';
 use Getopt::Std;
 my %opts;
 getopts( 'hdvno', \%opts );
-
+    
 my $help_mode  = $opts{'h'};
 my $debug_mode = $opts{'d'};
 
@@ -87,16 +87,16 @@ sub pad_str {
 
 sub chop_str {
     my ($input_string) = @_;
-    if ($input_string){
-        return substr $input_string, 0, (length $input_string) - 1 ;
+    if ($input_string) {
+        return substr $input_string, 0, ( length $input_string ) - 1;
     }
     return;
 }
 
 sub chomp_str {
     my ($input_string) = @_;
-    if ($input_string){
-        return substr $input_string, 1, (length $input_string) ;
+    if ($input_string) {
+        return substr $input_string, 1, ( length $input_string );
     }
     return;
 }
@@ -116,7 +116,7 @@ my %data_hash = (
     'DATE'            => $tp_localtime->date,
     'JULIAN'          => $tp_localtime->yday,
     'LOCAL_TIME'      => $tp_localtime->time,
-    'LOCAL_TIME_ZONE' => chop_str($tp_localtime->tzoffset ),
+    'LOCAL_TIME_ZONE' => chop_str( $tp_localtime->tzoffset ),
     'UTC_TIME'        => $tp_gmtime->time,
     'UTC_DATE'        => pad_str( 0, $tp_localtime->mon, 2 ) . "-"
         . pad_str( 0, $tp_localtime->mday, 2 ),

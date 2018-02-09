@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 # Convert an XML Key-Value pair to a text file
 
 echo > ~/Desktop/OutputASlist.txt

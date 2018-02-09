@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 # ipadify.sh
 #   Reduces the size of images in a directory around the size of a retina iPad
 #

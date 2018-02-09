@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 # path_dedupe.sh
 
 echo $PATH

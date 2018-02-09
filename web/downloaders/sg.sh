@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 
 # A downloader to backup one's investment in a site using CDN for assets outside authentication.
 

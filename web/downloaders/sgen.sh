@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 # sgen.sh
 #   Description
 #
