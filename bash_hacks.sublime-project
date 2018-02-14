@@ -20,7 +20,7 @@
 				".*/*"
 			],
 			"name": "~/.*",
-			"path": "/Users/cramerm"
+			"path": "~"
 		},
 		{
 			"path": "profiles"
@@ -34,7 +34,7 @@
 			"path": "."
 		},
 		{
-			"path": "/Users/cramerm/Documents/config"
+			"path": "~/Documents/config"
 		}
 	]
 }

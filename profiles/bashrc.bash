@@ -13,14 +13,13 @@ path_add_element(){
 }
 
 if [[ -n $profileDir ]]; then
-
     for anFile in `find $profileDir/public -iname "*.bash"`; do
-  # echo $anFile
-  source $anFile
+    # echo $anFile
+    source $anFile
 done
 
-if [[ -n $PrivateBASHRCPath ]]; then
-  for anFile in `find $PrivateBASHRCPath -iname "*.bash"`; do
+if [[ -n $BH_PRIVATE_BASHRC_PATH ]]; then
+    for anFile in `find $BH_PRIVATE_BASHRC_PATH -iname "*.bash"`; do
     # echo $anFile
     source $anFile
 done

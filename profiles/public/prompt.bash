@@ -87,7 +87,7 @@ fi ## /Color shortcuts
 # export PS1="    ${bold}[${nrml} \u ${bold}@${nrml} ${undl}\h${nrml} ${bold}:${nrml} \W ${bold}]${nrml}\n  ${bold}>${nrml} "
 
 
-if [[ -n $VANITY_HOSTNAME ]]; then bashHostNameReplacement=$VANITY_HOSTNAME
+if [[ -n $BH_VANITY_HOSTNAME ]]; then bashHostNameReplacement=$BH_VANITY_HOSTNAME
 else bashHostNameReplacement="\h"
 fi
 
