@@ -6,6 +6,9 @@ alias rcreload="source ~/.bashrc"
 alias qbashedit="nano ~/.bashrc"
 alias xcprep="xcode-select --install && sudo xcodebuild -license"
 
+export ICD="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
+alias icd="cd $ICD"
+
 alias cdprofile="cd $profileDir && pwd"
 alias cdbh="cd $profileDir/.. && pwd"
 
