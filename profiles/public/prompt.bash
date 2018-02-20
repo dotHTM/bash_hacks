@@ -72,7 +72,7 @@ if [[ -n $PS1 ]]; then
     for (( i = 0; i < $term_width; i++ )); do
         echo -n "="
     done
-    
+    echo
     ## Display a message the terminal is Interactive and if Screen
     echo -n "  ${bracket_color}>>${tput_nrml} ${user_color}Interactive Shell${tput_nrml} : ${hostname_color}Lvl ${SHLVL}${tput_nrml} ${bracket_color}<<${tput_nrml}  "
     if [[ "$TERM" == "screen" ]]; then
