@@ -1,6 +1,23 @@
 # prompt.sh
 
 
+# hr_echo "=" 32
+# hr_echo "="
+hr_echo(){
+    declare string_segment=$1 && shift
+    declare hr_length=$1 && shift
+    if [[ "$hr_length" == 0 || -z $hr_length ]]; then
+        hr_length=`tput cols`
+    fi
+    declare hr_string=""
+    declare next_hr_len=$((${#hr_string}+${#string_segment}))
+    while [[ "$next_hr_len" -le "$hr_length" ]]; do
+        hr_string="${hr_string}${string_segment}"
+        next_hr_len=$(( ${#hr_string} + ${#string_segment} ))
+    done
+    echo "$hr_string"
+}
+
 plainPrompt(){
     export PS1="[ \u @ \h : \W ] \! > "
 }
@@ -14,12 +31,12 @@ escape_wrap(){
 ## Color shortcuts
 if [[ -n $PS1 ]]; then
     tput init
-    
+
     theme_1=196
     theme_2=46
     theme_3=208
     theme_4=226
-    
+
     ## Raw values
     tput_bold=`tput bold`
     tput_undl=`tput smul`
@@ -41,19 +58,19 @@ if [[ -n $PS1 ]]; then
     wrapped_tput_theme2color=`escape_wrap $tput_theme2color`
     wrapped_tput_theme3color=`escape_wrap $tput_theme3color`
     wrapped_tput_theme4color=`escape_wrap $tput_theme4color`
-    
+
     bracket_color="${tput_theme1color}${tput_bold}"
     user_color="${tput_theme3color}"
     hostname_color="${tput_theme4color}${tput_undl}"
     prompt_color="${tput_theme2color}${tput_bold}"
     reset_color="${tput_nrml}"
-    
+
     wr_bracket_color=`escape_wrap ${bracket_color}`
     wr_user_color=`escape_wrap ${user_color}`
     wr_hostname_color=`escape_wrap ${hostname_color}`
     wr_prompt_color=`escape_wrap ${prompt_color}`
     wr_reset_color=`escape_wrap ${reset_color}`
-    
+
     theme_info(){
         echo " ${tput_theme1color}tput_theme1color${tput_nrml} = ${theme_1}"
         echo " ${tput_theme2color}tput_theme2color${tput_nrml} = ${theme_2}"
@@ -65,14 +82,11 @@ if [[ -n $PS1 ]]; then
         echo " ${hostname_color}hostname_color${tput_nrml} = ${theme_3}"
         echo " ${prompt_color}prompt_color  ${tput_nrml} = ${theme_4}"
     }
-    
-    
+
+
     ## HR
-    term_width=`tput cols`
-    for (( i = 0; i < $term_width; i++ )); do
-        echo -n "="
-    done
-    echo
+    hr_echo "="
+
     ## Display a message the terminal is Interactive and if Screen
     echo -n "  ${bracket_color}>>${tput_nrml} ${user_color}Interactive Shell${tput_nrml} : ${hostname_color}Lvl ${SHLVL}${tput_nrml} ${bracket_color}<<${tput_nrml}  "
     if [[ "$TERM" == "screen" ]]; then
@@ -81,17 +95,14 @@ if [[ -n $PS1 ]]; then
     echo
 fi ## /Color shortcuts
 
-
-# export PS1="[ ${bold}\u${nrml} @ ${undl}${bold}\h${nrml} : ${bold}\W${nrml} ]"
-
-# export PS1="    ${bold}[${nrml} \u ${bold}@${nrml} ${undl}\h${nrml} ${bold}:${nrml} \W ${bold}]${nrml}\n  ${bold}>${nrml} "
-
-
-if [[ -n $BH_VANITY_HOSTNAME ]]; then bashHostNameReplacement=$BH_VANITY_HOSTNAME
-else bashHostNameReplacement="\h"
+if [[ -n $BH_VANITY_HOSTNAME ]]; then
+    bashHostNameReplacement=$BH_VANITY_HOSTNAME
+else
+    bashHostNameReplacement="\h"
 fi
 
 commandLineDeliminator=" "
+
 
 change_PS1(){
     myInputString="$1"
