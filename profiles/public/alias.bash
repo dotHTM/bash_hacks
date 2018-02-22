@@ -132,7 +132,7 @@ searchFile() {
 }
 
 
-dockSpacerTile() {
+function dockSpacerTile() {
 	defaults write \
 		com.apple.dock \
 		persistent-apps \
