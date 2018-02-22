@@ -36,7 +36,7 @@ done <<< "$pathsList"
 
 export MANPATH=/opt/local/share/man:$MANPATH
 
-perlBaseDir="/Users/$USER/perl5"
+perlBaseDir="$HOME/perl5"
 
 ## Perl stuff
 export PATH="${perlBaseDir}/bin${PATH+:}${PATH}"
