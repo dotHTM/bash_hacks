@@ -20,15 +20,15 @@ alias lsaf="clear; lsa; ls -la *"
 alias sourceTreeOpen="open ./ -a /Applications/SourceTree.app"
 
 mkcd(){
-	mkdir -p $1 && cd $1
+    mkdir -p $1 && cd $1
 }
 
 alias qlynx="cd ~/Downloads/ && lynx -cookie_file=/tmp/lynxcookie -accept_all_cookies && rm /tmp/lynxcookie"
 
 playground(){
-	testDir="${HOME}/priv/test/"
-	mkcd $testDir
-	subl ${testDir}
+    testDir="${HOME}/priv/test/"
+    mkcd $testDir
+    subl ${testDir}
 }
 
 # Git
@@ -54,16 +54,16 @@ alias shost="subl -n /etc/hosts"
 #    openFilteredFiles "<filter string>" "<command string>" [../path/]
 #  Be sure to quote the filter and command strings
 openFilteredFiles(){
-		filterString="$1" && shift
-	commandString="$1" && shift
-	myPath="."
-	if [[ -n "$1" ]]; then
-		myPath="$1" && shift
-	fi
+    filterString="$1" && shift
+    commandString="$1" && shift
+    myPath="."
+    if [[ -n "$1" ]]; then
+        myPath="$1" && shift
+    fi
 
-	if [[ -z `find "${myPath}" -d 1 -iname $filterString -exec $commandString {} \;` ]]; then
-		echo "No files found for filter '$filterString'"
-	fi
+    if [[ -z `find "${myPath}" -d 1 -iname $filterString -exec $commandString {} \;` ]]; then
+        echo "No files found for filter '$filterString'"
+    fi
 }
 
 ## Open a Sublime Text project file here or at some path
@@ -81,22 +81,22 @@ alias fhist="history > `date '+%Y%m%d_%s'`.hist.$USER.txt"
 ### Useful functions
 
 looping(){
-	timeToWait=$1 && shift
-	commandToExec=$1 && shift
+    timeToWait=$1 && shift
+    commandToExec=$1 && shift
 
-	while :; do
-		$commandToExec
-		sleep $timeToWait
-	done
+    while :; do
+        $commandToExec
+        sleep $timeToWait
+    done
 }
 
 
 ## Save the results of a command to a variable, and save it so it can be recalled later
 tmpCache=""
 cacheCommand(){
-	inputCommand="$*"
-	tmpCache=`$inputCommand`
-	echo $tmpCache
+    inputCommand="$*"
+    tmpCache=`$inputCommand`
+    echo $tmpCache
 }
 
 alias ccmd="cacheCommand"
@@ -105,47 +105,47 @@ alias ecmd="echo \$tmpCache"
 ## Search a file(s)
 # searchFile [-d] "quoted/path/to/*.files" "(search|strings or words)" ["additional pattern to match"]
 searchFile() {
-	if [[ $1 == "-d" ]]; then
-		shift
-		debug=true
-	fi
-	inputPath=$1 && shift
-	grepString=$1 && shift
-	additionalString=$1 && shift
+    if [[ $1 == "-d" ]]; then
+        shift
+        debug=true
+    fi
+    inputPath=$1 && shift
+    grepString=$1 && shift
+    additionalString=$1 && shift
 
-	if [[ -n $additionalString ]]; then
-		highlightString="(${grepString}|${additionalString})"
-	else
-		highlightString="(${grepString})"
-	fi
-	highlightString=`echo ${highlightString} | perl -pe "s/\\//\\\\\\\\\//gi"`
-	perlString="s/(`echo ${highlightString}`)/`tput setaf 1`\1`tput sgr0`/gi"
+    if [[ -n $additionalString ]]; then
+        highlightString="(${grepString}|${additionalString})"
+    else
+        highlightString="(${grepString})"
+    fi
+    highlightString=`echo ${highlightString} | perl -pe "s/\\//\\\\\\\\\//gi"`
+    perlString="s/(`echo ${highlightString}`)/`tput setaf 1`\1`tput sgr0`/gi"
 
-	if [[ $debug ]]; then
-		echo "inputPath       = "$inputPath
-		echo "grepString      = "$grepString
-		echo "perlString      = "$perlString
-		echo "highlightString = "$highlightString
-		echo "---- ---- ---- ---- ---- ---- ---- ---- "
-	fi
-	cat $inputPath | grep -E "$grepString" | perl -pe "$perlString"
+    if [[ $debug ]]; then
+        echo "inputPath       = "$inputPath
+        echo "grepString      = "$grepString
+        echo "perlString      = "$perlString
+        echo "highlightString = "$highlightString
+        echo "---- ---- ---- ---- ---- ---- ---- ---- "
+    fi
+    cat $inputPath | grep -E "$grepString" | perl -pe "$perlString"
 }
 
 
 function dockSpacerTile() {
-	defaults write \
-		com.apple.dock \
-		persistent-apps \
-		-array-add '{"tile-type"="spacer-tile";}'
-	killall Dock
+    defaults write \
+    com.apple.dock \
+    persistent-apps \
+    -array-add '{"tile-type"="spacer-tile";}'
+    killall Dock
 }
 
 
 function bakThisUp() {
-  inputFiles=$@
-  for thisfile in $inputFiles; do
-    cp "$thisfile" "$thisfile.bak-`date "+%Y-%m-%d_%H-%M-%S"`"
-  done
+    inputFiles=$@
+    for thisfile in $inputFiles; do
+        cp "$thisfile" "$thisfile.bak-`date "+%Y-%m-%d_%H-%M-%S"`"
+    done
 }
 
 

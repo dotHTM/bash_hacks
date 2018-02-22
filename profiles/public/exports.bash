@@ -36,8 +36,6 @@ while read anPath; do
 	path_add_element "$anPath"
 done <<< "$pathsList"
 
-
-
 export MANPATH=/opt/local/share/man:$MANPATH
 
 perlBaseDir="$HOME/perl5"
