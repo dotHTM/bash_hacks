@@ -3,6 +3,10 @@
 export CLICOLOR=1
 export LSCOLORS=ehgxfxcxbxExDxBxBxbhbh
 
+export GREP_OPTIONS='--color=auto'
+export GREP_COLOR='1;31'
+
+
 # - Export Paths
 pathsList="/opt/local/bin
 /opt/local/sbin
@@ -63,9 +67,6 @@ edsubl(){
 export GEM_HOME="~/.gem"
 
 # other utility settings
-
-export GREP_OPTIONS='--color=auto'
-export GREP_COLOR='1;31'
 
 
 
