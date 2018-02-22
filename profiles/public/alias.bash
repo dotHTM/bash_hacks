@@ -150,4 +150,17 @@ function bakThisUp() {
 
 
 
+function cdl(){
+    declare target_dir=$1 && shift
+    if [[ -e "$target_dir" ]]; then
+        clear
+        cd $target_dir
+        ll -lha
+    fi
+}
+
+
+
+
+
 
