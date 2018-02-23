@@ -1,5 +1,7 @@
 # qs_aliaser.bash
 
+if [[ -e $BH_PRIVATE_BASHRC_PATH ]]; then
+
 BH_CONNECTION_LIST=`cat $BH_PRIVATE_BASHRC_PATH/quicksshfs_alias.cfg`
 
 for someServer in $BH_CONNECTION_LIST; do
@@ -21,4 +23,6 @@ for someServer in $BH_CONNECTION_LIST; do
   alias qs_${serverShortcutName}_f="quicksshfs.sh -r ${someServer} -v ${volPath} -f"
   alias qs_${serverShortcutName}_l="cd \`quicksshfs.sh -r ${someServer} -v ${volPath} -l\`"
 done
+
+fi
 

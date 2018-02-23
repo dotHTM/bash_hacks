@@ -1,4 +1,4 @@
-#  alias.sh
+  alias.sh
 #
 
 ### Lazy commands
@@ -18,6 +18,9 @@ alias lsa="ls -lha"
 alias lsaf="clear; lsa; ls -la *"
 
 alias sourceTreeOpen="open ./ -a /Applications/SourceTree.app"
+
+alias ax="chmod a+x"
+
 
 mkcd(){
     mkdir -p $1 && cd $1
