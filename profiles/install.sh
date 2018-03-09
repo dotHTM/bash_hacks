@@ -25,7 +25,7 @@ if [[
 
 ####################################
 ###### Bash hacks profile
-export BH_PROFILE_DIR=$HOME/Developer/bash_hacks/profiles
+export BH_PROFILE_DIR="$BH_PROFILE_DIR"
 
 #### If you have a private profile on disk or cloud service.
 export BH_PRIVATE_BASHRC_PATH=$HOME/Documents/config/private_profile
