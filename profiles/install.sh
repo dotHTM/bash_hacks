@@ -58,3 +58,5 @@ Have you already run this installer?
 You have backups you may want to compare/cleanup before proceeding.
 	"
 fi
+
+ln -s "$HOME/Library/Application Support/Sublime Text 3/Packages/User" "$HOME/.subl_prefs"
