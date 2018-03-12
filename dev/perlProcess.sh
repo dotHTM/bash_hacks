@@ -10,7 +10,6 @@ main(){
     someFile=$1 && shift
     someOutputFilePath=${someFile}_critic.md
 
-
     if [[ -n $someFile ]]; then
         check_syntax \
         && do_tidy && critic_returnValue=`critic_step` 
@@ -91,7 +90,4 @@ critic_markdown(){
     
 }
 
-
 main $*
-
-

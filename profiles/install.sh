@@ -52,7 +52,6 @@ The installation is not done.
 It would be a good idea to look at your .bashrc file and verify it's contents
 "
 
-
 else
 	echo "
 Have you already run this installer?
