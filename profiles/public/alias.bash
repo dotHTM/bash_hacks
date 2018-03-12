@@ -166,6 +166,15 @@ function cdl(){
     fi
 }
 
+function timeout(){
+    my_delay=$1 && shift
+    my_command=$*
+    ( $my_command ) & sleep $my_delay ; kill $! 
+    echo
+}
+
+
+
 
 
 
