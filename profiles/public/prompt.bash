@@ -4,7 +4,12 @@
 # hr_echo "=" 32
 # hr_echo "="
 hr_echo(){
-    declare string_segment=$1 && shift
+    declare string_segment='-'
+    if [[ "$string_segment" == '' || -z $string_segment ]]; then
+        string_segment=$1
+    fi
+    shift
+    
     declare hr_length=$1 && shift
     if [[ "$hr_length" == 0 || -z $hr_length ]]; then
         hr_length=`tput cols`
