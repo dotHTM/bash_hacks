@@ -8,9 +8,9 @@ cd ~/
 
 if [[ 
 	! -e .bashrc.bak && 
-! -e .bash_profile.bak && 
-! -e .profile.bak
-]]; then
+	! -e .bash_profile.bak && 
+	! -e .profile.bak
+	]]; then
 
 	mv .bashrc .bashrc.bak
 	mv .bash_profile .bash_profile.bak
