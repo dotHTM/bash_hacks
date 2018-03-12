@@ -22,8 +22,8 @@ alias lsa="ls -lha"
 alias lsaf="clear; lsa; ls -la *"
 
 alias sourceTreeOpen="open ./ -a /Applications/SourceTree.app"
-
 alias ax="chmod a+x"
+alias md="open -a /Applications/Marked\ 2.app/ "
 
 
 mkcd(){
