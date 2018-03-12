@@ -1,4 +1,4 @@
-  alias.sh
+#  alias.sh
 #
 
 ### Lazy commands
@@ -6,8 +6,12 @@ alias rcreload="source ~/.bashrc"
 alias qbashedit="nano ~/.bashrc"
 alias xcprep="xcode-select --install && sudo xcodebuild -license"
 
-export ICD="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
-alias icd="cd $ICD"
+export ICD_PATH="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
+alias cdi="cd \"$ICD_PATH\""
+alias icd="cd \"$ICD_PATH\""
+
+export PYTHONISTA_PATH="$HOME/Library/Mobile Documents/iCloud~com~omz-software~Pythonista3/Documents"
+alias cdpy="cd \"$PYTHONISTA_PATH\""
 
 alias cdprofile="cd $profileDir && pwd"
 alias cdbh="cd $profileDir/.. && pwd"
