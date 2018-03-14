@@ -1,6 +1,8 @@
 #!/usr/local/bin/bash
 # url2epub.sh
 #
+#     Usage: url2epub.sh url [title [chapter_level]]
+#
 ##    Takes a URL and makes an Epub from the HTML after cleaning it of divs.
 ##
 ##    Optionally takes a title, my_pub_chapter_level values
