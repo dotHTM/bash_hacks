@@ -63,7 +63,7 @@ ed_subl(){
 
 # gem
 
-export GEM_HOME="~/.gem"
+export GEM_HOME="$HOME/.gem"
 
 # other utility settings
 
