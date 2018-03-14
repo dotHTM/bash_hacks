@@ -10,6 +10,10 @@ export ICD_PATH="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 alias cdi="cd \"$ICD_PATH\""
 alias icd="cd \"$ICD_PATH\""
 
+alias cdo="cd $HOME/Documents"
+alias cde="cd $HOME/Desktop"
+alias cdv="cd $HOME/Developer"
+
 export PYTHONISTA_PATH="$HOME/Library/Mobile Documents/iCloud~com~omz-software~Pythonista3/Documents"
 alias cdpy="cd \"$PYTHONISTA_PATH\""
 
