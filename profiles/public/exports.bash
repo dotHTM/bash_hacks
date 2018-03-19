@@ -12,6 +12,7 @@ pathsList="/opt/local/bin
 /opt/local/sbin
 /usr/local/bin
 /usr/local/sbin
+/usr/local/opt/python/libexec/bin
 /usr/local/Cellar/perl/5.26.1/bin
 /Applications/Sublime\ Text.app/Contents/SharedSupport/bin"
 
