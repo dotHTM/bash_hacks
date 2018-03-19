@@ -70,11 +70,11 @@ if [[ -n $PS1 ]]; then
     prompt_color="${tput_theme2color}${tput_bold}"
     reset_color="${tput_nrml}"
 
-    wr_bracket_color=`escape_wrap ${bracket_color}`
-    wr_user_color=`escape_wrap ${user_color}`
-    wr_hostname_color=`escape_wrap ${hostname_color}`
-    wr_prompt_color=`escape_wrap ${prompt_color}`
-    wr_reset_color=`escape_wrap ${reset_color}`
+    wr_bracket_color="${wrapped_tput_theme1color}${wrapped_tput_bold}"
+    wr_user_color="${wrapped_tput_theme3color}"
+    wr_hostname_color="${wrapped_tput_theme4color}${wrapped_tput_undl}"
+    wr_prompt_color="${wrapped_tput_theme2color}${wrapped_tput_bold}"
+    wr_reset_color="${wrapped_tput_nrml}"
 
     theme_info(){
         echo " ${tput_theme1color}tput_theme1color${tput_nrml} = ${theme_1}"
