@@ -2,41 +2,42 @@
 #
 
 ### Lazy commands
-alias rcreload="source ~/.bashrc"
-alias qbashedit="nano ~/.bashrc"
-alias xcprep="xcode-select --install && sudo xcodebuild -license"
+alias rcreload="source ~/.bashrc"               #help= Reload the .bashrc file
+alias qbashedit="nano ~/.bashrc"                #help= Open the .bashrc file in nano
+alias xcprep="xcode-select --install && sudo xcodebuild -license"  #help= Accept XCode license and get initial command line tools
+
 
 export ICD_PATH="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
-alias cdi="cd \"$ICD_PATH\""
-alias icd="cd \"$ICD_PATH\""
+alias cdi="cd \"$ICD_PATH\""                    #help= CD to the iCloud folder
+alias icd="cd \"$ICD_PATH\""                    #help= CD to the iCloud folder
 
-alias cdo="cd $HOME/Documents"
-alias cde="cd $HOME/Desktop"
-alias cdv="cd $HOME/Developer"
+alias cdo="cd $HOME/Documents"                  #help= CD to the Documents folder
+alias cde="cd $HOME/Desktop"                    #help= CD to the Desktop folder
+alias cdv="cd $HOME/Developer"                  #help= CD to the Developer folder
 
 export PYTHONISTA_PATH="$HOME/Library/Mobile Documents/iCloud~com~omz-software~Pythonista3/Documents"
-alias cdpy="cd \"$PYTHONISTA_PATH\""
+alias cdpy="cd \"$PYTHONISTA_PATH\""            #help= CD to the Pythonista folder on iCloud
 
-alias cdprofile="cd $profileDir && pwd"
-alias cdbh="cd $profileDir/.. && pwd"
+alias cdprofile="cd $PROFILE_DIR && pwd"        #help= CD to the bash_hacks/profile folder
+alias cdbh="cd $PROFILE_DIR/.. && pwd"          #help= CD to the bash_hacks folder
 
-alias duh="du -h -d 1"
-alias ll="ls -lh"
-alias lsa="ls -lha"
-alias lsaf="clear; lsa; ls -la *"
+alias duh="du -h -d 1"                          #help= Disk Usage, Human readable, depth 1
+alias ll="ls -lh"                               #help= List, long view, human readable
+alias lsa="ls -lha"                             #help= List, long view, human readable, hidden files too
+alias lsaf="clear; lsa; ls -la *"               #help= List, long view and next child folders
 
-alias sourceTreeOpen="open ./ -a /Applications/SourceTree.app"
-alias ax="chmod a+x"
-alias md="open -a /Applications/Marked\ 2.app/ "
+alias sourceTreeOpen="open ./ -a /Applications/SourceTree.app"                  #help= Open the current directory in SourceTree
+alias ax="chmod a+x"                            #help= /path/to/file => Make a file executable
+alias md="open -a /Applications/Marked\ 2.app/ "                                #help= Open a file in the app Marked 2
 
 
-mkcd(){
+mkcd(){  #help= Make a directory and cd to it
     mkdir -p $1 && cd $1
 }
 
-alias qlynx="cd ~/Downloads/ && lynx -cookie_file=/tmp/lynxcookie -accept_all_cookies && rm /tmp/lynxcookie"
+alias qlynx="cd ${HOME}/Downloads/ && lynx -cookie_file=/tmp/lynxcookie -accept_all_cookies && rm /tmp/lynxcookie"            #help= Start Lynx in the Downloads folder and with accept_all_cookies enabled, and delete the cookie after quit
 
-playground(){
+playground(){ #help= CD to a folder for quick script testing and open that path in Sublime Text
     testDir="${HOME}/priv/test/"
     mkcd $testDir
     subl ${testDir}
@@ -44,27 +45,27 @@ playground(){
 
 # Git
 
-alias gdiff="git difftool"
-alias gstat="git status"
-alias gadd="git add"
+alias gdiff="git difftool"                      #help= git difftool
+alias gstat="git status"                        #help= git status
+alias gadd="git add"                            #help= git add
 
 # Logs
 
-alias glbranch="git log --graph --oneline --all --decorate"
-alias glstat="git log --stat -5"
+alias glbranch="git log --graph --oneline --all --decorate"                     #help= git log in a pretty format
+alias glstat="git log --stat -5"                #help= git log with some stats
 
 
 # Sublime Text Helpers
 
-alias sbashedit="subl ~/.bashrc --project $profileDir/../bash_hacks.sublime-project"
-alias smlcedit="subl ~/.bashrc --project $profileDir/../../machete-line-commands/machete-line-commands.sublime-project"
-alias shost="subl -n /etc/hosts"
+alias sbashedit="subl ~/.bashrc --project $PROFILE_DIR/../bash_hacks.sublime-project"                                    #help= open the bash_hacks & profile project in Sublime Text
+alias smlcedit="subl ~/.bashrc --project $PROFILE_DIR/../../machete-line-commands/machete-line-commands.sublime-project" #help= open the machete-line-commands project in Sublime Text
+alias shost="subl -n /etc/hosts"                #help= open the machine hosts file in Sublime Text
 
 
 ## open files using a filter and a command
 #    openFilteredFiles "<filter string>" "<command string>" [../path/]
 #  Be sure to quote the filter and command strings
-openFilteredFiles(){
+openFilteredFiles(){ #help= "<filter string>" "<command string>" [../path/] => Open files based on a filter. Be sure to quote the filter and command strings.
     filterString="$1" && shift
     commandString="$1" && shift
     myPath="."
@@ -79,15 +80,15 @@ openFilteredFiles(){
 
 ## Open a Sublime Text project file here or at some path
 #   subproj [../path/that/contains/a/project/]
-alias subproj='openFilteredFiles  "*.sublime-project" "subl --project" '
+alias subproj='openFilteredFiles  "*.sublime-project" "subl --project" '    #help= Open a Sublime Text project file here or at some path
 
 ### Date fun
-alias dateiso="date \"+%Y%m%d\""
-alias timeiso="date \"+%Y%m%d-%H%M%S\""
+alias dateiso="date \"+%Y%m%d\""                #help= Print the date in ISO 8601 format
+alias timeiso="date \"+%Y%m%d-%H%M%S\""         #help= Print the date-time in ISO 8601 format
 
 ### Note taking
 
-alias fhist="history > `date '+%Y%m%d_%s'`.hist.$USER.txt"
+alias fhist="history > `date '+%Y%m%d_%s'`.hist.$USER.txt"                      #help= Copy the history into a file with the current date
 
 ### Useful functions
 
@@ -110,8 +111,8 @@ cacheCommand(){
     echo $tmpCache
 }
 
-alias ccmd="cacheCommand"
-alias ecmd="echo \$tmpCache"
+alias ccmd="cacheCommand"                       #help= .
+alias ecmd="echo \$tmpCache"                    #help= .
 
 ## Search a file(s)
 # searchFile [-d] "quoted/path/to/*.files" "(search|strings or words)" ["additional pattern to match"]
@@ -152,7 +153,7 @@ function dockSpacerTile() {
 }
 
 
-function bakThisUp() {
+function bakThisUp() {   #help= .
     inputFiles=$@
     for thisfile in $inputFiles; do
         cp "$thisfile" "$thisfile.bak-`date "+%Y-%m-%d_%H-%M-%S"`"
