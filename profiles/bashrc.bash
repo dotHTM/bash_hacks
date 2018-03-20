@@ -1,5 +1,5 @@
 
-profileDir=$( cd $( dirname ${BASH_SOURCE[0]} ) && pwd )
+PROFILE_DIR=$( cd $( dirname ${BASH_SOURCE[0]} ) && pwd )
 
 path_add_element(){
     until [ -z "$1" ]; do
@@ -12,8 +12,8 @@ path_add_element(){
     done
 }
 
-if [[ -n $profileDir ]]; then
-    for anFile in `find $profileDir/public -iname "*.bash"`; do
+if [[ -n $PROFILE_DIR ]]; then
+    for anFile in `find $PROFILE_DIR/public -iname "*.bash"`; do
     # echo $anFile
     source $anFile
 done

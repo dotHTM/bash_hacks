@@ -27,10 +27,10 @@ reference
 web/downloaders
 web/webcams"
 
-export hackParentPath="${profileDir/\/profiles*}"
+export HACK_PARENT_PATH="${PROFILE_DIR/\/profiles*}"
 
 for anPath in $hacksPaths; do
-	path_add_element "${hackParentPath}/${anPath}"
+	path_add_element "${HACK_PARENT_PATH}/${anPath}"
 done
 
 # for anPath in $pathsList; do

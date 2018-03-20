@@ -14,7 +14,7 @@ inputFileName=$1 && shift
 
 if [[ -n $inputFileName ]]; then
   
-  cp -an "${hackParentPath}/dev/template_project" "./"
+  cp -an "${HACK_PARENT_PATH}/dev/template_project" "./"
   mv "template_project" "${inputFileName}"
   cd "./${inputFileName}"
   mv "template_project.sublime-project" "${inputFileName}.sublime-project"
