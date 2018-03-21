@@ -2,7 +2,7 @@
 
 ## License
 
-BSD like, to be determined later.
+MIT like, to be determined later.
 
 No Warranty, accept at your own risk
 
