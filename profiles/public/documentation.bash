@@ -22,50 +22,36 @@ description_wrap_indent=`space_to_length $(( $HELP_MAX_NAME_LENGTH + ${#descript
 
 declare -A help_dict
 
-read_alias_help(){
+read_help(){
     my_filename=$1 && shift
     
     while read line ; do
-        my_alias=${line/=*}
-        my_alias=${my_alias/alias }
-        my_help=${line/*#help= }
-        my_args=${my_help/ => *}
-        if [[ "$my_help" == "$my_args" ]]; then
-            my_args=""
-        else
-            my_help=${my_help/* => }
-            my_args="${my_args}
-            ${indent}${description_wrap_indent}"
+        if [[ "$line" =~ "#help=" || "$line" =~ "#args=" ]]; then
+            
+            my_id="$line"
+            my_id=${my_id/*alias }
+            my_id=${my_id/*function }
+            my_id=${my_id/()*}
+            my_id=${my_id/=*}
+            
+            my_args=''
+            
+            if [[ "$line" =~ "#args=" ]]; then
+                my_args="$line"
+                my_args=${my_args/*#args=}
+                my_args=${my_args/\#*}
+            fi
+            
+            my_help=''
+            
+            if [[ "$line" =~ "#help=" ]]; then
+                my_help="$line"
+                my_help=${my_help/*#help=}
+            fi
+            
+            display_help_line "$my_id" "$my_args" "$my_help"
         fi
-        display_help_line "$my_alias" "$my_args" "$my_help"
-    done <<< `cat "${my_filename}" | grep -e "^\s*alias\s" | grep "#help= "`
-    
-    # display_help
-}
-
-
-read_functions_help(){
-    my_filename=$1 && shift
-    
-    while read line ; do
-        my_func=${line/()*}
-        my_func=${my_func/* }
-        my_func="${my_func}()"
-        my_help=${line/*#help= }
-        my_args=${my_help/ => *}
-        if [[ "$my_help" == "$my_args" ]]; then
-            my_args=""
-        else
-            my_help=${my_help/* => }
-            my_args="${my_args}
-            ${indent}${description_wrap_indent}"
-        fi
-        display_help_line "$my_func" "$my_args" "$my_help"
-    done <<< `cat "${my_filename}" | grep -e "^\s*.*(\s*)\s*{"| grep "#help= "`
-
-
-    
-    # display_help
+    done <<< `cat "${my_filename}"`
 }
 
 display_help_line(){
@@ -75,35 +61,33 @@ display_help_line(){
     
     extra_bit=6
     
-    
     echo -n "${indent}${identifier}"
     if [[ -n $argument_string ]]; then
-        space_to_length 2
+        space_to_length 1
         echo $argument_string
-        space_to_length $HELP_MAX_NAME_LENGTH
+        space_to_length $(( $HELP_INDENT_LENGTH + $HELP_MAX_NAME_LENGTH ))
     elif (( ${#identifier} > $HELP_MAX_NAME_LENGTH )); then
         echo
         space_to_length $(( $HELP_INDENT_LENGTH + $HELP_MAX_NAME_LENGTH ))
-        extra_bit=10
     else
         space_to_length $(( $HELP_MAX_NAME_LENGTH - ${#identifier} ))
     fi
-    space_to_length 2
+    space_to_length 3
     
     first_run_done=0
-    
-    
-    
     
     column_width=$(( `tput cols` - $HELP_INDENT_LENGTH - $HELP_MAX_NAME_LENGTH - $extra_bit ))
     for (( start_point = 0; start_point < ${#descrtiption_string}; start_point+=${column_width} )); do
         if [[ "$first_run_done" == "1" ]]; then
-            echo -n "…"
+            echo "…"
             space_to_length $(( $HELP_INDENT_LENGTH + $HELP_MAX_NAME_LENGTH + $extra_bit ))
+            echo -n "…"
         else
+            echo -n "-"
             first_run_done=1
         fi
         echo -n "${descrtiption_string:$start_point:$column_width}"
+        
     done
     echo
     
@@ -114,8 +98,10 @@ display_help_line(){
 
 get_help(){
 
-    read_alias_help "$PROFILE_DIR/public/alias.bash"
-    read_functions_help "$PROFILE_DIR/public/alias.bash"
+    read_help "$PROFILE_DIR/public/alias.bash"
+    
+    # read_alias_help "$PROFILE_DIR/public/alias.bash"
+    # read_functions_help "$PROFILE_DIR/public/alias.bash"
 
 
 }

@@ -21,13 +21,13 @@ alias cdpy="cd \"$PYTHONISTA_PATH\""            #help= CD to the Pythonista fold
 alias cdprofile="cd $PROFILE_DIR && pwd"        #help= CD to the bash_hacks/profile folder
 alias cdbh="cd $PROFILE_DIR/.. && pwd"          #help= CD to the bash_hacks folder
 
-alias duh="du -h -d 1"                          #help= Disk Usage, Human readable, depth 1
+alias duh="du -h -d 1"                          #help= Disk Usage, Human readable, No sub folders
 alias ll="ls -lh"                               #help= List, long view, human readable
 alias lsa="ls -lha"                             #help= List, long view, human readable, hidden files too
 alias lsaf="clear; lsa; ls -la *"               #help= List, long view and next child folders
 
 alias sourceTreeOpen="open ./ -a /Applications/SourceTree.app"                  #help= Open the current directory in SourceTree
-alias ax="chmod a+x"                            #help= /path/to/file => Make a file executable
+alias ax="chmod a+x"                            #args= /path/to/file #help= Make a file executable
 alias md="open -a /Applications/Marked\ 2.app/ "                                #help= Open a file in the app Marked 2
 
 
@@ -65,7 +65,7 @@ alias shost="subl -n /etc/hosts"                #help= open the machine hosts fi
 ## open files using a filter and a command
 #    openFilteredFiles "<filter string>" "<command string>" [../path/]
 #  Be sure to quote the filter and command strings
-openFilteredFiles(){ #help= "<filter string>" "<command string>" [../path/] => Open files based on a filter. Be sure to quote the filter and command strings.
+openFilteredFiles(){ #args= "<filter string>" "<command string>" [../path/] #help= Open files based on a filter. Be sure to quote the filter and command strings.
     filterString="$1" && shift
     commandString="$1" && shift
     myPath="."
