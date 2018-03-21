@@ -1,25 +1,27 @@
 #  alias.sh
 #
 
+alias bh_update='cd $BH_PROFILE_DIR/.. && git pull'
+
 ### Lazy commands
 alias rcreload="source ~/.bashrc"               #help= Reload the .bashrc file
 alias qbashedit="nano ~/.bashrc"                #help= Open the .bashrc file in nano
 alias xcprep="xcode-select --install && sudo xcodebuild -license"  #help= Accept XCode license and get initial command line tools
 
 
-export ICD_PATH="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
-alias cdi="cd \"$ICD_PATH\""                    #help= CD to the iCloud folder
-alias icd="cd \"$ICD_PATH\""                    #help= CD to the iCloud folder
+export BH_ICD_PATH="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
+alias cdi='cd "$BH_ICD_PATH" && pwd'                    #help= CD to the iCloud folder
+alias icd='cd "$BH_ICD_PATH" && pwd'                    #help= CD to the iCloud folder
 
-alias cdo="cd $HOME/Documents"                  #help= CD to the Documents folder
-alias cde="cd $HOME/Desktop"                    #help= CD to the Desktop folder
-alias cdv="cd $HOME/Developer"                  #help= CD to the Developer folder
+alias cdo='cd "$HOME/Documents" && pwd'                  #help= CD to the Documents folder
+alias cde='cd "$HOME/Desktop" && pwd'                    #help= CD to the Desktop folder
+alias cdv='cd "$HOME/Developer" && pwd'                  #help= CD to the Developer folder
 
-export PYTHONISTA_PATH="$HOME/Library/Mobile Documents/iCloud~com~omz-software~Pythonista3/Documents"
-alias cdpy="cd \"$PYTHONISTA_PATH\""            #help= CD to the Pythonista folder on iCloud
+export BH_PYTHONISTA_PATH="$HOME/Library/Mobile Documents/iCloud~com~omz-software~Pythonista3/Documents"
+alias cdpy='cd "$BH_PYTHONISTA_PATH" && pwd'            #help= CD to the Pythonista folder on iCloud
 
-alias cdprofile="cd $PROFILE_DIR && pwd"        #help= CD to the bash_hacks/profile folder
-alias cdbh="cd $PROFILE_DIR/.. && pwd"          #help= CD to the bash_hacks folder
+alias cdprofile='cd "$BH_PROFILE_DIR" && pwd'        #help= CD to the bash_hacks/profile folder
+alias cdbh='cd "$BH_PROFILE_DIR"/.. && pwd'          #help= CD to the bash_hacks folder
 
 alias duh="du -h -d 1"                          #help= Disk Usage, Human readable, No sub folders
 alias ll="ls -lh"                               #help= List, long view, human readable
