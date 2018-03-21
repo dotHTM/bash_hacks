@@ -38,6 +38,7 @@ read_help(){
             
             if [[ "$line" =~ "#args=" ]]; then
                 my_args="$line"
+                my_args=${my_args/*#args= }
                 my_args=${my_args/*#args=}
                 my_args=${my_args/\#*}
             fi
@@ -46,6 +47,7 @@ read_help(){
             
             if [[ "$line" =~ "#help=" ]]; then
                 my_help="$line"
+                my_help=${my_help/*#help= }
                 my_help=${my_help/*#help=}
             fi
             
@@ -59,31 +61,43 @@ display_help_line(){
     argument_string=$1 && shift
     descrtiption_string=$1 && shift
     
-    extra_bit=6
+    tput_bold=`tput bold`
+    tput_undl=`tput smul`
+    tput_revE=`tput rev`
+    tput_blnk=`tput blink`
+    tput_nrml=`tput sgr0`
     
-    echo -n "${indent}${identifier}"
+    color_identifier=`tput setaf 14`
+    color_arguments=`tput setaf 11`
+    
+    left_wrap_align_bit=3
+    right_wrap_margin_bit=6
+    
+    if (( ${#identifier} <= $HELP_MAX_NAME_LENGTH )); then
+        space_to_length $(( $HELP_MAX_NAME_LENGTH - ${#identifier} ))
+    fi
+    echo -n "${indent}${tput_bold}${color_identifier}${identifier}${tput_nrml}"
     if [[ -n $argument_string ]]; then
         space_to_length 1
-        echo $argument_string
+        echo "${color_arguments}${argument_string}${tput_nrml}"
         space_to_length $(( $HELP_INDENT_LENGTH + $HELP_MAX_NAME_LENGTH ))
     elif (( ${#identifier} > $HELP_MAX_NAME_LENGTH )); then
         echo
         space_to_length $(( $HELP_INDENT_LENGTH + $HELP_MAX_NAME_LENGTH ))
-    else
-        space_to_length $(( $HELP_MAX_NAME_LENGTH - ${#identifier} ))
     fi
-    space_to_length 3
+    echo -n "${tput_nrml}"
+    space_to_length 1
     
     first_run_done=0
     
-    column_width=$(( `tput cols` - $HELP_INDENT_LENGTH - $HELP_MAX_NAME_LENGTH - $extra_bit ))
+    column_width=$(( `tput cols` - $HELP_INDENT_LENGTH - $HELP_MAX_NAME_LENGTH - $right_wrap_margin_bit ))
     for (( start_point = 0; start_point < ${#descrtiption_string}; start_point+=${column_width} )); do
         if [[ "$first_run_done" == "1" ]]; then
             echo "…"
-            space_to_length $(( $HELP_INDENT_LENGTH + $HELP_MAX_NAME_LENGTH + $extra_bit ))
+            space_to_length $(( $HELP_INDENT_LENGTH + $HELP_MAX_NAME_LENGTH + $left_wrap_align_bit ))
             echo -n "…"
         else
-            echo -n "-"
+            echo -n "- "
             first_run_done=1
         fi
         echo -n "${descrtiption_string:$start_point:$column_width}"

@@ -92,7 +92,7 @@ alias fhist="history > `date '+%Y%m%d_%s'`.hist.$USER.txt"                      
 
 ### Useful functions
 
-looping(){
+looping(){ #args= <time to wait in seconds> <command> #help= Repeat a command waiting some seconds between
     timeToWait=$1 && shift
     commandToExec=$1 && shift
 
@@ -105,18 +105,18 @@ looping(){
 
 ## Save the results of a command to a variable, and save it so it can be recalled later
 tmpCache=""
-cacheCommand(){
+cacheCommand(){ #args= <command> #help= Run a command and save it into a variable $tmpCache
     inputCommand="$*"
-    tmpCache=`$inputCommand`
+    tmpCache=$($inputCommand)
     echo $tmpCache
 }
 
-alias ccmd="cacheCommand"                       #help= .
-alias ecmd="echo \$tmpCache"                    #help= .
+alias ccmd="cacheCommand"    #args= <command>      #help= shortcut for cacheCommand 
+alias ecmd='echo "$tmpCache"'                      #help= get the value of $tmpCache (the last run cacheCommand)
 
 ## Search a file(s)
 # searchFile [-d] "quoted/path/to/*.files" "(search|strings or words)" ["additional pattern to match"]
-searchFile() {
+searchFile() { #args= searchFile [-d] "quoted/path/to/*.files" "(search|strings or words)" ["additional pattern to match"] #help= Search a file(s)
     if [[ $1 == "-d" ]]; then
         shift
         debug=true
@@ -144,25 +144,39 @@ searchFile() {
 }
 
 
-function dockSpacerTile() {
-    defaults write \
-    com.apple.dock \
-    persistent-apps \
-    -array-add '{"tile-type"="spacer-tile";}'
-    killall Dock
+function dockSpacerTile() { #args= [apps|docs [small]] #help= Create a blank Dock item on the Apps side
+    my_side=$1 && shift
+    my_small=$1 && shift
+    
+    if [[ "${my_side}" =~ "docs" || "docs" =~ "${my_side}" ]]; then
+        echo "docs"
+        tile_side="persistent-others"
+    else
+        echo "apps"
+        tile_side="persistent-apps"
+    fi
+
+    if [[ "${my_small}" =~ "small" || "small" =~ "${my_small}" ]]; then
+        echo "small"
+        tile_size='{"tile-type"="small-spacer-tile";}' 
+    else
+        echo "large"
+        tile_size='{"tile-type"="spacer-tile";}'
+    fi
+    defaults \
+        write com.apple.dock "${tile_side}" \
+        -array-add "$tile_size" \
+        && killall Dock
 }
 
-
-function bakThisUp() {   #help= .
+function bakThisUp() {  #args= /path/to/file #help= backup a file using iso datetime
     inputFiles=$@
     for thisfile in $inputFiles; do
         cp "$thisfile" "$thisfile.bak-`date "+%Y-%m-%d_%H-%M-%S"`"
     done
 }
 
-
-
-function cdl(){
+function cdl(){ #args= /some/path/ #help= clear screen and list all files of path
     declare target_dir=$1 && shift
     if [[ -e "$target_dir" ]]; then
         clear
@@ -171,7 +185,7 @@ function cdl(){
     fi
 }
 
-function timeout(){
+function timeout(){ #args= <number of seconds> <command> #help= run a command and kill it if it takes more than the timeout
     my_delay=$1 && shift
     my_command=$*
     ( $my_command ) & sleep $my_delay ; kill $! 
