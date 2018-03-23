@@ -33,5 +33,9 @@ In the `profile` directory is a `color` directory for macOS Termainal.
 
 ### Updates
 
-TBD later
+```shell
+cdbh # alias to cd into the bash_hacks directory
+git pull
+```
+
 
