@@ -21,6 +21,7 @@ use Data::Dumper::Concise;
 use Tie::Handle::CSV;
 use Getopt::Long;
 
+my $help_requested;
 my $filename;
 my $search_string;
 my $open_profile   = '';
@@ -30,6 +31,7 @@ my $key_tweetID    = 'ID';
 my $csv_output;
 
 GetOptions(
+    "help"           => \$help_requested,
     "file=s"         => \$filename,
     "search=s"       => \$search_string,
     "key-name=s"     => \$key_screenName,
@@ -43,6 +45,7 @@ GetOptions(
 sub usage {
     say join "\n",
         "Usage:  Search a CSV file containing tweet information from gem t",
+        "    -h, --help          Print this Help",
         "    -f, --file          Filename to search, a CSV file",
         "    -s, --search        Regex search pattern. ex '\bnsfw'",
         "        --csv-output    Output CSV lines instead of just usernames",
@@ -51,6 +54,11 @@ sub usage {
         "        --key-name      Table key for Twitter screen name",
         "        --key-tweet-id  Table key for Tweet ID",
         "----";
+    exit;
+}
+
+if ($help_requested){
+    usage;
     exit;
 }
 
