@@ -16,6 +16,7 @@ alias icd='cd "$BH_ICD_PATH" && pwd'                    #help= CD to the iCloud 
 alias cdo='cd "$HOME/Documents" && pwd'                  #help= CD to the Documents folder
 alias cde='cd "$HOME/Desktop" && pwd'                    #help= CD to the Desktop folder
 alias cdv='cd "$HOME/Developer" && pwd'                  #help= CD to the Developer folder
+alias cdw='cd "$HOME/Downloads" && pwd'                  #help= CD to the Downloads folder
 
 export BH_PYTHONISTA_PATH="$HOME/Library/Mobile Documents/iCloud~com~omz-software~Pythonista3/Documents"
 alias cdpy='cd "$BH_PYTHONISTA_PATH" && pwd'            #help= CD to the Pythonista folder on iCloud
