@@ -1,25 +1,12 @@
 #  alias.sh
 #
 
-alias bh_update='cd $BH_PROFILE_DIR/.. && git pull'
+alias bh_update='cd "$BH_PROFILE_DIR/.." && git pull'
 
 ### Lazy commands
 alias rcreload="source ~/.bashrc"               #help= Reload the .bashrc file
 alias qbashedit="nano ~/.bashrc"                #help= Open the .bashrc file in nano
-alias xcprep="xcode-select --install && sudo xcodebuild -license"  #help= Accept XCode license and get initial command line tools
-
-
-export BH_ICD_PATH="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
-alias cdi='cd "$BH_ICD_PATH" && pwd'                    #help= CD to the iCloud folder
-alias icd='cd "$BH_ICD_PATH" && pwd'                    #help= CD to the iCloud folder
-
-alias cdo='cd "$HOME/Documents" && pwd'                  #help= CD to the Documents folder
-alias cde='cd "$HOME/Desktop" && pwd'                    #help= CD to the Desktop folder
-alias cdv='cd "$HOME/Developer" && pwd'                  #help= CD to the Developer folder
-alias cdw='cd "$HOME/Downloads" && pwd'                  #help= CD to the Downloads folder
-
-export BH_PYTHONISTA_PATH="$HOME/Library/Mobile Documents/iCloud~com~omz-software~Pythonista3/Documents"
-alias cdpy='cd "$BH_PYTHONISTA_PATH" && pwd'            #help= CD to the Pythonista folder on iCloud
+alias vbashedit="vi ~/.bashrc"                #help= Open the .bashrc file in vi
 
 alias cdprofile='cd "$BH_PROFILE_DIR" && pwd'        #help= CD to the bash_hacks/profile folder
 alias cdbh='cd "$BH_PROFILE_DIR"/.. && pwd'          #help= CD to the bash_hacks folder
@@ -29,10 +16,9 @@ alias ll="ls -lh"                               #help= List, long view, human re
 alias lsa="ls -lha"                             #help= List, long view, human readable, hidden files too
 alias lsaf="clear; lsa; ls -la *"               #help= List, long view and next child folders
 
-alias sourceTreeOpen="open ./ -a /Applications/SourceTree.app"                  #help= Open the current directory in SourceTree
 alias ax="chmod a+x"                            #args= /path/to/file #help= Make a file executable
-alias md="open -a /Applications/Marked\ 2.app/ "                                #help= Open a file in the app Marked 2
 
+alias public_key="cat $HOME/.ssh/id_rsa.pub"
 
 mkcd(){  #help= Make a directory and cd to it
     mkdir -p $1 && cd $1
@@ -40,29 +26,6 @@ mkcd(){  #help= Make a directory and cd to it
 
 alias qlynx="cd ${HOME}/Downloads/ && lynx -cookie_file=/tmp/lynxcookie -accept_all_cookies && rm /tmp/lynxcookie"            #help= Start Lynx in the Downloads folder and with accept_all_cookies enabled, and delete the cookie after quit
 
-playground(){ #help= CD to a folder for quick script testing and open that path in Sublime Text
-    testDir="${HOME}/priv/test/"
-    mkcd $testDir
-    subl ${testDir}
-}
-
-# Git
-
-alias gdiff="git difftool"                      #help= git difftool
-alias gstat="git status"                        #help= git status
-alias gadd="git add"                            #help= git add
-
-# Logs
-
-alias glbranch="git log --graph --oneline --all --decorate"                     #help= git log in a pretty format
-alias glstat="git log --stat -5"                #help= git log with some stats
-
-
-# Sublime Text Helpers
-
-alias sbashedit="subl ~/.bashrc --project $PROFILE_DIR/../bash_hacks.sublime-project"                                    #help= open the bash_hacks & profile project in Sublime Text
-alias smlcedit="subl ~/.bashrc --project $PROFILE_DIR/../../machete-line-commands/machete-line-commands.sublime-project" #help= open the machete-line-commands project in Sublime Text
-alias shost="subl -n /etc/hosts"                #help= open the machine hosts file in Sublime Text
 
 
 ## open files using a filter and a command
@@ -81,9 +44,6 @@ openFilteredFiles(){ #args= "<filter string>" "<command string>" [../path/] #hel
     fi
 }
 
-## Open a Sublime Text project file here or at some path
-#   subproj [../path/that/contains/a/project/]
-alias subproj='openFilteredFiles  "*.sublime-project" "subl --project" '    #help= Open a Sublime Text project file here or at some path
 
 ### Date fun
 alias dateiso="date \"+%Y%m%d\""                #help= Print the date in ISO 8601 format
@@ -146,31 +106,6 @@ searchFile() { #args= searchFile [-d] "quoted/path/to/*.files" "(search|strings 
     cat $inputPath | grep -E "$grepString" | perl -pe "$perlString"
 }
 
-
-function dockSpacerTile() { #args= [apps|docs [small]] #help= Create a blank Dock item on the Apps side
-    my_side=$1 && shift
-    my_small=$1 && shift
-    
-    if [[ "${my_side}" =~ "docs" || "docs" =~ "${my_side}" ]]; then
-        echo "docs"
-        tile_side="persistent-others"
-    else
-        echo "apps"
-        tile_side="persistent-apps"
-    fi
-
-    if [[ "${my_small}" =~ "small" || "small" =~ "${my_small}" ]]; then
-        echo "small"
-        tile_size='{"tile-type"="small-spacer-tile";}' 
-    else
-        echo "large"
-        tile_size='{"tile-type"="spacer-tile";}'
-    fi
-    defaults \
-        write com.apple.dock "${tile_side}" \
-        -array-add "$tile_size" \
-        && killall Dock
-}
 
 function bakThisUp() {  #args= /path/to/file #help= backup a file using iso datetime
     inputFiles=$@
