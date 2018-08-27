@@ -1,9 +1,20 @@
 
-
 if [[ -z $HELP_MAX_NAME_LENGTH ]]; then
     HELP_MAX_NAME_LENGTH=12
 fi
 
+tput_bold=`tput bold`
+tput_undl=`tput smul`
+tput_revE=`tput rev`
+tput_blnk=`tput blink`
+tput_nrml=`tput sgr0`
+
+color_identifier=`tput setaf 9`
+color_identifier=`tput setaf 14`
+color_arguments=`tput setaf 11`
+
+left_wrap_align_bit=3
+right_wrap_margin_bit=6
 
 space_to_length(){
     my_length=$1
@@ -23,12 +34,16 @@ description_wrap_indent=`space_to_length $(( $HELP_MAX_NAME_LENGTH + ${#descript
 declare -A help_dict
 
 read_help(){
-    my_filename=$1 && shift
-    
-    while read line ; do
-        if [[ "$line" =~ "#help=" || "$line" =~ "#args=" ]]; then
-            
-            my_id="$line"
+    while my_filename=$1 && shift; do
+        
+        
+        echo
+        echo "${color_identifier}### ${my_filename} ###${tput_nrml}"
+        echo
+        while read line ; do
+            if [[ "$line" =~ " ""#help=" || "$line" =~ " ""#args=" ]]; then # the use of quotes 
+                
+                my_id="$line"
             my_id=${my_id/*alias }
             my_id=${my_id/*function }
             my_id=${my_id/()*}
@@ -54,25 +69,14 @@ read_help(){
             display_help_line "$my_id" "$my_args" "$my_help"
         fi
     done <<< `cat "${my_filename}"`
+done
 }
 
 display_help_line(){
     identifier=$1 && shift
     argument_string=$1 && shift
     descrtiption_string=$1 && shift
-    
-    tput_bold=`tput bold`
-    tput_undl=`tput smul`
-    tput_revE=`tput rev`
-    tput_blnk=`tput blink`
-    tput_nrml=`tput sgr0`
-    
-    color_identifier=`tput setaf 14`
-    color_arguments=`tput setaf 11`
-    
-    left_wrap_align_bit=3
-    right_wrap_margin_bit=6
-    
+        
     if (( ${#identifier} <= $HELP_MAX_NAME_LENGTH )); then
         space_to_length $(( $HELP_MAX_NAME_LENGTH - ${#identifier} ))
     fi
@@ -112,11 +116,7 @@ display_help_line(){
 
 get_help(){
 
-    read_help "$PROFILE_DIR/public/alias.bash"
-    
-    # read_alias_help "$PROFILE_DIR/public/alias.bash"
-    # read_functions_help "$PROFILE_DIR/public/alias.bash"
-
+    read_help "$PROFILE_DIR"/public/*.bash
 
 }
 

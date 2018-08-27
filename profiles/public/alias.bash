@@ -79,7 +79,7 @@ alias ecmd='echo "$tmpCache"'                      #help= get the value of $tmpC
 
 ## Search a file(s)
 # searchFile [-d] "quoted/path/to/*.files" "(search|strings or words)" ["additional pattern to match"]
-searchFile() { #args= searchFile [-d] "quoted/path/to/*.files" "(search|strings or words)" ["additional pattern to match"] #help= Search a file(s)
+searchFile() { #args= [-d] "quoted/path/to/*.files" "(search|strings or words)" ["additional pattern to match"] #help= Search a file(s)
     if [[ $1 == "-d" ]]; then
         shift
         debug=true
