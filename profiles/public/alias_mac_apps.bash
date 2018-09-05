@@ -65,11 +65,12 @@ subproj(){
     shift $((OPTIND-1))
 
     # open
-    echo "open:"
-    for anFile in `find ./ -iname "*.sublime-project"`; do
+    echo "open:"    
+    while read -r anFile; do
         echo " - $anFile"
-        subl -p $anFile
-    done
+        subl -p "$anFile"
+    done <<< `find ./ -iname "*.sublime-project"`
+    
 }
 
 
