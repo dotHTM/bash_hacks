@@ -6,11 +6,11 @@ alias cdi='cd "$BH_ICD_PATH" && pwd'                    #help= CD to the iCloud 
 alias icd='cd "$BH_ICD_PATH" && pwd'                    #help= CD to the iCloud folder
 
 alias cde='cd "$HOME/Desktop" && pwd'                    #help= CD to the Desktop folder
-alias cdw='cd "$HOME/Downloads" && pwd'                  #help= CD to the Downloads folder
+alias cdl='cd "$HOME/Downloads" && pwd'                  #help= CD to the Downloads folder
 alias cdo='cd "$HOME/Documents" && pwd'                  #help= CD to the Documents folder
 alias cdv='cd "$HOME/Developer" && pwd'                  #help= CD to the Developer folder
 
-
+alias killTrash="rm -rf ~/.Trash/*" #help= Empty the Trash with `rm`
 
 
 
