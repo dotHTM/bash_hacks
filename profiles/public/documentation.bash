@@ -34,49 +34,63 @@ description_wrap_indent=`space_to_length $(( $HELP_MAX_NAME_LENGTH + ${#descript
 declare -A help_dict
 
 read_help(){
+    
+    has_help=0
+    need_to_print_filename=1
+    
     while my_filename=$1 && shift; do
-        
-        
-        echo
-        echo "${color_identifier}### ${my_filename} ###${tput_nrml}"
-        echo
+      
         while read line ; do
-            if [[ "$line" =~ " ""#help=" || "$line" =~ " ""#args=" ]]; then # the use of quotes 
+            if [[ "$line" =~ " ""#help=" || "$line" =~ " ""#args=" ]]; then
+                # the use of quotes 
                 
                 my_id="$line"
-            my_id=${my_id/*alias }
-            my_id=${my_id/*function }
-            my_id=${my_id/()*}
-            my_id=${my_id/=*}
-            
-            my_args=''
-            
-            if [[ "$line" =~ "#args=" ]]; then
-                my_args="$line"
-                my_args=${my_args/*#args= }
-                my_args=${my_args/*#args=}
-                my_args=${my_args/\#*}
+                my_id=${my_id/*alias }
+                my_id=${my_id/*function }
+                my_id=${my_id/()*}
+                my_id=${my_id/=*}
+                
+                my_args=''
+                
+                if [[ "$line" =~ "#args=" ]]; then
+                    my_args="$line"
+                    my_args=${my_args/*#args= }
+                    my_args=${my_args/*#args=}
+                    my_args=${my_args/\#*}
+                fi
+                
+                my_help=''
+                
+                if [[ "$line" =~ "#help=" ]]; then
+                    my_help="$line"
+                    my_help=${my_help/*#help= }
+                    my_help=${my_help/*#help=}
+                fi
+                
+                
+                if [[ $my_args || $my_help  ]]; then
+                    has_help=1
+                fi
+                
+                
+                if [[ $has_help && $need_to_print_filename ]]; then
+                    echo
+                    echo "${color_identifier}### ${my_filename} ###${tput_nrml}"
+                    echo
+                    need_to_print_filename=''
+                fi
+                
+                display_help_line "$my_id" "$my_args" "$my_help"
             fi
-            
-            my_help=''
-            
-            if [[ "$line" =~ "#help=" ]]; then
-                my_help="$line"
-                my_help=${my_help/*#help= }
-                my_help=${my_help/*#help=}
-            fi
-            
-            display_help_line "$my_id" "$my_args" "$my_help"
-        fi
-    done <<< `cat "${my_filename}"`
-done
+        done <<< `cat "${my_filename}"`
+    done
 }
 
 display_help_line(){
     identifier=$1 && shift
     argument_string=$1 && shift
     descrtiption_string=$1 && shift
-        
+    
     if (( ${#identifier} <= $HELP_MAX_NAME_LENGTH )); then
         space_to_length $(( $HELP_MAX_NAME_LENGTH - ${#identifier} ))
     fi
@@ -115,9 +129,9 @@ display_help_line(){
 
 
 get_help(){
-
-    read_help "$PROFILE_DIR"/public/*.bash
-
+    for some_file in `find "${PROFILE_DIR}/public/" -iname "*.bash"`; do
+        read_help $some_file
+    done
 }
 
 
