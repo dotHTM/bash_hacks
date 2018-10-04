@@ -1,6 +1,9 @@
 # prompt.sh
 
 
+prompt_user="$USER"
+export PROMPT_STYLE=''
+
 # hr_echo "=" 32
 # hr_echo "="
 hr_echo(){
@@ -110,21 +113,33 @@ commandLineDeliminator=" "
 
 
 change_PS1(){
-    myInputString="$1"
+    export PROMPT_STYLE="$1" && shift
+    myInputString="$1" 
     if [[ -n $PS1 ]]; then
         export PS1="$myInputString"
     fi
 }
 
 dullPrompt(){
-    change_PS1 "[ \u @ ${bashHostNameReplacement} : \W ]${commandLineDeliminator}\! > "
+    change_PS1 dullPrompt "[ $prompt_user @ ${bashHostNameReplacement} : \W ]${commandLineDeliminator}\! > "
 }
 
 boldPrompt(){
-    change_PS1 "${wr_bracket_color}[${wr_reset_color} ${wr_user_color}\u${wr_reset_color} ${wr_bracket_color}@${wr_reset_color} ${wr_hostname_color}${bashHostNameReplacement}${wr_reset_color} ${wr_bracket_color}:${wr_reset_color} \W ${wr_bracket_color}]${wr_reset_color}${commandLineDeliminator}${wr_prompt_color}\! >${wr_reset_color} "
+    change_PS1 boldPrompt "${wr_bracket_color}[${wr_reset_color} ${wr_user_color}$prompt_user${wr_reset_color} ${wr_bracket_color}@${wr_reset_color} ${wr_hostname_color}${bashHostNameReplacement}${wr_reset_color} ${wr_bracket_color}:${wr_reset_color} \W ${wr_bracket_color}]${wr_reset_color}${commandLineDeliminator}${wr_prompt_color}\! >${wr_reset_color} "
 }
 
 shortPrompt(){
-    change_PS1 "${wr_bracket_color}[${wr_reset_color} ${wr_bracket_color}:${wr_reset_color} \W ${wr_bracket_color}]${wr_reset_color}${commandLineDeliminator}${wr_prompt_color}\! >${wr_reset_color} "
+    change_PS1 shortPrompt "${wr_bracket_color}[${wr_reset_color} ${wr_bracket_color}:${wr_reset_color} \W ${wr_bracket_color}]${wr_reset_color}${commandLineDeliminator}${wr_prompt_color}\! >${wr_reset_color} "
 }
 
+reprompt(){
+    $PROMPT_STYLE
+}
+
+cosplay(){
+    prompt_user="$1" && shift
+    if [[ -n $1 ]]; then
+        bashHostNameReplacement="$1" && shift
+    fi
+    reprompt
+}
