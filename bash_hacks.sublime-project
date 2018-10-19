@@ -29,7 +29,6 @@
 			"folder_exclude_patterns":
 			[
 				"profiles",
-				".git"
 			],
 			"path": "."
 		},
