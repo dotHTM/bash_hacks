@@ -40,10 +40,10 @@ escape_wrap(){
 if [[ -n $PS1 ]]; then
     tput init
 
-    theme_1=196
-    theme_2=46
-    theme_3=208
-    theme_4=226
+    theme_1=9
+    theme_2=10
+    theme_3=12
+    theme_4=11
 
     ## Raw values
     tput_bold=`tput bold`
