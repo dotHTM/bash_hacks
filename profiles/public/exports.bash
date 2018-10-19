@@ -13,7 +13,9 @@ pathsList="/opt/local/bin
 /usr/local/sbin
 /usr/local/opt/python/libexec/bin
 /usr/local/Cellar/perl/5.26.1/bin
-/Applications/Sublime\ Text.app/Contents/SharedSupport/bin"
+/Applications/Sublime\ Text.app/Contents/SharedSupport/bin
+/Applications/Sublime\ Merge.app/Contents/SharedSupport/bin
+"
 
 hacksPaths=".
 amuse
