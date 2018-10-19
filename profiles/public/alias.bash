@@ -4,19 +4,19 @@
 alias bh_update='cd "$BH_PROFILE_DIR/.." && git pull'   #help= cd to the profile directory and update.
 
 ### Lazy commands
-alias rcreload='source ~/.bashrc'               #help= Reload the .bashrc file
-alias qbashedit='nano ~/.bashrc'                #help= Open the .bashrc file in nano
-alias vbashedit='vi ~/.bashrc'                #help= Open the .bashrc file in vi
+alias rcreload="source ~/.bashrc"               #help= Reload the .bashrc file
+alias qbashedit="nano ~/.bashrc"                #help= Open the .bashrc file in nano
+alias vbashedit="vi ~/.bashrc"                #help= Open the .bashrc file in vi
 
 alias cdprofile='cd "$BH_PROFILE_DIR" && pwd'        #help= CD to the bash_hacks/profile folder
 alias cdbh='cd "$BH_PROFILE_DIR"/.. && pwd'          #help= CD to the bash_hacks folder
 
-alias duh='du -h -d 1'                          #help= Disk Usage, Human readable, No sub folders
-alias ll='ls -lh'                               #help= List, long view, human readable
-alias lsa='ls -lha'                             #help= List, long view, human readable, hidden files too
-alias lsaf='clear; lsa; ls -la *'               #help= List, long view and next child folders
+alias duh="du -h -d 1"                          #help= Disk Usage, Human readable, No sub folders
+alias ll="ls -lh"                               #help= List, long view, human readable
+alias lsa="ls -lha"                             #help= List, long view, human readable, hidden files too
+alias lsaf="clear; lsa; ls -la *"               #help= List, long view and next child folders
 
-alias ax='chmod a+x'                            #args= /path/to/file #help= Make a file executable
+alias ax="chmod a+x"                            #args= /path/to/file #help= Make a file executable
 
 alias public_key="cat $HOME/.ssh/id_rsa.pub"
 
@@ -51,7 +51,7 @@ alias timeiso="date \"+%Y%m%d-%H%M%S\""         #help= Print the date-time in IS
 
 ### Note taking
 
-alias fhist='history > `date "+%Y%m%d_%s"`.hist.$USER.txt'                      #help= Copy the history into a file with the current date
+alias fhist="history > `date '+%Y%m%d_%s'`.hist.$USER.txt"                      #help= Copy the history into a file with the current date
 
 ### Useful functions
 
@@ -74,7 +74,7 @@ cacheCommand(){ #args= <command> #help= Run a command and save it into a variabl
     echo $tmpCache
 }
 
-alias ccmd='cacheCommand'    #args= <command>      #help= shortcut for cacheCommand 
+alias ccmd="cacheCommand"    #args= <command>      #help= shortcut for cacheCommand 
 alias ecmd='echo "$tmpCache"'                      #help= get the value of $tmpCache (the last run cacheCommand)
 
 ## Search a file(s)
@@ -97,11 +97,11 @@ searchFile() { #args= [-d] "quoted/path/to/*.files" "(search|strings or words)" 
     perlString="s/(`echo ${highlightString}`)/`tput setaf 1`\1`tput sgr0`/gi"
 
     if [[ $debug ]]; then
-        echo 'inputPath       = '$inputPath
-        echo 'grepString      = '$grepString
-        echo 'perlString      = '$perlString
-        echo 'highlightString = '$highlightString
-        echo '---- ---- ---- ---- ---- ---- ---- ---- '
+        echo "inputPath       = "$inputPath
+        echo "grepString      = "$grepString
+        echo "perlString      = "$perlString
+        echo "highlightString = "$highlightString
+        echo "---- ---- ---- ---- ---- ---- ---- ---- "
     fi
     cat $inputPath | grep -E "$grepString" | perl -pe "$perlString"
 }
