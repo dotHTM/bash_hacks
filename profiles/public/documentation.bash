@@ -9,7 +9,8 @@ tput_revE=`tput rev`
 tput_blnk=`tput blink`
 tput_nrml=`tput sgr0`
 
-color_identifier=`tput setaf 9`
+color_directory=`tput setaf 9`
+color_file=`tput setaf 10`
 color_identifier=`tput setaf 14`
 color_arguments=`tput setaf 11`
 
@@ -75,7 +76,7 @@ read_help(){
                 
                 if [[ $has_help && $need_to_print_filename ]]; then
                     echo
-                    echo "${color_identifier}### ${my_filename} ###${tput_nrml}"
+                    echo "${color_file}### ${my_filename} ###${tput_nrml}"
                     echo
                     need_to_print_filename=''
                 fi
@@ -123,16 +124,25 @@ display_help_line(){
     done
     echo
     
-    
-
 }
 
 
-get_help(){
-    for some_file in `find "${PROFILE_DIR}/public/" -iname "*.bash"`; do
-        read_help $some_file
+search_multiple_dir_for_help(){
+    directory_list=($*)
+    element_count=${#directory_list[*]}
+    for i in `seq 0 $(($element_count-1))` ; do
+        echo
+        echo "${color_directory}### ${directory_list[$i]} ###${tput_nrml}"
+        search_dir_for_help ${directory_list[$i]}
     done
 }
 
+
+
+search_dir_for_help(){
+    for some_file in `find "$1" -iname "*.bash"`; do
+        read_help $some_file
+    done
+}
 
 

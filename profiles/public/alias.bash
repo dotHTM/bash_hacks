@@ -1,7 +1,7 @@
 #  alias.sh
 #
 
-alias bh_update='cd "$BH_PROFILE_DIR/.." && git pull'
+alias bh_update='cd "$BH_PROFILE_DIR/.." && git pull'   #help= cd to the profile directory and update.
 
 ### Lazy commands
 alias rcreload="source ~/.bashrc"               #help= Reload the .bashrc file

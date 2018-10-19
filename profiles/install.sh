@@ -37,6 +37,8 @@ export BH_PRIVATE_BASHRC_PATH=\"$HOME/Documents/config/private_profile\"
 
 #### Enable bh_profile
 # source \"$BH_PROFILE_DIR/bashrc.bash\"
+alias get_help=\"search_multiple_dir_for_help '$BH_PROFILE_DIR/public/' '\${BH_PRIVATE_BASHRC_PATH}'\"
+
 
 #### Your desired prompt
 # boldPrompt
