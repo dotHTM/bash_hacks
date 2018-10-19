@@ -46,8 +46,8 @@ openFilteredFiles(){ #args= "<filter string>" "<command string>" [../path/] #hel
 
 
 ### Date fun
-alias dateiso="date \"+%Y%m%d\""                #help= Print the date in ISO 8601 format
-alias timeiso="date \"+%Y%m%d-%H%M%S\""         #help= Print the date-time in ISO 8601 format
+alias dateiso='date "+%Y%m%d"'                #help= Print the date in ISO 8601 format
+alias timeiso='date "+%Y%m%d-%H%M%S"'         #help= Print the date-time in ISO 8601 format
 
 ### Note taking
 
