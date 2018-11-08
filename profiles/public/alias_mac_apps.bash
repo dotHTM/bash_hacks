@@ -1,28 +1,25 @@
 
 
 
-alias sourceTreeOpen="open ./ -a /Applications/SourceTree.app"                  #help= Open the current directory in SourceTree
-alias md="open -a /Applications/Marked\ 2.app/ "                                #help= Open a file in the app Marked 2
-
-
+alias sourceTreeOpen="open ./ -a /Applications/SourceTree.app"  #help= Open the current directory in SourceTree
+alias md="open -a /Applications/Marked\ 2.app/ "  #help= Open a file in the app Marked 2
 
 playground(){ #help= CD to a folder for quick script testing and open that path in Sublime Text
-testDir="${HOME}/priv/test/"
-mkcd $testDir
-subl ${testDir}
+    testDir="${HOME}/priv/test/"
+    mkcd $testDir
+    subl ${testDir}
 }
 
 # Sublime Text Helpers
 
-alias sbashedit="subl ~/.bashrc --project $PROFILE_DIR/../bash_hacks.sublime-project"                                    #help= open the bash_hacks & profile project in Sublime Text
+sbashedit(){  #help= open the bash_hacks & profile project in Sublime Text
+    subl ~/.bashrc --project "$PROFILE_DIR/../bash_hacks.sublime-project"
+    smerge "$PROFILE_DIR/../bash_hacks.sublime-project"
+}
 alias smlcedit="subl ~/.bashrc --project $PROFILE_DIR/../../machete-line-commands/machete-line-commands.sublime-project" #help= open the machete-line-commands project in Sublime Text
-alias shost="subl -n /etc/hosts"                #help= open the machine hosts file in Sublime Text
+alias shost="subl -n /etc/hosts"  #help= open the machine hosts file in Sublime Text
 
-
-## Open a Sublime Text project file here or at some path
-#   subproj [../path/that/contains/a/project/]
-subproj(){
-
+subproj(){ #help=Open a Sublime Text project file here or at some path  #args=[../path/that/contains/a/project/]
     template_project='{
         "folders":
         [
@@ -65,7 +62,7 @@ subproj(){
     shift $((OPTIND-1))
 
     # open
-    echo "open:"    
+    echo "open:"
     while read -r anFile; do
         echo " - $anFile"
         subl -p "$anFile"
