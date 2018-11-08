@@ -3,16 +3,9 @@ if [[ -z $HELP_MAX_NAME_LENGTH ]]; then
     HELP_MAX_NAME_LENGTH=12
 fi
 
-tput_bold=`tput bold`
-tput_undl=`tput smul`
-tput_revE=`tput rev`
-tput_blnk=`tput blink`
-tput_nrml=`tput sgr0`
 
-color_directory=`tput setaf 9`
-color_file=`tput setaf 10`
-color_identifier=`tput setaf 14`
-color_arguments=`tput setaf 11`
+
+
 
 left_wrap_align_bit=3
 right_wrap_margin_bit=6
@@ -35,6 +28,17 @@ description_wrap_indent=`space_to_length $(( $HELP_MAX_NAME_LENGTH + ${#descript
 declare -A help_dict
 
 read_help(){
+    
+    tput_bold=`tput bold`
+    tput_undl=`tput smul`
+    tput_revE=`tput rev`
+    tput_blnk=`tput blink`
+    tput_nrml=`tput sgr0`
+
+    color_directory=`tput setaf 9`
+    color_file=`tput setaf 10`
+    color_identifier=`tput setaf 14`
+    color_arguments=`tput setaf 11`
     
     has_help=0
     need_to_print_filename=1
