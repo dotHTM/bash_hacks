@@ -67,7 +67,7 @@ for inputDir in $input; do
                 echo
             fi
             cd "$launchDir"
-        done <<< `find "${inputDir}" -name '.git' -type d`
+        done <<< `find -L "${inputDir}" -name '.git'`
     fi
 done
 
