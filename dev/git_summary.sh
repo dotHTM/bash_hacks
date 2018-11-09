@@ -46,9 +46,9 @@ for someParentDir in $parentDirectories; do
                     if [[ -e "$someGitDir" ]]; then
                         cd "${someGitDir}/.."
                         if [[ -n `git status -s` ]]; then
-                            echo "${style_violet}============================================================${style_nrml}"
-                            echo "'${style_yellow_bright}${someGitDir}${style_nrml}'"
-                            echo "${style_cyan_bright}----------------------------------------------------${style_nrml}"
+                            echo "${style_violet}============================================================${style_white}"
+                            echo "'${style_yellow}${someGitDir}${style_white}'"
+                            echo "${style_cyan}----------------------------------------------------${style_white}"
                             git status -s
                             echo
                         fi
