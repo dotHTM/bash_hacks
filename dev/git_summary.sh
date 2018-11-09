@@ -35,6 +35,24 @@ style_violet_bright=`tput setaf 13`
 style_cyan_bright=`tput setaf 14`
 style_white_bright=`tput setaf 15`
 
+gitStats(){
+    status=`git status -s`
+    if [[ -n `git remote` ]]; then
+        branchStatus=`git status -s -b`
+        branchStatus=${branchStatus/"$status"/}
+        remoteBranchStatus=${branchStatus/*\[/}
+        if [[ $remoteBranchStatus != $branchStatus ]]; then
+            git status -s -b
+        elif [[ -n $status ]]; then
+            git status -s
+        fi
+    else
+        if [[ -n $status ]]; then
+            git status -s
+        fi
+    fi
+}
+
 for someParentDir in $parentDirectories; do
     if [[ -e $someParentDir ]]; then
         cd $someParentDir
@@ -45,11 +63,11 @@ for someParentDir in $parentDirectories; do
                     cd $back_to_parent
                     if [[ -e "$someGitDir" ]]; then
                         cd "${someGitDir}/.."
-                        if [[ -n `git status -s` ]]; then
+                        if [[ -n `gitStats` ]]; then
                             echo "${style_violet}============================================================${style_white}"
                             echo "'${style_yellow}${someGitDir}${style_white}'"
                             echo "${style_cyan}----------------------------------------------------${style_white}"
-                            git status -s
+                            gitStats
                             echo
                         fi
                     fi
