@@ -22,29 +22,38 @@ cd ~/
 
 	echo " 
 
+if [[ \$BASH_VERSINFO < 4 ]]; then
+    echo -n "bash version is \"\$BASH_VERSINFO\" and profile requires 4"
+else
+    ####################################
+    ###### Bash hacks profile
+    export BH_PROFILE_DIR=\"$BH_PROFILE_DIR\"
 
-####################################
-###### Bash hacks profile
-export BH_PROFILE_DIR=\"$BH_PROFILE_DIR\"
+    #### If you have a private profile on disk or cloud service.
+    export BH_PRIVATE_BASHRC_PATH=\"$HOME/Documents/config/private_profile\"
 
-#### If you have a private profile on disk or cloud service.
-export BH_PRIVATE_BASHRC_PATH=\"$HOME/Documents/config/private_profile\"
+    #### If your hostname is goofed up by DNS, or if you want emoji or 
+    ##   something custom in your hostname.
+    # export BH_VANITY_HOSTNAME=\"`hostname` :)\"
 
-#### If your hostname is goofed up by DNS, or if you want emoji or 
-##   something custom in your hostname.
-# export BH_VANITY_HOSTNAME=\"`hostname` :)\"
-
-#### Enable bh_profile
-source \"$BH_PROFILE_DIR/bashrc.bash\"
-alias get_help=\"search_multiple_dir_for_help '$BH_PROFILE_DIR/public/' '\${BH_PRIVATE_BASHRC_PATH}'\"
+    #### Enable bh_profile
+    source \"$BH_PROFILE_DIR/bashrc.bash\"
+    alias get_help=\"search_multiple_dir_for_help '$BH_PROFILE_DIR/public/' '\${BH_PRIVATE_BASHRC_PATH}'\"
 
 
-#### Your desired prompt
-color_setup
-boldPrompt
+    #### Your desired prompt
+    if [[ -n \$TERM && \$TERM != "dumb" ]]; then
+        color_setup
+        boldPrompt
+        
+        # git_summary.sh path/to/your/user/developer/directory
+        interactive_message
+    fi
 
-######
-####################################
+    ######
+    ####################################
+
+fi
 
 " >> ~/.bashrc
 
