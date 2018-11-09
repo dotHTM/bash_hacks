@@ -5,12 +5,6 @@
 #   Written by Mike Cramer
 #   Started on DATE
 
-
-parentDirectories=$*
-if [[ -z $parentDirectories ]]; then parentDirectories=`pwd`; fi
-
-if [[ -z $TERM ]]; then TERM='dumb'; fi
-
 style_bold=`tput bold`
 style_undl=`tput smul`
 style_revE=`tput rev`
@@ -53,26 +47,27 @@ gitStats(){
     fi
 }
 
-for someParentDir in $parentDirectories; do
-    if [[ -e $someParentDir ]]; then
-        cd $someParentDir
-        back_to_parent=`pwd`
-        while read someDir; do
-            if [[ -e "$someDir" ]]; then
-                while read someGitDir; do
-                    cd $back_to_parent
-                    if [[ -e "$someGitDir" ]]; then
-                        cd "${someGitDir}/.."
-                        if [[ -n `gitStats` ]]; then
-                            echo "${style_violet}============================================================${style_white}"
-                            echo "'${style_yellow}${someGitDir}${style_white}'"
-                            echo "${style_cyan}----------------------------------------------------${style_white}"
-                            gitStats
-                            echo
-                        fi
-                    fi
-                done  <<< `find "$someDir" -name '.git' -d 2`
+launchDir="`pwd`"
+
+input=$*
+if [[ $input == '' ]]; then
+    input="./"
+fi
+
+for inputDir in $input; do
+    cd "$launchDir"
+    if [[ -e $inputDir ]]; then
+        while read someGitDir; do
+            cd "${someGitDir}/.."
+            if [[ -n `gitStats` ]]; then
+                echo "${style_violet}================================================================${style_white}"
+                echo "'${style_yellow}`pwd`${style_white}'"
+                echo "${style_cyan}-------------------------------------------------------${style_white}"
+                gitStats
+                echo
             fi
-        done <<< `find ./ -type d -d 1`
+            cd "$launchDir"
+        done <<< `find "${inputDir}" -name '.git' -type d`
     fi
 done
+
