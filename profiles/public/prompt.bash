@@ -8,10 +8,9 @@ export PROMPT_STYLE=''
 # hr_echo "="
 hr_echo(){
     declare string_segment='-'
-    if [[ "$string_segment" == '' || -z $string_segment ]]; then
-        string_segment=$1
+    if [[ -n $1 ]]; then
+        string_segment=$1 && shift
     fi
-    shift
     
     declare hr_length=$1 && shift
     if [[ "$hr_length" == 0 || -z $hr_length ]]; then
@@ -34,74 +33,88 @@ escape_wrap(){
     echo "\[$1\]"
 }
 
-##### THIS IS A HECKIN MESS!!!!
+color_setup(){
+    ## Color shortcuts
+    if [[ -n $TERM || -n $PS1 ]]; then
+        tput init
 
-## Color shortcuts
-if [[ -n $PS1 ]]; then
-    tput init
+        style_black=`tput setaf 0`
+        style_red=`tput setaf 1`
+        style_green=`tput setaf 2`
+        style_yellow=`tput setaf 3`
+        style_blue=`tput setaf 4`
+        style_violet=`tput setaf 5`
+        style_cyan=`tput setaf 6`
+        style_white=`tput setaf 7`
 
-    theme_1=9    # brackets
-    theme_2=10   # carrot
-    theme_3=12   # user
-    theme_4=11   # hostname
+        style_black_bold=`tput setaf 8`
+        style_red_bold=`tput setaf 9`
+        style_green_bold=`tput setaf 10`
+        style_yellow_bold=`tput setaf 11`
+        style_blue_bold=`tput setaf 12`
+        style_violet_bold=`tput setaf 13`
+        style_cyan_bold=`tput setaf 14`
+        style_white_bold=`tput setaf 15`
 
-    ## Raw values
-    tput_bold=`tput bold`
-    tput_undl=`tput smul`
-    tput_revE=`tput rev`
-    tput_blnk=`tput blink`
-    tput_nrml=`tput sgr0`
-    tput_theme1color=`tput setaf ${theme_1}`
-    tput_theme2color=`tput setaf ${theme_2}`
-    tput_theme3color=`tput setaf ${theme_3}`
-    tput_theme4color=`tput setaf ${theme_4}`
+        ## Raw values
+        style_bold=`tput bold`
+        style_undl=`tput smul`
+        style_revE=`tput rev`
+        style_blnk=`tput blink`
+        style_nrml=`tput sgr0`
+        style_theme1color=$style_red  #brackets
+        style_theme2color=$style_green  #carrot
+        style_theme3color=$style_blue  #user
+        style_theme4color=$style_yellow  #hostname
 
-    ## Wrapped values for PS1
-    wrapped_tput_bold=`escape_wrap $tput_bold`
-    wrapped_tput_undl=`escape_wrap $tput_undl`
-    wrapped_tput_revE=`escape_wrap $tput_revE`
-    wrapped_tput_blnk=`escape_wrap $tput_blnk`
-    wrapped_tput_nrml=`escape_wrap $tput_nrml`
-    wrapped_tput_theme1color=`escape_wrap $tput_theme1color`
-    wrapped_tput_theme2color=`escape_wrap $tput_theme2color`
-    wrapped_tput_theme3color=`escape_wrap $tput_theme3color`
-    wrapped_tput_theme4color=`escape_wrap $tput_theme4color`
+        ## Wrapped values for PS1
+        wrapped_style_bold=`escape_wrap $style_bold`
+        wrapped_style_undl=`escape_wrap $style_undl`
+        wrapped_style_revE=`escape_wrap $style_revE`
+        wrapped_style_blnk=`escape_wrap $style_blnk`
+        wrapped_style_nrml=`escape_wrap $style_nrml`
+        wrapped_style_theme1color=`escape_wrap $style_theme1color`
+        wrapped_style_theme2color=`escape_wrap $style_theme2color`
+        wrapped_style_theme3color=`escape_wrap $style_theme3color`
+        wrapped_style_theme4color=`escape_wrap $style_theme4color`
 
-    bracket_color="${tput_theme1color}${tput_bold}"
-    user_color="${tput_theme3color}"
-    hostname_color="${tput_theme4color}${tput_undl}"
-    prompt_color="${tput_theme2color}${tput_bold}"
-    reset_color="${tput_nrml}"
+        bracket_color="${style_theme1color}${style_bold}"
+        user_color="${style_theme3color}"
+        hostname_color="${style_theme4color}${style_undl}"
+        prompt_color="${style_theme2color}${style_bold}"
+        reset_color="${style_nrml}"
 
-    wr_bracket_color="${wrapped_tput_theme1color}${wrapped_tput_bold}"
-    wr_user_color="${wrapped_tput_theme3color}"
-    wr_hostname_color="${wrapped_tput_theme4color}${wrapped_tput_undl}"
-    wr_prompt_color="${wrapped_tput_theme2color}${wrapped_tput_bold}"
-    wr_reset_color="${wrapped_tput_nrml}"
+        wr_bracket_color="${wrapped_style_theme1color}${wrapped_style_bold}"
+        wr_user_color="${wrapped_style_theme3color}"
+        wr_hostname_color="${wrapped_style_theme4color}${wrapped_style_undl}"
+        wr_prompt_color="${wrapped_style_theme2color}${wrapped_style_bold}"
+        wr_reset_color="${wrapped_style_nrml}"
+    fi
+}
 
-    theme_info(){
-        echo " ${tput_theme1color}tput_theme1color${tput_nrml} = ${theme_1}"
-        echo " ${tput_theme2color}tput_theme2color${tput_nrml} = ${theme_2}"
-        echo " ${tput_theme3color}tput_theme3color${tput_nrml} = ${theme_3}"
-        echo " ${tput_theme4color}tput_theme4color${tput_nrml} = ${theme_4}"
-        echo ""
-        echo " ${bracket_color}bracket_color ${tput_nrml} = ${theme_1}"
-        echo " ${user_color}user_color    ${tput_nrml} = ${theme_2}"
-        echo " ${hostname_color}hostname_color${tput_nrml} = ${theme_3}"
-        echo " ${prompt_color}prompt_color  ${tput_nrml} = ${theme_4}"
-    }
+theme_info(){
+    echo " ${style_theme1color}style_theme1color${style_nrml}"
+    echo " ${style_theme2color}style_theme2color${style_nrml}"
+    echo " ${style_theme3color}style_theme3color${style_nrml}"
+    echo " ${style_theme4color}style_theme4color${style_nrml}"
+    echo ""
+    echo " ${bracket_color}bracket_color ${style_nrml}"
+    echo " ${user_color}user_color    ${style_nrml}"
+    echo " ${hostname_color}hostname_color${style_nrml}"
+    echo " ${prompt_color}prompt_color  ${style_nrml}"
+}
 
 
+interactive_message(){
     ## HR
     hr_echo "="
-
     ## Display a message the terminal is Interactive and if Screen
-    echo -n "  ${bracket_color}>>${tput_nrml} ${user_color}Interactive Shell${tput_nrml} : ${hostname_color}Lvl ${SHLVL}${tput_nrml} ${bracket_color}<<${tput_nrml}  "
+    echo -n "  ${bracket_color}>>${style_nrml} ${user_color}Interactive Shell${style_nrml} : ${hostname_color}Lvl ${SHLVL}${style_nrml} ${bracket_color}<<${style_nrml}  "
     if [[ "$TERM" == "screen" ]]; then
-        echo -n "  ${bracket_color}>>${tput_nrml} ${prompt_color}Screen${tput_nrml} ${bracket_color}<<${tput_nrml}  "
+        echo -n "  ${bracket_color}>>${style_nrml} ${prompt_color}Screen${style_nrml} ${bracket_color}<<${style_nrml}  "
     fi
     echo
-fi ## /Color shortcuts
+}
 
 if [[ -n $BH_VANITY_HOSTNAME ]]; then
     bashHostNameReplacement=$BH_VANITY_HOSTNAME

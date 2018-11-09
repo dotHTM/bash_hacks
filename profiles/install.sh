@@ -30,18 +30,18 @@ export BH_PROFILE_DIR=\"$BH_PROFILE_DIR\"
 #### If you have a private profile on disk or cloud service.
 export BH_PRIVATE_BASHRC_PATH=\"$HOME/Documents/config/private_profile\"
 
-#### If your hostname is goofed up by DNS, etc and you are
-##   bothered by that thing. Or if you want emoji or 
+#### If your hostname is goofed up by DNS, or if you want emoji or 
 ##   something custom in your hostname.
 # export BH_VANITY_HOSTNAME=\"`hostname` :)\"
 
 #### Enable bh_profile
-# source \"$BH_PROFILE_DIR/bashrc.bash\"
+source \"$BH_PROFILE_DIR/bashrc.bash\"
 alias get_help=\"search_multiple_dir_for_help '$BH_PROFILE_DIR/public/' '\${BH_PRIVATE_BASHRC_PATH}'\"
 
 
 #### Your desired prompt
-# boldPrompt
+color_setup
+boldPrompt
 
 ######
 ####################################
