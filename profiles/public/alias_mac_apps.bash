@@ -14,7 +14,7 @@ playground(){ #help= CD to a folder for quick script testing and open that path 
 
 sbashedit(){  #help= open the bash_hacks & profile project in Sublime Text
     subl ~/.bashrc --project "$PROFILE_DIR/../bash_hacks.sublime-project"
-    smerge "$PROFILE_DIR/../bash_hacks.sublime-project"
+    # smerge "$PROFILE_DIR/../bash_hacks.sublime-project"
 }
 alias smlcedit="subl ~/.bashrc --project $PROFILE_DIR/../../machete-line-commands/machete-line-commands.sublime-project" #help= open the machete-line-commands project in Sublime Text
 alias shost="subl -n /etc/hosts"  #help= open the machine hosts file in Sublime Text
