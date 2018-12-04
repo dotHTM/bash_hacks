@@ -10,5 +10,6 @@ patch /etc/passwd -i $HOME/bash_hacks/installers/alpine/etc-passwd.diff
 apk add vim nano
 apk add python3 ffmpeg
 pip3 install --upgrade pip
+pip install youtube_dl
 clear
 bash
