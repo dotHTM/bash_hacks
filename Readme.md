@@ -10,6 +10,12 @@ No Warranty, accept at your own risk
 
 Publicly distributable elements of my bash profile are available for your use or inspection. Tested somewhat on macOS systems, no clue why it fails or succeeds in anything else. 
 
+Try it out in a docker container!
+
+```shell
+$ docker run -ti  alpine:latest ash -c "wget -O - https://raw.githubusercontent.com/dotHTM/bash_hacks/master/profiles/alpine.ash | ash"
+```
+
 ## Dependancies
 
 idk, maybe bash 4.x. macOS ships with bash 3.x, so likely install via [Brew](brew.sh) or whatever means you prefer
