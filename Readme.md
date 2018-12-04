@@ -13,7 +13,7 @@ Publicly distributable elements of my bash profile are available for your use or
 Try it out in a docker container!
 
 ```shell
-$ docker run -ti  alpine:latest ash -c "wget -O - https://raw.githubusercontent.com/dotHTM/bash_hacks/master/profiles/alpine.ash | ash"
+$ docker run -ti  alpine:latest ash -c "wget -O - https://raw.githubusercontent.com/dotHTM/bash_hacks/master/installers/alpine/alpine.ash | ash"
 ```
 
 ## Dependancies
