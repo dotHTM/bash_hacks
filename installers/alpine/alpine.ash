@@ -11,5 +11,3 @@ apk add python3 ffmpeg
 pip3 install --upgrade pip
 clear
 bash
-
-

@@ -10,9 +10,3 @@ depreciatedError(){
 	echo
 }
 
-# fixopenwith
-
-fixopenwith(){
-	depreciatedError "Recent macOS appears to not suffer this problem as often."
-}
-alias DEPfixopenwith='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user'

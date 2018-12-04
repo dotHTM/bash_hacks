@@ -1,27 +1,34 @@
 # dockerUtils.sh
 
-# Docker Toolbox on Mac
-alias primedocker="/Applications/Docker/Docker\ Quickstart\ Terminal.app/Contents/Resources/Scripts/start.sh"
 
-# other functions
-alias dkperl="docker run -it --rm --name my-running-perl-script -v \"$PWD\":/usr/src/myapp -w /usr/src/myapp perl:5.20 perl"
+if [[ `uname` == 'Darwin' ]]; then
+    # Docker Toolbox on Mac
+    alias primedocker="/Applications/Docker/Docker\ Quickstart\ Terminal.app/Contents/Resources/Scripts/start.sh"
+fi
 
-alias dkrsubl="docker run -ti --rm testbuild bash"
 
-dke(){
-	if [[ -z $@ ]]; then
-		command=/bin/bash
-	else
-		command=$@
-	fi
-	docker exec -ti `docker ps -l -q` "$command"
-}
+if [[ -n `which docker` ]]; then
 
-alias dcompose=`which docker-compose`
+    # other functions
+    alias dkperl="docker run -it --rm --name my-running-perl-script -v \"$PWD\":/usr/src/myapp -w /usr/src/myapp perl:5.20 perl"
 
-alias dcu="docker-compose up"
-alias dcb="docker-compose build"
-alias dcd="docker-compose down"
+    alias dkrsubl="docker run -ti --rm testbuild bash"
 
-alias dcr="docker-compose rm -f && docker-compose up"
+    dke(){
+        if [[ -z $@ ]]; then
+            command=/bin/bash
+        else
+            command=$@
+        fi
+        docker exec -ti `docker ps -l -q` "$command"
+    }
 
+    if [[ -n `which docker-compose` ]]; then
+        alias dc="docker-compose"
+        alias dcu="docker-compose up"
+        alias dcb="docker-compose build"
+        alias dcd="docker-compose down"
+        alias dcr="docker-compose rm -f && `which docker-compose` up"
+    fi
+
+fi

@@ -30,7 +30,7 @@ else
     export BH_PROFILE_DIR=\"$BH_PROFILE_DIR\"
 
     #### If you have a private profile on disk or cloud service.
-    export BH_PRIVATE_BASHRC_PATH=\"\$HOME/Documents/config/private_profile\"
+    # export BH_PRIVATE_BASHRC_PATH=\"\$HOME/Documents/config/private_profile\"
 
     #### If your hostname is goofed up by DNS, or if you want emoji or 
     ##   something custom in your hostname.
