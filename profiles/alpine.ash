@@ -1,4 +1,5 @@
 #!/bin/ash
+# https://raw.githubusercontent.com/dotHTM/bash_hacks/master/profiles/alpine.ash
 apk update
 apk add bash git ncurses
 cd && git clone https://github.com/dotHTM/bash_hacks.git
