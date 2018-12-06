@@ -6,68 +6,34 @@ BH_PROFILE_DIR=$( cd $( dirname ${BASH_SOURCE[0]} ) && pwd )
 
 cd $HOME
 
-#if [[ 
-#	! -e .bashrc.bak && 
-#	! -e .bash_profile.bak && 
-#	! -e .profile.bak
-#	]]; then
-
-	mv .bashrc .bashrc.bak
-	mv .bash_profile .bash_profile.bak
-	mv .profile .profile.bak
-
-	touch .bashrc
-	ln .bashrc .profile
-	ln .bashrc .bash_profile
-
-	echo " 
-
-if [[ \$BASH_VERSINFO < 4 ]]; then
-    echo -n "bash version is \"\$BASH_VERSINFO\" and profile requires 4"
-else
-    ####################################
-    ###### Bash hacks profile
-    export BH_PROFILE_DIR=\"$BH_PROFILE_DIR\"
-
-    #### If you have a private profile on disk or cloud service.
-    # export BH_PRIVATE_BASHRC_PATH=\"\$HOME/Documents/config/private_profile\"
-
-    #### If your hostname is goofed up by DNS, or if you want emoji or 
-    ##   something custom in your hostname.
-    # export BH_VANITY_HOSTNAME=\"`hostname` :)\"
-
-    #### Enable bh_profile
-    source \"\$BH_PROFILE_DIR/bashrc.bash\"
-    alias get_help=\"search_multiple_dir_for_help '\$BH_PROFILE_DIR/public/' '\${BH_PRIVATE_BASHRC_PATH}'\"
-
-
-    #### Your desired prompt
-    if [[ -n \$TERM && \$TERM != "dumb" ]]; then
-        color_setup
-        boldPrompt
-        
-        # git_summary.sh path/to/your/user/developer/directory
-        interactive_message
+bakup_this_rc(){
+    somepath=$1 && shift
+    if [[ -e "$somepath" ]]; then
+        bakup_path="${somepath}.`date '+%F%T'`.bak"
+        mv ${somepath} ${bakup_path} && echo "  Backed up file: ${bakup_path}"
     fi
+    
+}
 
-    ######
-    ####################################
+rc_list='.bashrc
+.bash_profile
+.profile'
 
-fi
+for someRC in $rc_list; do
+    bakup_this_rc $someRC
+done
 
-" >> ~/.bashrc
+touch .bashrc
+ln .bashrc .profile
+ln .bashrc .bash_profile
 
-	echo "
-The installation is not done.
+echo "####################################
+###### Bash hacks profile
+export BH_PROFILE_DIR=\"$BH_PROFILE_DIR\"
+" >> $HOME/.bashrc
 
-It would be a good idea to look at your .bashrc file and verify it's contents
-"
+cat "${BH_PROFILE_DIR}/default_rc" >> $HOME/.bashrc
 
-#else
-#	echo "
-#Have you already run this installer?
-#You have backups you may want to compare/cleanup before proceeding.
-#	"
-#fi
+echo "It would be a good idea to look at your .bashrc file and verify it's contents"
 
 ln -s "$HOME/Library/Application Support/Sublime Text 3/Packages/User" "$HOME/.subl_prefs"
