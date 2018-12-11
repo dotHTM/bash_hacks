@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/usr/bin/env bash
 
 for color in {0..256} ; do #Colors
     for fgbg in 48 38 ; do #Foreground/Background

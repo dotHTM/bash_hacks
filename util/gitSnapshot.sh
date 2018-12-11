@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/usr/bin/env bash
 # gitSnapshot.sh
 
 if [[ -z ${XPC_SERVICE_NAME/*SourceTree*} ]]; then

@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/usr/bin/env bash
 #
 # TumblrDownloader - Mirror the content of a tumblr URL
 #

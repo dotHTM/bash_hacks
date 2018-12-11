@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/usr/bin/env bash
 
 # Echo with Lolcat (installable w/ ruby gem)
 

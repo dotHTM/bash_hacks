@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/usr/bin/env bash
 ##
 ## Add Meh Tracking numbers to Deliveries Mac App via URL Scheme. (and checking for items previously found by this script.)
 

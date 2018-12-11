@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/usr/bin/env bash
 # dkFullReset.sh
 
 if [[ -n `which docker` ]]; then

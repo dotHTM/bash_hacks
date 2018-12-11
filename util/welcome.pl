@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 # .welcome.pl
 
 use feature ":5.16";

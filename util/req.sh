@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ### This is a terrible hack and is diffiult to use, I hate bash...
 

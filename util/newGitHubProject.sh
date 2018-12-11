@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/usr/bin/env bash
 # newGitHubProject.sh
 #
 #   Written by Mike Cramer

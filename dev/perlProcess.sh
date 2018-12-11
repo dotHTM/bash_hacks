@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/usr/bin/env bash
 # perlProcess.sh
 
 criticSeverity=$1 && shift

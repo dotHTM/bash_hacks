@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/usr/bin/env bash
 # sftwre_update.sh
 
 for (( i = 0; i < 100; i++ )); do

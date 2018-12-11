@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/usr/bin/env bash
 
 # Get YouTube links off a page and open them in VLC as a playlist.
 

@@ -1,4 +1,4 @@
-#!/usr/local/bin/perl
+#!/usr/bin/env perl
 # csv_search.pl
 
 use feature ':5.16';

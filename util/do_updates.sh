@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/usr/bin/env bash
 # do_updates.sh
 
 echo "==== Homebrew ================================"

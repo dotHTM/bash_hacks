@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/usr/bin/env bash
 # url2epub.sh
 #
 #     Usage: url2epub.sh url [title [chapter_level]]

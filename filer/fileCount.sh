@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/usr/bin/env bash
 # fileCount.sh
 #   COUNT FILES IN A DIRECTORY
 #

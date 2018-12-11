@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/usr/bin/env bash
 # dkJanitor.sh
 
 if [[ -n `which docker` ]]; then

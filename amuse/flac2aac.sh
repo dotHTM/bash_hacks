@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/usr/bin/env bash
 
 for i in *flac; do
 	of="${i/.flac/.m4a}";
