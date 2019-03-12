@@ -1,6 +1,8 @@
 # prompt.sh
 
 
+if [[ $IS_USER_TERM == 1 ]]; then
+    
 prompt_user="$USER"
 export PROMPT_STYLE=''
 
@@ -156,3 +158,6 @@ cosplay(){
     fi
     reprompt
 }
+
+
+fi

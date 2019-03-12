@@ -3,6 +3,8 @@
 # 
 
 
+
+
 if [[ -e "/opt/local/bin/port" ]]; then
 	echo
 	echo "==== port ===="
@@ -17,11 +19,11 @@ if [[ -e "/usr/local/bin/brew" ]]; then
 	/usr/local/bin/brew upgrade
 fi
 
-if [[ -e "/usr/local/bin/gem" ]]; then
+if [[ -e "/usr/bin/gem" ]]; then
 	echo
 	echo "==== gem ===="
-	/usr/local/bin/gem update --system
-	/usr/local/bin/gem update
+	/usr/bin/gem update --system
+	/usr/bin/gem update
 fi
 
 if [[ -e "/usr/local/bin/npm" ]]; then

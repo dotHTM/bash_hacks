@@ -1,4 +1,6 @@
 
+if [[ $IS_USER_TERM == 1 ]]; then
+
 if [[ -z $HELP_MAX_NAME_LENGTH ]]; then
     HELP_MAX_NAME_LENGTH=12
 fi
@@ -150,3 +152,4 @@ search_dir_for_help(){
 }
 
 
+fi
