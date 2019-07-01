@@ -23,4 +23,6 @@ if [[ `uname` == 'Darwin' ]]; then
 
     alias xc-sim-hitman="xcrun simctl erase all"
 
+    alias ops='eval $(op signin)'
+
 fi
