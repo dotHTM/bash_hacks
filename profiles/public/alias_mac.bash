@@ -18,8 +18,14 @@ if [[ `uname` == 'Darwin' ]]; then
     export BH_PYTHONISTA_PATH="$HOME/Library/Mobile Documents/iCloud~com~omz-software~Pythonista3/Documents"
     alias cdpy='cd "$BH_PYTHONISTA_PATH" && pwd'            #help= CD to the Pythonista folder on iCloud
 
-    alias xcprep="xcode-select --install && sudo xcodebuild -license"  #help= Accept XCode license and get initial command line tools
-
+    xcprep(){ #help= Accept XCode license and get initial command line tools
+        if [[ -e /Applications/Xcode.app ]]; then
+            sudo xcode-select -s /Applications/Xcode.app
+        else
+            xcode-select --install
+        fi
+        sudo xcodebuild -license
+    }
 
     alias xc-sim-hitman="xcrun simctl erase all"
 
