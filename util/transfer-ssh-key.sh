@@ -16,9 +16,11 @@ for host in $host_list; do
         cp .ssh/authorized_keys .ssh/tmp; cat .ssh/tmp | sort | uniq > .ssh/authorized_keys;
         echo '$public_key' >> .ssh/authorized_keys2;
         cp .ssh/authorized_keys2 .ssh/tmp; cat .ssh/tmp | sort | uniq > .ssh/authorized_keys2;
-        vim .ssh/authorized_keys;
-        vim .ssh/authorized_keys2;
+        rm .ssh/tmp;
         "
+        
+        # vim .ssh/authorized_keys;
+        # vim .ssh/authorized_keys2;
     
 done
 
