@@ -27,7 +27,7 @@ idk, maybe bash 4.x. macOS ships with bash 3.x, so likely install via [Brew](bre
 3. Run `install.sh`
 4. Check your `.bashrc` file for correctness.
 
-### macOS Termainal Color themes
+### macOS Terminal Color themes
 
 In the `profile` directory is a `color` directory for macOS Termainal.
 
