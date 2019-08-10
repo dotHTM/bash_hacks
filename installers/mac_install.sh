@@ -8,7 +8,7 @@ brew install bash wget
 
 install_parent="$HOME/Developer"
 
-mkdir $install_parent
+mkdir -p $install_parent
 cd $install_parent
 git clone https://github.com/dotHTM/bash_hacks.git
 
