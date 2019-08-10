@@ -5,6 +5,8 @@
 # Install brew, bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew install bash wget
+sudo bash -c 'echo "/usr/local/bin/bash" >> /etc/shells'
+chsh -s /usr/local/bin/bash
 
 install_parent="$HOME/Developer"
 
