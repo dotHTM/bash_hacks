@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# bash -c "$(curl https://raw.githubusercontent.com/dotHTM/bash_hacks/master/installers/mac_install.sh)"
+# bash -c "$(curl https://raw.githubusercontent.com/dotHTM/bash_hacks/mac_install_test/installers/mac_install.sh)"
 
 # Install brew, bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
