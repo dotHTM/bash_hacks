@@ -1,28 +1,28 @@
 # qs_aliaser.bash
 
 if [[ -e "$BH_PRIVATE_BASHRC_PATH/quicksshfs_alias.cfg" ]]; then
-  # BH_CONNECTION_LIST=`cat `
-
-  # for someServer in $BH_CONNECTION_LIST; do
-
-while read someServer; do
-    if [[ -n $someServer && -n `echo $someServer | perl -pe 's/^[#;\/].*$//gmi'` ]]; then
+    make_qs_alias(){
+        someServer=$1 && shift
+        trailing_handle=$1 && shift
+        args_list=$1 && shift
+        
         serverShortcutName=`echo $someServer | cut -d "@" -f 2 | tr ":/." "_--"`
         hostNickName=`echo $someServer | perl -pe 's/(?:.*@)?(.*):.*/\1/gmi'`
         pathNickName=`echo $someServer | perl -pe 's/\/$//gmi' | perl -pe 's/.*\/.*?/\1/gmi'`
 
         volPath="$hostNickName-$pathNickName"
 
-        alias qs_${serverShortcutName}_="quicksshfs.sh -r ${someServer} -v ${volPath} -sumn"
-        alias qs_${serverShortcutName}_s="quicksshfs.sh -r ${someServer} -v ${volPath} -s"
-        # alias qs_${serverShortcutName}_muol="cd \`quicksshfs.sh -r ${someServer} -v ${volPath} -muol\`"
-        # alias qs_${serverShortcutName}_u="quicksshfs.sh -r ${someServer} -v ${volPath} -u"
-        # alias qs_${serverShortcutName}_m="quicksshfs.sh -r ${someServer} -v ${volPath} -m"
-        # alias qs_${serverShortcutName}_n="quicksshfs.sh -r ${someServer} -v ${volPath} -mn"
-        # alias qs_${serverShortcutName}_no="quicksshfs.sh -r ${someServer} -v ${volPath} -mn"
-        # alias qs_${serverShortcutName}_o="quicksshfs.sh -r ${someServer} -v ${volPath} -mo"
-        alias qs_${serverShortcutName}_f="quicksshfs.sh -r ${someServer} -v ${volPath} -f"
-        # alias qs_${serverShortcutName}_l="cd \`quicksshfs.sh -r ${someServer} -v ${volPath} -l\`"
-    fi
-  done < $BH_PRIVATE_BASHRC_PATH/quicksshfs_alias.cfg
+        alias 'qs_'${serverShortcutName}'_'${trailing_handle}="quicksshfs.sh -r ${someServer} -v ${volPath} ${args_list}"
+    }
+
+    while read someServer; do
+        if [[ -n $someServer && -n `echo $someServer | perl -pe 's/^[#;\/].*$//gmi'` ]]; then
+            
+            make_qs_alias $someServer '' '-sumn'
+            
+            for some_args in 's' 'f' 'muol' 'nm' ; do
+                make_qs_alias $someServer "$some_args" "-$some_args"
+            done
+        fi
+    done < $BH_PRIVATE_BASHRC_PATH/quicksshfs_alias.cfg
 fi
