@@ -5,7 +5,7 @@
 			"file_include_patterns":
 			[
 				".*",
-				".*/*",
+				".*/*"
 			],
 			"folder_exclude_patterns":
 			[
@@ -20,7 +20,7 @@
 				".*/*"
 			],
 			"name": "~/.*",
-			"path": "~"
+			"path": "/Users/cramerm"
 		},
 		{
 			"path": "profiles"
@@ -28,12 +28,15 @@
 		{
 			"folder_exclude_patterns":
 			[
-				"profiles",
+				"profiles"
 			],
 			"path": "."
 		},
 		{
-			"path": "~/Documents/config"
+			"path": "/Users/cramerm/Documents/config"
+		},
+		{
+			"path": "/tmp/vol/utnetdb-dev.gw.utexas.edu-utnetdb"
 		}
 	]
 }

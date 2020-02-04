@@ -17,6 +17,7 @@ if [[ `uname` == 'Darwin' ]]; then ## Mac Specific directories
 /usr/local/sbin
 /usr/local/opt/python/libexec/bin
 /usr/local/Cellar/perl/5.26.1/bin
+$HOME/Library/Python/3.7/bin
 /Applications/Sublime\ Text.app/Contents/SharedSupport/bin
 /Applications/Sublime\ Merge.app/Contents/SharedSupport/bin"
 fi    

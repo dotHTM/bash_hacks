@@ -13,8 +13,7 @@ alias cdbh='cd "$BH_PROFILE_DIR"/.. && pwd'          #help= CD to the bash_hacks
 
 alias duh="du -h -d 1"                          #help= Disk Usage, Human readable, No sub folders
 alias ll="ls -lh"                               #help= List, long view, human readable
-alias lsa="ls -lha"                             #help= List, long view, human readable, hidden files too
-alias lsaf="clear; lsa; ls -la *"               #help= List, long view and next child folders
+alias la="ls -lha"                             #help= List, long view, human readable, hidden files too
 
 alias ax="chmod a+x"                            #args= /path/to/file #help= Make a file executable
 

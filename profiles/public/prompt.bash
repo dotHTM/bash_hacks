@@ -1,43 +1,42 @@
 # prompt.sh
 
 
-if [[ $IS_USER_TERM == 1 ]]; then
+if [[ $IS_USER_TERM && $TERM ]]; then
     
-prompt_user="$USER"
-export PROMPT_STYLE=''
+    prompt_user="$USER"
+    export PROMPT_STYLE=''
 
-# hr_echo "=" 32
-# hr_echo "="
-hr_echo(){
-    declare string_segment='-'
-    if [[ -n $1 ]]; then
-        string_segment=$1 && shift
-    fi
-    
-    declare hr_length=$1 && shift
-    if [[ "$hr_length" == 0 || -z $hr_length ]]; then
-        hr_length=`tput cols`
-    fi
-    declare hr_string=""
-    declare next_hr_len=$((${#hr_string}+${#string_segment}))
-    while [[ "$next_hr_len" -le "$hr_length" ]]; do
-        hr_string="${hr_string}${string_segment}"
-        next_hr_len=$(( ${#hr_string} + ${#string_segment} ))
-    done
-    echo "$hr_string"
-}
 
-plainPrompt(){
-    export PS1="[ \u @ \h : \W ] \! > "
-}
+    hr_echo(){
+        declare string_segment='-'
+        if [[ -n $1 ]]; then
+            string_segment=$1 && shift
+        fi
+        
+        declare hr_length=$1 && shift
+        if [[ "$hr_length" == 0 || -z $hr_length ]]; then
+            hr_length=`tput cols`
+        fi
+        declare hr_string=""
+        declare next_hr_len=$((${#hr_string}+${#string_segment}))
+        while [[ "$next_hr_len" -le "$hr_length" ]]; do
+            hr_string="${hr_string}${string_segment}"
+            next_hr_len=$(( ${#hr_string} + ${#string_segment} ))
+        done
+        echo "$hr_string"
+    }
 
-escape_wrap(){
-    echo "\[$1\]"
-}
+    plainPrompt(){
+        export PS1="[ \u @ \h : \W ] \! > "
+    }
 
-color_setup(){
-    ## Color shortcuts
-    if [[ -n $TERM || -n $PS1 ]]; then
+    escape_wrap(){
+        echo "\[$1\]"
+    }
+
+    color_setup(){
+        ## Color shortcuts
+
         tput init
 
         style_black=`tput setaf 0`
@@ -91,73 +90,73 @@ color_setup(){
         wr_hostname_color="${wrapped_style_theme4color}${wrapped_style_undl}"
         wr_prompt_color="${wrapped_style_theme2color}${wrapped_style_bold}"
         wr_reset_color="${wrapped_style_nrml}"
+
+    }
+
+    theme_info(){
+        echo " ${style_theme1color}style_theme1color${style_nrml}"
+        echo " ${style_theme2color}style_theme2color${style_nrml}"
+        echo " ${style_theme3color}style_theme3color${style_nrml}"
+        echo " ${style_theme4color}style_theme4color${style_nrml}"
+        echo ""
+        echo " ${bracket_color}bracket_color ${style_nrml}"
+        echo " ${user_color}user_color    ${style_nrml}"
+        echo " ${hostname_color}hostname_color${style_nrml}"
+        echo " ${prompt_color}prompt_color  ${style_nrml}"
+    }
+
+
+    interactive_message(){
+        ## HR
+        hr_echo "="
+        ## Display a message the terminal is Interactive and if Screen
+        echo -n "  ${bracket_color}>>${style_nrml} ${user_color}Interactive Shell${style_nrml} : ${hostname_color}Lvl ${SHLVL}${style_nrml} ${bracket_color}<<${style_nrml}  "
+        if [[ "$TERM" == "screen" ]]; then
+            echo -n "  ${bracket_color}>>${style_nrml} ${prompt_color}Screen${style_nrml} ${bracket_color}<<${style_nrml}  "
+        fi
+        echo
+    }
+
+    if [[ -n $BH_VANITY_HOSTNAME ]]; then
+        bashHostNameReplacement=$BH_VANITY_HOSTNAME
+    else
+        bashHostNameReplacement="\h"
     fi
-}
 
-theme_info(){
-    echo " ${style_theme1color}style_theme1color${style_nrml}"
-    echo " ${style_theme2color}style_theme2color${style_nrml}"
-    echo " ${style_theme3color}style_theme3color${style_nrml}"
-    echo " ${style_theme4color}style_theme4color${style_nrml}"
-    echo ""
-    echo " ${bracket_color}bracket_color ${style_nrml}"
-    echo " ${user_color}user_color    ${style_nrml}"
-    echo " ${hostname_color}hostname_color${style_nrml}"
-    echo " ${prompt_color}prompt_color  ${style_nrml}"
-}
+    commandLineDeliminator=" "
 
 
-interactive_message(){
-    ## HR
-    hr_echo "="
-    ## Display a message the terminal is Interactive and if Screen
-    echo -n "  ${bracket_color}>>${style_nrml} ${user_color}Interactive Shell${style_nrml} : ${hostname_color}Lvl ${SHLVL}${style_nrml} ${bracket_color}<<${style_nrml}  "
-    if [[ "$TERM" == "screen" ]]; then
-        echo -n "  ${bracket_color}>>${style_nrml} ${prompt_color}Screen${style_nrml} ${bracket_color}<<${style_nrml}  "
-    fi
-    echo
-}
+    change_PS1(){
+        export PROMPT_STYLE="$1" && shift
+        myInputString="$1" 
+        if [[ -n $PS1 ]]; then
+            export PS1="$myInputString"
+        fi
+    }
 
-if [[ -n $BH_VANITY_HOSTNAME ]]; then
-    bashHostNameReplacement=$BH_VANITY_HOSTNAME
-else
-    bashHostNameReplacement="\h"
-fi
+    dullPrompt(){
+        change_PS1 dullPrompt "[ $prompt_user @ ${bashHostNameReplacement} : \W ]${commandLineDeliminator}\! > "
+    }
 
-commandLineDeliminator=" "
+    boldPrompt(){
+        change_PS1 boldPrompt "${wr_bracket_color}[${wr_reset_color} ${wr_user_color}$prompt_user${wr_reset_color} ${wr_bracket_color}@${wr_reset_color} ${wr_hostname_color}${bashHostNameReplacement}${wr_reset_color} ${wr_bracket_color}:${wr_reset_color} \W ${wr_bracket_color}]${wr_reset_color}${commandLineDeliminator}${wr_prompt_color}\! >${wr_reset_color} "
+    }
 
+    shortPrompt(){
+        change_PS1 shortPrompt "${wr_bracket_color}[${wr_reset_color} ${wr_bracket_color}:${wr_reset_color} \W ${wr_bracket_color}]${wr_reset_color}${commandLineDeliminator}${wr_prompt_color}\! >${wr_reset_color} "
+    }
 
-change_PS1(){
-    export PROMPT_STYLE="$1" && shift
-    myInputString="$1" 
-    if [[ -n $PS1 ]]; then
-        export PS1="$myInputString"
-    fi
-}
+    reprompt(){
+        $PROMPT_STYLE
+    }
 
-dullPrompt(){
-    change_PS1 dullPrompt "[ $prompt_user @ ${bashHostNameReplacement} : \W ]${commandLineDeliminator}\! > "
-}
-
-boldPrompt(){
-    change_PS1 boldPrompt "${wr_bracket_color}[${wr_reset_color} ${wr_user_color}$prompt_user${wr_reset_color} ${wr_bracket_color}@${wr_reset_color} ${wr_hostname_color}${bashHostNameReplacement}${wr_reset_color} ${wr_bracket_color}:${wr_reset_color} \W ${wr_bracket_color}]${wr_reset_color}${commandLineDeliminator}${wr_prompt_color}\! >${wr_reset_color} "
-}
-
-shortPrompt(){
-    change_PS1 shortPrompt "${wr_bracket_color}[${wr_reset_color} ${wr_bracket_color}:${wr_reset_color} \W ${wr_bracket_color}]${wr_reset_color}${commandLineDeliminator}${wr_prompt_color}\! >${wr_reset_color} "
-}
-
-reprompt(){
-    $PROMPT_STYLE
-}
-
-cosplay(){
-    prompt_user="$1" && shift
-    if [[ -n $1 ]]; then
-        bashHostNameReplacement="$1" && shift
-    fi
-    reprompt
-}
+    cosplay(){
+        prompt_user="$1" && shift
+        if [[ -n $1 ]]; then
+            bashHostNameReplacement="$1" && shift
+        fi
+        reprompt
+    }
 
 
 fi

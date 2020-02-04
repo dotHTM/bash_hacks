@@ -27,8 +27,10 @@ if [[ $input == '' ]]; then
     input="./"
 fi
 
-style_nrml=`tput sgr0`
-style_yellow=`tput setaf 3`
+if [[ $IS_USER_TERM && $TERM ]]; then
+    style_nrml=`tput sgr0`
+    style_yellow=`tput setaf 3`
+fi
 
 for inputDir in $input; do
     cd "$launchDir"

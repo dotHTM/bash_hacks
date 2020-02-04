@@ -1,5 +1,5 @@
 
-if [[ $IS_USER_TERM == 1 ]]; then
+if [[ $IS_USER_TERM && $TERM ]]; then
 
 if [[ -z $HELP_MAX_NAME_LENGTH ]]; then
     HELP_MAX_NAME_LENGTH=12
@@ -31,6 +31,7 @@ declare -A help_dict
 
 read_help(){
     
+
     tput_bold=`tput bold`
     tput_undl=`tput smul`
     tput_revE=`tput rev`
@@ -41,6 +42,7 @@ read_help(){
     color_file=`tput setaf 10`
     color_identifier=`tput setaf 14`
     color_arguments=`tput setaf 11`
+
     
     has_help=0
     need_to_print_filename=1
