@@ -24,11 +24,11 @@ if [[ -n `which docker` ]]; then
     }
 
     if [[ -n `which docker-compose` ]]; then
-        alias dc="docker-compose"
-        alias dcu="docker-compose up"
-        alias dcb="docker-compose build"
-        alias dcd="docker-compose down"
-        alias dcr="docker-compose rm -f && `which docker-compose` up"
+        alias dkc="docker-compose"
+        alias dkcu="docker-compose up"
+        alias dkcb="docker-compose build"
+        alias dkcd="docker-compose down"
+        alias dkcr="docker-compose rm -f && `which docker-compose` up"
     fi
 
 fi

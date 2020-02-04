@@ -27,7 +27,7 @@ if [[ `uname` == 'Darwin' ]]; then
         sudo xcodebuild -license
     }
 
-    alias xc-sim-hitman="xcrun simctl erase all"
+    alias xc-sim-remove="xcrun simctl erase all"
 
     alias ops='eval $(op signin)'
 
