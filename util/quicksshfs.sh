@@ -85,7 +85,9 @@ if (( $mount_mode )); then
   sshfs ${connection} \
   ${mountPoint} \
   -o auto_cache \
-  -o volname=$volumeName
+  -o volname=$volumeName \
+  -o gid=`id -g` \
+  -o uid=`id -u`
 fi
 
 if (( $openInSublimeNewWindow )); then
