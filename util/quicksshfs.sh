@@ -23,11 +23,12 @@ usage() {
   echo "    -n    Open in Sublime Text in a New window (overrides above)"
   echo "    -l    return the path to the mount point (overrides shell connection)"
   echo "    -s    Open an ssh connection to the host"
+  echo "    -b    Open an mobile-shell (mosh) connection to the host"
 
   exit 1
 }
 
-while getopts "hr:v:p:umosndfl" inputOptions; do
+while getopts "hr:v:p:umosbndfl" inputOptions; do
   case "${inputOptions}" in
     h) usage ;;                ##
     ##
@@ -42,6 +43,7 @@ while getopts "hr:v:p:umosndfl" inputOptions; do
     n) openInSublimeNewWindow=1 ;;      ##
     l) openInLocalShell=1 ;;      ##
     s) shellOpen=1 ;;          ##
+    b) moshOpen=1 ;;           ##
     d) DEBUG_MODE=1;;          ##
     ##
     *) usage ;;                ##
@@ -97,12 +99,21 @@ elif (( $openInSublime )); then
 fi
 
 if [[ -n $connection ]]; then
+  
+  domain=${connection/:*}
+  path=${connection/*:}
+  
+  echo "$domain => $path"
+  
   if [[ -n $openInLocalShell ]]; then
     echo "$mountPoint"
   else
-    if (( $shellOpen )); then
-      # ssh ${connection/:*}
-      ssh ${connection/:*} -t "cd ${connection/*:}; bash" ## --login"
+    if [[ $shellOpen || $moshOpen ]]; then
+      if (( $moshOpen )); then
+        mosh $domain -- bash -c "cd $path; bash"
+      else
+        ssh $domain -t "cd $path; bash"
+      fi
     fi
   fi
 fi
