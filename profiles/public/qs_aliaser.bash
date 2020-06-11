@@ -8,7 +8,7 @@ if [[ -e "$BH_PRIVATE_BASHRC_PATH/quicksshfs_alias.cfg" ]]; then
         args_list=$1 && shift
         
         serverShortcutName=`echo $configURI | cut -d "@" -f 2 | tr ":/." "_--"`
-        hostNickName=`echo $configURI | perl -pe 's/(?:[^/:]*@)?(.*):.*/\1/gmi'`
+        hostNickName=`echo $configURI | perl -pe 's/(?:[^\/:]*@)?(.*):.*/\1/gmi'`
         pathNickName=`echo $configURI | perl -pe 's/\/$//gmi' | perl -pe 's/.*\/.*?/\1/gmi'`
 
         volPath="$hostNickName-$pathNickName"
@@ -28,3 +28,4 @@ if [[ -e "$BH_PRIVATE_BASHRC_PATH/quicksshfs_alias.cfg" ]]; then
         fi
     done < $BH_PRIVATE_BASHRC_PATH/quicksshfs_alias.cfg
 fi
+
