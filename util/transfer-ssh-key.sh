@@ -12,7 +12,11 @@ public_key=`cat $HOME/.ssh/id_rsa.pub`
 
 for host in $host_list; do
     ssh "${host}" -t \
-        "echo '$public_key' >> .ssh/authorized_keys;
+        "
+        mkdir -p .ssh/;
+        touch .ssh/authorized_keys;
+        touch .ssh/authorized_keys2;
+        echo '$public_key' >> .ssh/authorized_keys;
         cp .ssh/authorized_keys .ssh/tmp; cat .ssh/tmp | sort | uniq > .ssh/authorized_keys;
         echo '$public_key' >> .ssh/authorized_keys2;
         cp .ssh/authorized_keys2 .ssh/tmp; cat .ssh/tmp | sort | uniq > .ssh/authorized_keys2;
