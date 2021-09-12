@@ -3,18 +3,22 @@
 
 name=$1 && shift
 
-
 if [[ -z $name ]]; then
-    echo "Need to specify a project name"
-    exit
+    myPWD=`pwd`
+    name=${myPWD/*\//}
+else
+    mkdir -p "./${name}"
+    cd "./${name}"
 fi
-
-mkdir -p "./${name}"
-cd "./${name}"
 
 git init
 
-touch README.md
+now=`date`
+
+echo "## $name
+
+Initialized - $now
+"> README.md
 
 echo '{
     "folders":
@@ -31,4 +35,19 @@ echo '{
         }
     ]
 }' > "./${name}.sublime-project"
+
+echo '
+.DS_Store
+*.sublime-workspace
+' > "./.gitignore"
+
+
+git add *
+git add .*
+git commit -m "init"
+
+
+
+subl -p "./${name}.sublime-project"
+smerge ./
 

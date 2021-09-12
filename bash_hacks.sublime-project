@@ -20,20 +20,23 @@
 				".*/*"
 			],
 			"name": "~/.*",
-			"path": "/Users/cramerm"
+			"path": "~",
 		},
 		{
-			"path": "profiles"
+			"path": "profiles",
 		},
 		{
 			"folder_exclude_patterns":
 			[
 				"profiles"
 			],
-			"path": "."
+			"path": ".",
 		},
 		{
-			"path": "/Users/cramerm/Documents/config"
-		}
-	]
+			"path": "~/Documents/config",
+		},
+		{
+			"path": "~/Documents/config"
+		},
+	],
 }
