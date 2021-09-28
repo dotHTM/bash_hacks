@@ -86,6 +86,7 @@ if (( $mount_mode )); then
   mkdir -p ${mountPoint}
   sshfs ${connection} \
   ${mountPoint} \
+  -o reconnect \
   -o auto_cache \
   -o volname=$volumeName \
   -o gid=`id -g` \

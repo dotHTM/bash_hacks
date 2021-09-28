@@ -8,24 +8,25 @@ if [[ -e "$BH_PRIVATE_BASHRC_PATH/quicksshfs_alias.cfg" ]]; then
         args_list=$1 && shift
         
         serverShortcutName=`echo $configURI | cut -d "@" -f 2 | tr ":/." "_--"`
-        hostNickName=`echo $configURI | perl -pe 's/(?:[^\/:]*@)?(.*):.*/\1/gmi'`
-        pathNickName=`echo $configURI | perl -pe 's/\/$//gmi' | perl -pe 's/.*\/.*?/\1/gmi'`
-
-        volPath="$hostNickName-$pathNickName"
+        host=`echo $configURI | sed -E 's/([^@]+)@([^:]+):(.*)/\2/'`
+        path=`echo $configURI | sed -E 's/([^@]+)@([^:]+):(.*)/\3/'` 
+        volPath=`echo "$host-$path" | tr ":/." "_--"`
+        
+        
 
         alias 'qs_'${serverShortcutName}'_'${trailing_handle}="quicksshfs.sh -r ${configURI} -v ${volPath} ${args_list}"
     }
+    
+    qs_list=`cat "$BH_PRIVATE_BASHRC_PATH/quicksshfs_alias.cfg" | sed 's/^[#;\/].*$//' | grep -E '\w'`
 
     while read someConfigURI; do
-        if [[ -n $someConfigURI && -n `echo $someConfigURI | perl -pe 's/^[#;\/].*$//gmi'` ]]; then
-            
+            # echo " - $someConfigURI"
             make_qs_alias $someConfigURI '' '-sumn'
             make_qs_alias $someConfigURI 'bb' '-bumn'
             
-            for some_args in 's' 'f' 'muol' 'nm' 'fm' 'b' ; do
+            for some_args in 's' 'f' 'fm' 'b' ; do
                 make_qs_alias $someConfigURI "$some_args" "-$some_args"
             done
-        fi
-    done < $BH_PRIVATE_BASHRC_PATH/quicksshfs_alias.cfg
+    done <<< "$qs_list"
 fi
 
