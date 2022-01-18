@@ -1,6 +1,11 @@
 {
 	"folders":
 	[
+		
+		{
+			
+			"path": "python"
+		},
 		{
 			"file_include_patterns":
 			[
@@ -36,7 +41,8 @@
 			"path": "~/Documents/config",
 		},
 		{
-			"path": "~/Documents/config"
+			"path": "~/Documents/config",
 		},
 	],
+
 }

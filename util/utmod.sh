@@ -2,6 +2,13 @@
 # utmod.sh
 
 
+for var in "$@"; do
+    if [[ $var == "-h" || $var == "--help" ]]; then
+        echo "usage: $0 <list of folder paths with UT assets> ..."
+    fi
+done
+
+
 extFolderList='
 utx Textures
 unr Maps
@@ -12,7 +19,19 @@ ini System
 int System
 '
 
-UTFolder=~/"Library/Application Support/Unreal Tournament/"
+macUTFolder="${HOME}/Library/Application Support/Unreal Tournament/"
+
+if [[ -d "$UT_FOLDER" ]]; then
+    UTFolder="$UT_FOLDER"
+elif [[ -d "$macUTFolder" ]]; then
+    UTFolder="$macUTFolder"
+else
+    echo "Couldn't resolve UT Folder path. Please specify in the env as 'UT_FOLDER'"
+    if [[ -n "$UT_FOLDER" ]]; then
+        echo "current \$UT_FOLDER: '$UT_FOLDER'"
+    fi
+    exit
+fi
 
 organizeFolder(){
     ext=$1
