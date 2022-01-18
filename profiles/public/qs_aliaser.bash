@@ -24,7 +24,7 @@ if [[ -e "$BH_PRIVATE_BASHRC_PATH/quicksshfs_alias.cfg" ]]; then
             make_qs_alias $someConfigURI '' '-sumn'
             make_qs_alias $someConfigURI 'bb' '-bumn'
             
-            for some_args in 's' 'f' 'fm' 'b' ; do
+            for some_args in 's' 'f' 'fm' 'm' 'b' ; do
                 make_qs_alias $someConfigURI "$some_args" "-$some_args"
             done
     done <<< "$qs_list"

@@ -65,7 +65,7 @@ if [[ $IS_USER_TERM && $TERM ]]; then
         style_nrml=`tput sgr0`
         style_theme1color=$style_red  #brackets
         style_theme2color=$style_green  #carrot
-        style_theme3color=$style_blue  #user
+        style_theme3color=$style_cyan  #user
         style_theme4color=$style_yellow  #hostname
 
         ## Wrapped values for PS1
