@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-readyDir="${HOME}/Desktop/Ready/"
+readyDir="${HOME}/Desktop/UTReady/"
 
 decompressedDir="${readyDir}/decompressed/"
 umodDir="${readyDir}/umods/"
