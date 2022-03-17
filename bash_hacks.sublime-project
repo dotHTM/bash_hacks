@@ -4,9 +4,6 @@
 		
 		{
 			
-			"path": "python"
-		},
-		{
 			"file_include_patterns":
 			[
 				".*",
@@ -28,20 +25,39 @@
 			"path": "~",
 		},
 		{
+			/*"file_include_patterns":
+			[
+				".*",
+				".* /*"
+			],*/
+			/*"folder_exclude_patterns":
+			[
+				".Trash*",
+				".cisco",
+				".cpanm",
+				".wine"
+			],*/
+			/*"folder_include_patterns":
+			[
+				".*",
+				".* /*"
+			],*/
+			/*"name": "~/.*",*/
 			"path": "profiles",
 		},
 		{
+			"path": ".",
 			"folder_exclude_patterns":
 			[
 				"profiles"
 			],
-			"path": ".",
 		},
 		{
-			"path": "~/Documents/config",
-		},
-		{
-			"path": "~/Documents/config",
+			/*"folder_exclude_patterns":
+			[
+				"profiles"
+			],*/
+			"path": "/Users/dothtm/Documents/config",
 		},
 	],
 
