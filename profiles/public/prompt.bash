@@ -109,8 +109,7 @@ if [[ $IS_USER_TERM && $TERM ]]; then
     interactive_message(){
         ## HR
         hr_echo "="
-        ## Display a message the terminal is Interactive and if Screen
-        echo -n "  ${bracket_color}>>${style_nrml} ${user_color}Interactive Shell${style_nrml} : ${hostname_color}Lvl ${SHLVL}${style_nrml} ${bracket_color}<<${style_nrml}  "
+        echo -n "  ${bracket_color}>>${style_nrml} ${user_color}Bash v$BASH_VERSION${style_nrml} : ${hostname_color}Lvl ${SHLVL}${style_nrml} ${bracket_color}<<${style_nrml}  "
         if [[ "$TERM" == "screen" ]]; then
             echo -n "  ${bracket_color}>>${style_nrml} ${prompt_color}Screen${style_nrml} ${bracket_color}<<${style_nrml}  "
         fi
@@ -140,6 +139,10 @@ if [[ $IS_USER_TERM && $TERM ]]; then
 
     boldPrompt(){
         change_PS1 boldPrompt "${wr_bracket_color}[${wr_reset_color} ${wr_user_color}$prompt_user${wr_reset_color} ${wr_bracket_color}@${wr_reset_color} ${wr_hostname_color}${bashHostNameReplacement}${wr_reset_color} ${wr_bracket_color}:${wr_reset_color} \W ${wr_bracket_color}]${wr_reset_color}${commandLineDeliminator}${wr_prompt_color}\! >${wr_reset_color} "
+    }
+    
+    semiboldPrompt(){
+        change_PS1 boldPrompt "\n# ${wr_bracket_color}[${wr_reset_color} ${wr_user_color}$prompt_user${wr_reset_color} ${wr_bracket_color}@${wr_reset_color} ${wr_hostname_color}${bashHostNameReplacement}${wr_reset_color} ${wr_bracket_color}:${wr_reset_color} \W ${wr_bracket_color}]${wr_reset_color} ${commandLineDeliminator}${wr_prompt_color}\!\n; ${wr_reset_color} "
     }
 
     shortPrompt(){
