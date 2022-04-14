@@ -7,12 +7,6 @@ if [[ -e "$BH_PRIVATE_BASHRC_PATH/quicksshfs_alias.cfg" ]]; then
         trailing_handle=$1 && shift
         args_list=$1 && shift
         
-        echo "##############################################################"
-        echo "  configURI        $configURI"
-        echo "  trailing_handle  $trailing_handle"
-        echo "  args_list        $args_list"
-        
-        
         serverShortcutName=`echo "$configURI" | cut -d "@" -f 2 | tr " :/." "__--"`
         host=`echo "$configURI" | sed -E 's/([^@]+)@([^:]+):(.*)/\2/'`
         path=`echo "$configURI" | sed -E 's/([^@]+)@([^:]+):(.*)/\3/'` 
