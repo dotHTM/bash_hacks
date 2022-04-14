@@ -104,16 +104,16 @@ if [[ -n $connection ]]; then
   domain=${connection/:*}
   path=${connection/*:}
   
-  echo "$domain => $path"
+  echo "$domain => \"$path\""
   
   if [[ -n $openInLocalShell ]]; then
     echo "$mountPoint"
   else
     if [[ $shellOpen || $moshOpen ]]; then
       if (( $moshOpen )); then
-        mosh $domain -- bash -c "cd $path; bash"
+        mosh $domain -- bash -c "cd \"$path\"; bash"
       else
-        ssh $domain -t "cd $path; bash"
+        ssh $domain -t "cd \"$path\"; bash"
       fi
     fi
   fi
