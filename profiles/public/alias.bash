@@ -1,6 +1,9 @@
 #  alias.sh
 #
 
+alias recd='cd $PWD'
+
+
 alias bh_update='cd "$BH_PROFILE_DIR/.." && git pull'   #help= cd to the profile directory and update.
 
 ### Lazy commands
