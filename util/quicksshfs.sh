@@ -78,7 +78,7 @@ if (( $forceUnmountMode )); then
   diskutil unmount force "${mountPoint}" 
 else
   if (( $unmountMode )); then
-    umount "${mountPoint}" 
+    diskutil unmount "${mountPoint}" 
   fi
 fi
 
@@ -111,8 +111,10 @@ if [[ -n "$connection" ]]; then
   else
     if [[ "$shellOpen" || "$moshOpen" ]]; then
       if (( "$moshOpen" )); then
+        echo "; mosh "$domain" -- bash -c \"cd \\\"$path\\\"; bash\""
         mosh "$domain" -- bash -c "cd \"$path\"; bash"
       else
+        echo "; ssh "$domain" -t \"cd \\\"$path\\\"; bash\""
         ssh "$domain" -t "cd \"$path\"; bash"
       fi
     fi
