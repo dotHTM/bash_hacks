@@ -25,24 +25,6 @@
 			"path": "~",
 		},
 		{
-			/*"file_include_patterns":
-			[
-				".*",
-				".* /*"
-			],*/
-			/*"folder_exclude_patterns":
-			[
-				".Trash*",
-				".cisco",
-				".cpanm",
-				".wine"
-			],*/
-			/*"folder_include_patterns":
-			[
-				".*",
-				".* /*"
-			],*/
-			/*"name": "~/.*",*/
 			"path": "profiles",
 		},
 		{
@@ -53,11 +35,7 @@
 			],
 		},
 		{
-			/*"folder_exclude_patterns":
-			[
-				"profiles"
-			],*/
-			"path": "/Users/dothtm/Documents/config",
+			"path": "~/Documents/config",
 		},
 	],
 
