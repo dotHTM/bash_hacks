@@ -23,12 +23,13 @@ usage() {
   echo "    -n    Open in Sublime Text in a New window (overrides above)"
   echo "    -l    return the path to the mount point (overrides shell connection)"
   echo "    -s    Open an ssh connection to the host"
+  echo "    -e    Try to reconnect to a terminal emulator (tmux, then screen) on the remote."
   echo "    -b    Open an mobile-shell (mosh) connection to the host"
 
   exit 1
 }
 
-while getopts "hr:v:p:umosbndfl" inputOptions; do
+while getopts "hr:v:p:umosbnedfl" inputOptions; do
   case "${inputOptions}" in
     h) usage ;;                ##
     ##
@@ -43,6 +44,7 @@ while getopts "hr:v:p:umosbndfl" inputOptions; do
     n) openInSublimeNewWindow=1 ;;      ##
     l) openInLocalShell=1 ;;      ##
     s) shellOpen=1 ;;          ##
+    e) screenOpen=1 ;;          ##
     b) moshOpen=1 ;;           ##
     d) DEBUG_MODE=1;;          ##
     ##
@@ -52,9 +54,14 @@ while getopts "hr:v:p:umosbndfl" inputOptions; do
 done
 shift $((OPTIND-1))
 
+shellInvokationCommand="\$SHELL"
+if (( "$screenOpen" )); then
+  shellInvokationCommand="env tmux attach || env tmux || env screen -d -r  || env screen || ${shellInvokationCommand}"
+fi
+
 remoteSansColon=`echo "${connection}" | perl -pe "s/://gi"`
-perlRemoteHost=`echo "${connection}" | perl -pe "s/:.*//gi"`
-perlRemotePath=`echo "${connection}" | perl -pe "s/.*://gi"`
+perlRemoteHost=`echo "${connection//}" | perl -pe "s/:.*//gi"`
+perlRemotePath=`echo "${connection//}" | perl -pe "s/.*://gi"`
 
 if [[ $connection == $remoteSansColon ]]; then echo "Incorrect remote format"; usage; fi ##
 if [[ -z "${connection}" ]]; then echo "No connection specified"; usage; fi              ##
@@ -111,11 +118,11 @@ if [[ -n "$connection" ]]; then
   else
     if [[ "$shellOpen" || "$moshOpen" ]]; then
       if (( "$moshOpen" )); then
-        echo "; mosh "$domain" -- bash -c \"cd \\\"$path\\\"; bash\""
-        mosh "$domain" -- bash -c "cd \"$path\"; bash"
+        echo "; mosh "$domain" -- bash -c \"cd \\\"$path\\\"; ${shellInvokationCommand}\""
+        mosh "$domain" -- bash -c "cd \"$path\"; ${shellInvokationCommand}"
       else
-        echo "; ssh "$domain" -t \"cd \\\"$path\\\"; bash\""
-        ssh "$domain" -t "cd \"$path\"; bash"
+        echo "; ssh "$domain" -t \"cd \\\"$path\\\"; ${shellInvokationCommand};\""
+        ssh "$domain" -t "cd \"$path\"; ${shellInvokationCommand};"
       fi
     fi
   fi
