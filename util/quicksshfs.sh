@@ -48,7 +48,8 @@ while getopts "hr:v:p:umosbnedflPE" inputOptions; do
     e) screenOpen=1 ;;          ##
     b) moshOpen=1 ;;           ##
     d) DEBUG_MODE=1;;          ##
-    P) PRINT_MODE=1;;          ##
+    P) print_mountpoint=1;;          ##
+    V) print_volume=1;;          ##
     E) echoCD=1;;          ##
     ##
     *) usage ;;                ##
@@ -85,30 +86,36 @@ fi
 ## Action modes
 
 
-if [[ -n $PRINT_MODE ]]; then
+if [[ -n $print_mountpoint ]]; then
   echo "$mountPoint"
+  exit
+fi
+
+
+if [[ -n $print_volume ]]; then
+  echo "$print_volume"
   exit
 fi
 
 
 
 if (( $forceUnmountMode )); then 
-  diskutil unmount force "${mountPoint}" 
+  diskutil unmount force "${mountPoint}" 1>/dev/null
 else
   if (( $unmountMode )); then
-    diskutil unmount "${mountPoint}" 
+    diskutil unmount "${mountPoint}" 1>/dev/null
   fi
 fi
 
 if (( "$mount_mode" )); then
   mkdir -p "${mountPoint}"
   sshfs "${connection}" \
-  "${mountPoint}" \
-  -o reconnect \
-  -o auto_cache \
-  -o volname="$volumeName" \
-  -o gid=`id -g` \
-  -o uid=`id -u`
+    "${mountPoint}" \
+    -o reconnect \
+    -o auto_cache \
+    -o volname="$volumeName" \
+    -o gid=`id -g` \
+    -o uid=`id -u`
 fi
 
 if (( "$openInSublimeNewWindow" )); then
