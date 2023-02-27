@@ -22,7 +22,7 @@
 				".*/*"
 			],
 			"name": "~/.*",
-			"path": "~",
+			"path": "/Users/dothtm",
 		},
 		{
 			"path": "profiles",
@@ -35,7 +35,7 @@
 			],
 		},
 		{
-			"path": "~/Documents/config",
+			"path": "/Users/dothtm/Documents/config",
 		},
 	],
 

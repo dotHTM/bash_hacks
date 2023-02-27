@@ -25,11 +25,12 @@ usage() {
   echo "    -s    Open an ssh connection to the host"
   echo "    -e    Try to reconnect to a terminal emulator (tmux, then screen) on the remote."
   echo "    -b    Open an mobile-shell (mosh) connection to the host"
+  echo "    -P    Print the local mount path."
 
   exit 1
 }
 
-while getopts "hr:v:p:umosbnedfl" inputOptions; do
+while getopts "hr:v:p:umosbnedflPE" inputOptions; do
   case "${inputOptions}" in
     h) usage ;;                ##
     ##
@@ -47,6 +48,8 @@ while getopts "hr:v:p:umosbnedfl" inputOptions; do
     e) screenOpen=1 ;;          ##
     b) moshOpen=1 ;;           ##
     d) DEBUG_MODE=1;;          ##
+    P) PRINT_MODE=1;;          ##
+    E) echoCD=1;;          ##
     ##
     *) usage ;;                ##
     ##
@@ -81,6 +84,14 @@ fi
 
 ## Action modes
 
+
+if [[ -n $PRINT_MODE ]]; then
+  echo "$mountPoint"
+  exit
+fi
+
+
+
 if (( $forceUnmountMode )); then 
   diskutil unmount force "${mountPoint}" 
 else
@@ -111,7 +122,10 @@ if [[ -n "$connection" ]]; then
   domain="${connection/:*}"
   path="${connection/*:}"
   
-  echo "$domain => \"$path\""
+  
+  if [[ -n "$echoCD" ]]; then
+    echo "$domain => \"$path\""
+  fi
   
   if [[ -n "$openInLocalShell" ]]; then
     echo "$mountPoint"
