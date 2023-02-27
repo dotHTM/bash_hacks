@@ -93,7 +93,7 @@ fi
 
 
 if [[ -n $print_volume ]]; then
-  echo "$print_volume"
+  echo "$volumeName"
   exit
 fi
 
