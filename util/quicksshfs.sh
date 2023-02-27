@@ -30,7 +30,7 @@ usage() {
   exit 1
 }
 
-while getopts "hr:v:p:umosbnedflPE" inputOptions; do
+while getopts "hr:v:p:umosbnedflPVE" inputOptions; do
   case "${inputOptions}" in
     h) usage ;;                ##
     ##
