@@ -88,13 +88,11 @@ fi
 
 if [[ -n $print_mountpoint ]]; then
   echo "$mountPoint"
-  exit
 fi
 
 
 if [[ -n $print_volume ]]; then
   echo "$volumeName"
-  exit
 fi
 
 
