@@ -5,8 +5,8 @@ usage() {
   if [[ $DEBUG_MODE ]]; then
     echo "
     remoteSansColon:  $remoteSansColon
-    perlRemoteHost:   $perlRemoteHost
-    perlRemotePath:   $perlRemotePath
+    remoteHost:   $remoteHost
+    remotePath:   $remotePath
     "
   fi
 
@@ -63,14 +63,14 @@ if (( "$screenOpen" )); then
   shellInvokationCommand="env tmux attach || env tmux || env screen -d -r  || env screen || ${shellInvokationCommand}"
 fi
 
-remoteSansColon=`echo "${connection}" | perl -pe "s/://gi"`
-perlRemoteHost=`echo "${connection//}" | perl -pe "s/:.*//gi"`
-perlRemotePath=`echo "${connection//}" | perl -pe "s/.*://gi"`
+remoteSansColon="${connection/:/}"
+remoteHost="${connection/:*/}"
+remotePath="${connection/*:/}"
 
 if [[ $connection == $remoteSansColon ]]; then echo "Incorrect remote format"; usage; fi ##
 if [[ -z "${connection}" ]]; then echo "No connection specified"; usage; fi              ##
-if [[ -z "${perlRemoteHost}" ]]; then echo "No remote Host specified"; usage; fi         ##
-if [[ -z "${perlRemotePath}" ]]; then echo "No remote Path specified"; usage; fi         ##
+if [[ -z "${remoteHost}" ]]; then echo "No remote Host specified"; usage; fi         ##
+if [[ -z "${remotePath}" ]]; then echo "No remote Path specified"; usage; fi         ##
 ##
 
 if [[ -z "$volumeName" ]]; then
@@ -84,17 +84,6 @@ if [[ -z "$connection" || -z "$mountPoint" || -z "$volumeName" ]]; then
 fi
 
 ## Action modes
-
-
-if [[ -n $print_mountpoint ]]; then
-  echo "$mountPoint"
-fi
-
-
-if [[ -n $print_volume ]]; then
-  echo "$volumeName"
-fi
-
 
 
 if (( $forceUnmountMode )); then 
@@ -147,3 +136,11 @@ if [[ -n "$connection" ]]; then
   fi
 fi
 
+if [[ -n $print_mountpoint ]]; then
+  echo "$mountPoint"
+fi
+
+
+if [[ -n $print_volume ]]; then
+  echo "$volumeName"
+fi
