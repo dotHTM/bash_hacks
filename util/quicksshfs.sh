@@ -26,6 +26,8 @@ usage() {
   echo "    -e    Try to reconnect to a terminal emulator (tmux, then screen) on the remote."
   echo "    -b    Open an mobile-shell (mosh) connection to the host"
   echo "    -P    Print the local mount path."
+  echo "    -V    Print the local volume name."
+  echo "    -E    Be a little verbose."
 
   exit 1
 }
@@ -50,7 +52,7 @@ while getopts "hr:v:p:umosbnedflPVE" inputOptions; do
     d) DEBUG_MODE=1;;          ##
     P) print_mountpoint=1;;          ##
     V) print_volume=1;;          ##
-    E) echoCD=1;;          ##
+    E) echoOut=1;;          ##
     ##
     *) usage ;;                ##
     ##
@@ -97,12 +99,12 @@ fi
 if (( "$mount_mode" )); then
   mkdir -p "${mountPoint}"
   sshfs "${connection}" \
-    "${mountPoint}" \
-    -o reconnect \
-    -o auto_cache \
-    -o volname="$volumeName" \
-    -o gid=`id -g` \
-    -o uid=`id -u`
+  "${mountPoint}" \
+  -o reconnect \
+  -o auto_cache \
+  -o volname="$volumeName" \
+  -o gid=`id -g` \
+  -o uid=`id -u`
 fi
 
 if (( "$openInSublimeNewWindow" )); then
@@ -117,19 +119,25 @@ if [[ -n "$connection" ]]; then
   path="${connection/*:}"
   
   
-  if [[ -n "$echoCD" ]]; then
+  if [[ -n "$echoOut" ]]; then
     echo "$domain => \"$path\""
   fi
   
   if [[ -n "$openInLocalShell" ]]; then
-    echo "$mountPoint"
+    if [[ -n "$echoOut" ]]; then
+      echo "$mountPoint"
+    fi
   else
     if [[ "$shellOpen" || "$moshOpen" ]]; then
       if (( "$moshOpen" )); then
-        echo "; mosh "$domain" -- bash -c \"cd \\\"$path\\\"; ${shellInvokationCommand}\""
+        if [[ -n "$echoOut" ]]; then
+          echo "; mosh "$domain" -- bash -c \"cd \\\"$path\\\"; ${shellInvokationCommand}\""
+        fi
         mosh "$domain" -- bash -c "cd \"$path\"; ${shellInvokationCommand}"
       else
-        echo "; ssh "$domain" -t \"cd \\\"$path\\\"; ${shellInvokationCommand};\""
+        if [[ -n "$echoOut" ]]; then
+          echo "; ssh "$domain" -t \"cd \\\"$path\\\"; ${shellInvokationCommand};\""
+        fi
         ssh "$domain" -t "cd \"$path\"; ${shellInvokationCommand};"
       fi
     fi
