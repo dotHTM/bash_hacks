@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # quicksshfs.sh
 
+
+defaultMountParent="/tmp/vol/"
+
 usage() {
   if [[ $DEBUG_MODE ]]; then
     echo "
@@ -79,20 +82,47 @@ if [[ -z "$volumeName" ]]; then
   volumeName=`echo "$connection" | cut -d "@" -f 2 | tr ":/." "_--"`
 fi
 if [[ -z "$mountPoint" ]]; then
-  mountPoint="/tmp/vol/$volumeName"
+  mountPoint="$defaultMountParent/$volumeName"
 fi
 if [[ -z "$connection" || -z "$mountPoint" || -z "$volumeName" ]]; then
   usage
 fi
 
+
+platform=`uname`
+
+
 ## Action modes
+
+trashMountPoint(){
+  mp=$1 && shift
+  if [[ -d $mp ]]; then
+    if [[ "$platform" == "Darwin" ]]; then
+      mv "$mp" ~/.Trash/"${mp/*\//}__`date "+%s"`"
+    else
+      echo "idk what to do for your platform to remove/trash this mount point..." >&2
+    fi
+  fi
+}
 
 
 if (( $forceUnmountMode )); then 
-  diskutil unmount force "${mountPoint}" 1>/dev/null
-else
-  if (( $unmountMode )); then
-    diskutil unmount "${mountPoint}" 1>/dev/null
+  if [[ -d "${mountPoint}" ]]; then
+    if [[ "$platform" == "Darwin" ]]; then
+      diskutil unmount force "${mountPoint}" 1>/dev/null
+    else
+      echo "idk what to do for your platform to unmount this mount point..." >&2
+    fi
+    trashMountPoint "${mountPoint}"
+  fi
+elif (( $unmountMode )); then
+  if [[ -d "${mountPoint}" ]]; then
+    if [[ "$platform" == "Darwin" ]]; then
+      diskutil unmount "${mountPoint}" 1>/dev/null
+    else
+      echo "idk what to do for your platform to unmount this mount point..." >&2
+    fi
+    trashMountPoint "${mountPoint}"
   fi
 fi
 
