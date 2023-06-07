@@ -11,16 +11,22 @@ else
     cd "./${name}"
 fi
 
-git init
-
 now=`date`
 
-echo "## $name
+if [[ ! -e README.md ]]; then
+
+    echo "## $name
 
 Initialized - $now
 "> README.md
 
-echo '{
+
+fi
+
+
+projectFile="./${name}.sublime-project"
+if [[ ! -e "$projectFile" ]]; then
+    echo '{
     "folders":
     [
         {
@@ -34,18 +40,21 @@ echo '{
             // "shell_cmd": "env",
         }
     ]
-}' > "./${name}.sublime-project"
+}' > "$projectFile"
 
-echo '
-.DS_Store
-*.sublime-workspace
-' > "./.gitignore"
+fi
 
+if [[ ! -d ./.git ]]; then
+    git init
+    echo '
+    .DS_Store
+    *.sublime-workspace
+    ' >> "./.gitignore"
 
-git add *
-git add .*
-git commit -m "init"
-
+    git add *
+    git add .*
+    git commit -m "init"
+fi
 
 
 subl -p "./${name}.sublime-project"
