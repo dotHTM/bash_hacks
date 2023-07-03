@@ -3,3 +3,4 @@ profiles/plugins/*.*sh
 cal.html
 *.bak
 *.pl_critic.md
+pyrightconfig.json
