@@ -42,8 +42,8 @@ usage() {
 }
 
 ifEcho(){
-  level=$1 && shift
   message=$1 && shift
+  level=$1 && shift
   if (( ${level} )); then
     echo $message
   fi
@@ -53,7 +53,7 @@ ifEcho(){
 unmount(){
   path=$1 && shift
   verbose=$1 && shift
-  ifEcho $verbose "unmounting      : ${path}"
+  ifEcho  "unmounting      : ${path}" $verbose
   if [[ -d "${path}" ]]; then
     if [[ "$platform" == "Darwin" ]]; then
       diskutil unmount "${path}" 1>/dev/null
@@ -67,7 +67,7 @@ unmount(){
 forceUnmount(){
   path=$1 && shift
   verbose=$1 && shift
-  ifEcho $verbose "force unmounting: ${path}"
+  ifEcho  "force unmounting: ${path}" $verbose
   if [[ -d "${path}" ]]; then
     if [[ "$platform" == "Darwin" ]]; then
       diskutil unmount force "${path}" 1>/dev/null
@@ -133,7 +133,7 @@ remoteHost="${connection/:*/}"
 remotePath="${connection/*:/}"
 
 if [[ -z "${connection}" ]];then
-  ifEcho $echoOut "No connection, eject all mode."
+  ifEcho  "No connection, eject all mode." $echoOut
   if (( ${unmountMode}  )); then
     for path in `find ${defaultMountParent} -type d -d 1`; do
       unmount "${path}" $echoOut
@@ -195,36 +195,23 @@ fi
 domain="${connection/:*}"
 path="${connection/*:}"
 
-if [[ -n "$echoOut" ]]; then
-  echo "$domain => \"$path\""
-fi
+
+ifEcho "$domain => \"$path\"" $echoOut
+
 
 if [[ -n "$openInLocalShell" ]]; then
-  if [[ -n "$echoOut" ]]; then
-    echo "$mountPoint"
-  fi
+  ifEcho "$mountPoint" $echoOut
 else
   if [[ "$shellOpen" || "$moshOpen" ]]; then
     if (( "$moshOpen" )); then
-      if [[ -n "$echoOut" ]]; then
-        echo "; mosh "$domain" -- bash -c \"cd \\\"$path\\\"; ${shellInvokationCommand}\""
-      fi
+      ifEcho "; mosh "$domain" -- bash -c \"cd \\\"$path\\\"; ${shellInvokationCommand}\"" $echoOut
       mosh "$domain" -- bash -c "cd \"$path\"; ${shellInvokationCommand}"
     else
-      if [[ -n "$echoOut" ]]; then
-        echo "; ssh "$domain" -t \"cd \\\"$path\\\"; ${shellInvokationCommand};\""
-      fi
+      ifEcho "; ssh "$domain" -t \"cd \\\"$path\\\"; ${shellInvokationCommand};\"" $echoOut
       ssh "$domain" -t "cd \"$path\"; ${shellInvokationCommand};"
     fi
   fi
 fi
 
-
-if [[ -n $print_mountpoint ]]; then
-  echo "$mountPoint"
-fi
-
-
-if [[ -n $print_volume ]]; then
-  echo "$volumeName"
-fi
+ifEcho "$mountPoint" $print_mountpoint
+ifEcho "$volumeName" $print_volume
