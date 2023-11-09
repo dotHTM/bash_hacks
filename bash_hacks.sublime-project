@@ -4,29 +4,14 @@
 		
 		{
 			
-			"file_include_patterns":
-			[
-				".*",
-				".*/*"
-			],
-			"folder_exclude_patterns":
-			[
-				".Trash*",
-				".cisco",
-				".cpanm",
-				".wine"
-			],
-			"folder_include_patterns":
-			[
-				".*",
-				".*/*"
-			],
-			"name": "~/.*",
-			"path": "~",
+			"file_include_patterns":[".bash*"],
+			"folder_exclude_patterns":["*"],
+			"name": "~/.bash*",
+			"path": "/Users/cramerml",
 		},
-		{
-			"path": "profiles",
-		},
+		
+		{"path": "~/.config/fish",},
+		{"path": "profiles",},
 		{
 			"path": ".",
 			"folder_exclude_patterns":
@@ -35,7 +20,10 @@
 			],
 		},
 		{
-			"path": "~/Documents/config/private_profile"
+			"path": "/Users/cramerml/Documents/config/private_profile",
+		},
+		{
+			"path": "/Users/cramerml/Developer/personal/pyHacks"
 		},
 	],
 
