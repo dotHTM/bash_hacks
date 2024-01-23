@@ -6,6 +6,9 @@ defaultMountParent="/tmp/vol/"
 
 platform=`uname`
 
+CT=60
+CXT=60
+
 
 usage() {
   if [[ $DEBUG_MODE ]]; then
@@ -17,7 +20,7 @@ usage() {
   fi
 
   echo "Usage: 
-  ${0/*\/} [-ufmonlsebPVE] -r [user@]server.com:/remote/path [-v volumeName [-p /path/to/mountPoint]]
+  ${0/*\/}  -r [user@]server.com:/remote/path [-a sub/directory/path] [-v volumeName [-p /path/to/mountPoint]] [-ufmonlsebPVE]
   ${0/*\/} [-uf]
   "
   echo
@@ -25,9 +28,26 @@ usage() {
   echo
   echo "    -h    Print this help"
   echo
+  echo "    -r    Remote connection string. An SSH host string, followed
+                  by a colon (:), and the absolute path to cd into and/or
+                  (un)mount from the remote system's root."
+  echo
+  echo "    -a    Additional subdirectory to append to the defined path
+                  in the -r flag. Useful for use in aliases where mounting
+                  the parent configured directory is not possible."
+  echo
+  echo "    -v    The local volume mount name. When displaying in Finder
+                  on the Desktop, this name replaces the mount point name."
+  echo
+  echo "    -p    The local volume mount point."
+  echo
   echo "    -u    unmount"
   echo "    -f    force unmount with diskutil"
   echo "    -m    mount disks"
+  echo 
+  echo "    -c    Set cache_timeout"
+  echo "    -x    Set cache_X_timeout"
+  echo 
   echo "    -o    Open in Sublime Text in the current open Project window"
   echo "    -n    Open in Sublime Text in a New window (overrides above)"
   echo "    -l    return the path to the mount point (overrides shell connection)"
@@ -95,13 +115,16 @@ trashMountPoint(){
 
 
 
-while getopts "hr:v:p:umosbnedflPVE" inputOptions; do
+while getopts "hr:a:v:p:c:x:umosbnedflPVE" inputOptions; do
   case "${inputOptions}" in
   h) usage ;;                ##
     ##
   r) connection=${OPTARG} ;; ##
+  a) appendPath=${OPTARG} ;; ##
   v) volumeName=${OPTARG} ;; ##
   p) mountPoint=${OPTARG} ;; ##
+  c) CT=${OPTARG} ;; ##
+  x) CXT=${OPTARG} ;; ##
     ##
   u) unmountMode=1 ;;        ##
   f) forceUnmountMode=1 ;;   ##
@@ -154,6 +177,9 @@ if [[ -z "${remotePath}" ]]; then echo "No remote Path specified"; usage; fi #
 if [[ $connection == $remoteSansColon ]]; then echo "Incorrect remote format"; usage; fi #
 
 
+if [[ -n "$appendPath" ]]; then
+  connection="${connection}/${appendPath}"
+fi
 if [[ -z "$volumeName" ]]; then
   volumeName=`echo "$connection" | cut -d "@" -f 2 | tr ":/." "_--"`
 fi
@@ -176,12 +202,14 @@ fi
 if (( "$mount_mode" )); then
   mkdir -p "${mountPoint}"
   sshfs "${connection}" \
-  "${mountPoint}" \
-  -o reconnect \
-  -o auto_cache \
-  -o volname="$volumeName" \
-  -o gid=`id -g` \
-  -o uid=`id -u`
+    "${mountPoint}" \
+    -o reconnect \
+    -o cache_timeout="$CT" \
+    -o volname="$volumeName" \
+    -o gid=`id -g` \
+    -o uid=`id -u`
+    # -o cache=yes \
+    # -o cache_X_timeout=$CXT \
 fi
 
 if (( "$openInSublimeNewWindow" )); then
