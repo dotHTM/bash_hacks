@@ -2,21 +2,11 @@
 # insomnia.sh
 
 
+
 time_to(){
-    message=$1 && shift
     hour=$1 && shift
     minute=$1 && shift
     next_day=$1 && shift
-    
-    if [[ -z $minute ]]; then
-        until="${message} ${hour}"
-        minute="00"
-    else
-        until="${message} ${hour}:${minute}"
-    fi
-    
-    mkdir -p ~/.config/variables
-    echo "${until}" > ~/.config/variables/insomnia.txt
     
     if [[ -z $next_day ]]; then
         echo $(( `date -v${hour}H -v${minute}M -v0S "+%s"` - `date "+%s"` ))
@@ -25,21 +15,32 @@ time_to(){
     fi
 }
 
-wait_until(){
-    hour=$1 && shift
-    minute=$1 && shift
-    next_day=$1 && shift
-    sleep $( time_to "" $hour $minute $next_day )
-}
 buzz_until(){
     hour=$1 && shift
     minute=$1 && shift
     next_day=$1 && shift
-    caffeinate -disu -t $( time_to "☕️" $hour $minute $next_day )
+    caffeinate -disu -t $( time_to $hour $minute $next_day )
 }
 
-wait_until 8
-buzz_until 12
-wait_until 13
-buzz_until 17
-wait_until "00" "00" 1
+buzzed_durring(){
+    start_hour=$1 && shift
+    start_minute=$1 && shift
+
+    end_hour=$1 && shift
+    end_minute=$1 && shift
+    end_next_day=$1 && shift
+    
+    start_delta=$( time_to $start_hour $start_minute )
+    end_delta=$( time_to $end_hour $end_minute $end_next_day )
+    
+    if (( $start_delta < 0 && 0 < $end_delta )); then 
+        buzz_until ${end_hour} ${end_minute} ${end_next_day}
+    else
+        sleep 30
+    fi
+}
+
+while [[ 1 == 1 ]]; do
+    buzzed_durring 08 00 12 00
+    buzzed_durring 13 00 17 00
+done
