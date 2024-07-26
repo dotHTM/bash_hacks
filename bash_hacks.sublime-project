@@ -1,30 +1,9 @@
 {
-	"folders":
-	[
-		
-		{
-			
-			"file_include_patterns":[".bash*"],
-			"folder_exclude_patterns":["*"],
-			"name": "~/.bash*",
-			"path": "/Users/cramerml",
-		},
-		
-		{"path": "~/.config/fish",},
-		{"path": "profiles",},
-		{
-			"path": ".",
-			"folder_exclude_patterns":
-			[
-				"profiles"
-			],
-		},
-		{
-			"path": "/Users/cramerml/Documents/config/private_profile",
-		},
-		{
-			"path": "/Users/cramerml/Developer/personal/pyHacks"
-		},
-	],
-
+  "folders": [
+    { "path": "~/.config/bash", },
+    { "path": "~/.config/fish", },
+    { "path": ".", },
+    { "path": "~/Documents/config/private_profile", },
+    { "path": "~/Developer/personal/pyHacks", },
+  ],
 }
