@@ -7,8 +7,6 @@ defaultMountParent="/tmp/vol/"
 platform=`uname`
 
 CT=60
-CXT=60
-
 
 usage() {
   if [[ $DEBUG_MODE ]]; then
@@ -26,37 +24,48 @@ usage() {
   echo
   echo "  If [/path/to/mountPoint] is ommitted, then /tmp will be the parent folder to the mounted file system."
   echo
-  echo "    -h    Print this help"
+  echo "    -h        Print this help"
   echo
-  echo "    -r    Remote connection string. An SSH host string, followed
-                  by a colon (:), and the absolute path to cd into and/or
-                  (un)mount from the remote system's root."
+  echo "Required"
   echo
-  echo "    -a    Additional subdirectory to append to the defined path
-                  in the -r flag. Useful for use in aliases where mounting
-                  the parent configured directory is not possible."
+  echo "    -r <str>  Remote connection string. An SSH host string, followed
+                      by a colon (:), and the absolute path to cd into
+                      and/or (un)mount from the remote system's root."
   echo
-  echo "    -v    The local volume mount name. When displaying in Finder
-                  on the Desktop, this name replaces the mount point name."
+  echo "CONFIG"
   echo
-  echo "    -p    The local volume mount point."
+  echo "    -a <str>  Additional subdirectory to append to the defined path
+                      in the -r flag. Useful for use in aliases where
+                      mounting the parent configured directory is not possible."
   echo
-  echo "    -u    unmount"
-  echo "    -f    force unmount with diskutil"
-  echo "    -m    mount disks"
+  echo "    -v <str>  The local volume mount name. When displaying in Finder
+                      on the Desktop, this name replaces the mount point name."
+  echo
+  echo "    -p <str>  The local volume mount point."
+  echo
+  echo "    -c <int>  Set cache_timeout"
   echo 
-  echo "    -c    Set cache_timeout"
-  echo "    -x    Set cache_X_timeout"
+  echo "    -C <cmd>  run a command" 
   echo 
-  echo "    -o    Open in Sublime Text in the current open Project window"
-  echo "    -n    Open in Sublime Text in a New window (overrides above)"
-  echo "    -l    return the path to the mount point (overrides shell connection)"
-  echo "    -s    Open an ssh connection to the host"
-  echo "    -e    Try to reconnect to a terminal emulator (tmux, then screen) on the remote."
-  echo "    -b    Open an mobile-shell (mosh) connection to the host"
-  echo "    -P    Print the local mount path."
-  echo "    -V    Print the local volume name."
-  echo "    -E    Be a little verbose."
+  echo "ACTIONS"
+  echo 
+  echo "    -u        unmount"
+  echo "    -f        force unmount with diskutil"
+  echo "    -m        mount disks"
+  echo 
+  echo "    -o        Open in Sublime Text in the current open Project window"
+  echo "    -n        Open in Sublime Text in a New window (overrides above)"
+  echo "    -s        Open an ssh connection to the host"
+  echo "    -b        Open an mobile-shell (mosh) connection to the host"
+  echo "    -e        Try to reconnect to a terminal emulator (tmux, then screen)
+                      on the remote."
+  echo
+  echo "MESSAGING"
+  echo
+  echo "    -l        return the path to the mount point (overrides shell connection)"
+  echo "    -P        Print the local mount path."
+  echo "    -V        Print the local volume name."
+  echo "    -E        Be a little verbose."
 
   exit 1
 }
@@ -115,7 +124,7 @@ trashMountPoint(){
 
 
 
-while getopts "hr:a:v:p:c:x:umosbnedflPVE" inputOptions; do
+while getopts "hr:a:v:p:c:C:x:umosbnedflPVE" inputOptions; do
   case "${inputOptions}" in
   h) usage ;;                ##
     ##
@@ -123,8 +132,8 @@ while getopts "hr:a:v:p:c:x:umosbnedflPVE" inputOptions; do
   a) appendPath=${OPTARG} ;; ##
   v) volumeName=${OPTARG} ;; ##
   p) mountPoint=${OPTARG} ;; ##
+  C) remoteCommand=${OPTARG} ;;          ##
   c) CT=${OPTARG} ;; ##
-  x) CXT=${OPTARG} ;; ##
     ##
   u) unmountMode=1 ;;        ##
   f) forceUnmountMode=1 ;;   ##
@@ -145,6 +154,9 @@ while getopts "hr:a:v:p:c:x:umosbnedflPVE" inputOptions; do
   esac
 done
 shift $((OPTIND-1))
+
+
+
 
 shellInvokationCommand="\$SHELL"
 if (( "$screenOpen" )); then
@@ -208,8 +220,6 @@ if (( "$mount_mode" )); then
     -o volname="$volumeName" \
     -o gid=`id -g` \
     -o uid=`id -u`
-    # -o cache=yes \
-    # -o cache_X_timeout=$CXT \
 fi
 
 if (( "$openInSublimeNewWindow" )); then
@@ -226,6 +236,9 @@ path="${connection/*:}"
 
 ifEcho "$domain => \"$path\"" $echoOut
 
+if [[ -n "$remoteCommand" ]]; then
+  ssh "$domain" -t "cd \"$path\"; ${remoteCommand};"
+fi
 
 if [[ -n "$openInLocalShell" ]]; then
   ifEcho "$mountPoint" $echoOut
@@ -240,6 +253,7 @@ else
     fi
   fi
 fi
+
 
 ifEcho "$mountPoint" $print_mountpoint
 ifEcho "$volumeName" $print_volume
