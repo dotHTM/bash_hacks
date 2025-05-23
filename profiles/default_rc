@@ -19,7 +19,6 @@
         color_setup
         boldPrompt
         
-        # git_summary.sh path/to/your/user/developer/directory
         interactive_message
     fi
 
