@@ -25,6 +25,6 @@ done
 echo
 if [[ -n $(which pipx) ]]; then
 echo "==== pipx ================================"
-pipx upgrade (pipx list --json | jq -r ".venvs | keys[]")
+pipx upgrade $( pipx list --json | jq -r ".venvs | keys[]" )
 echo
 fi
