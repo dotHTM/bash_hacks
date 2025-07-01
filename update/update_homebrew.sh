@@ -1,16 +1,6 @@
 #!/usr/bin/env bash
-# do_updates.sh
 
-
-set -e 
-
-update_ms.sh
-
-if [[ "Darwin" == $(uname) ]]; then
-    echo "==== macOS ================================"
-    softwareupdate --install --recommended
-    echo
-fi
+set -e
 
 if [[ -n $(which brew) ]]; then
     echo "==== Homebrew ================================"
@@ -20,5 +10,3 @@ if [[ -n $(which brew) ]]; then
     brew cleanup
     echo
 fi
-
-update_pip.sh
