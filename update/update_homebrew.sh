@@ -7,6 +7,7 @@ if [[ -n $(which brew) ]]; then
     brew update
     brew upgrade
     brew upgrade --cask --greedy
+    brew autoremove
     brew cleanup
     echo
 fi
