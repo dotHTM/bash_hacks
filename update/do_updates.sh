@@ -5,20 +5,7 @@
 set -e 
 
 update_ms.sh
-
-if [[ "Darwin" == $(uname) ]]; then
-    echo "==== macOS ================================"
-    softwareupdate --install --recommended
-    echo
-fi
-
-if [[ -n $(which brew) ]]; then
-    echo "==== Homebrew ================================"
-    brew update
-    brew upgrade
-    brew upgrade --cask --greedy
-    brew cleanup
-    echo
-fi
-
+update_macos.sh
+update_homebrew.sh
 update_pip.sh
+
