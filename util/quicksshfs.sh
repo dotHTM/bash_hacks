@@ -225,17 +225,23 @@ if (( "$mount_mode" )); then
     -o uid=`id -u`
 fi
 
+open_path="${mountPoint}"
+if [ -n "$go_to_path" ];then
+  open_path="${mountPoint}/${go_to_path}"
+fi
 
-open_path="${mountPoint}/${go_to_path}"
-
-if [ -e "$open_path" ]; then
-  if (( "$openInSublimeNewWindow" )); then
+if (( "$openInSublimeNewWindow" )); then
+  if [ -e "$open_path" ]; then
     subl -n "$open_path"
-  elif (( "$openInSublime" )); then
-    subl -a "$open_path"
+  else
+    echo "path '$open_path' does not exist"
   fi
-else
-  echo "path '$open_path' does not exist"
+elif (( "$openInSublime" )); then
+  if [ -e "$open_path" ]; then
+    subl -a "$open_path"
+  else
+    echo "path '$open_path' does not exist"
+  fi
 fi
 
 
