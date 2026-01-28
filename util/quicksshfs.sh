@@ -18,7 +18,7 @@ usage() {
   fi
 
   echo "Usage: 
-  ${0/*\/}  -r [user@]server.com:/remote/path [-a sub/directory/path] [-v volumeName [-p /path/to/mountPoint]] [-ufmonlsebPVE]
+  ${0/*\/}  -r [user@]server.com:/remote/path [-a sub/directory/path] [-v volumeName [-p /path/to/mountPoint]] [-g relative/path/on/mountpoint] [-ufmonlsebPVE]
   ${0/*\/} [-uf]
   "
   echo
@@ -42,6 +42,8 @@ usage() {
                       on the Desktop, this name replaces the mount point name."
   echo
   echo "    -p <str>  The local volume mount point."
+  echo
+  echo "    -g <str>  The relative path to open."
   echo
   echo "    -c <int>  Set cache_timeout"
   echo 
@@ -124,7 +126,7 @@ trashMountPoint(){
 
 
 
-while getopts "hr:a:v:p:c:C:x:umosbnedflPVE" inputOptions; do
+while getopts "hr:a:v:p:g:c:C:x:umosbnedflPVE" inputOptions; do
   case "${inputOptions}" in
   h) usage ;;                ##
     ##
@@ -132,6 +134,7 @@ while getopts "hr:a:v:p:c:C:x:umosbnedflPVE" inputOptions; do
   a) appendPath=${OPTARG} ;; ##
   v) volumeName=${OPTARG} ;; ##
   p) mountPoint=${OPTARG} ;; ##
+  g) go_to_path=${OPTARG} ;; ##
   C) remoteCommand=${OPTARG} ;;          ##
   c) CT=${OPTARG} ;; ##
     ##
@@ -222,10 +225,17 @@ if (( "$mount_mode" )); then
     -o uid=`id -u`
 fi
 
-if (( "$openInSublimeNewWindow" )); then
-  subl -n "$mountPoint"
-elif (( "$openInSublime" )); then
-  subl -a "$mountPoint"
+
+open_path="${mountPoint}/${go_to_path}"
+
+if [ -e "$open_path" ]; then
+  if (( "$openInSublimeNewWindow" )); then
+    subl -n "$open_path"
+  elif (( "$openInSublime" )); then
+    subl -a "$open_path"
+  fi
+else
+  echo "path '$open_path' does not exist"
 fi
 
 
