@@ -14,7 +14,7 @@ done
 for this_pip in $pips; do
     if [[ -n $(which $this_pip) ]]; then
         echo "==== $this_pip ===="
-        # $this_pip list
+        $this_pip list
         $this_pip install --upgrade pip
         $this_pip freeze --local \
             | grep -v '^\-e' \

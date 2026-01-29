@@ -4,6 +4,6 @@ set -e
 
 if [[ "Darwin" == $(uname) ]]; then
     echo "==== macOS ================================"
-    softwareupdate --install --recommended
+    open "x-apple.systempreferences:com.apple.preferences.softwareupdate"
     echo
 fi
