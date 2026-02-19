@@ -3,6 +3,7 @@
     { "path": "~/.config/bash", },
     { "path": "~/.config/fish", },
     { "path": ".", },
+    { "path": "~/", },
     { "path": "~/Documents/config/private_profile", },
     { "path": "~/Developer/personal/pyHacks", },
   ],
