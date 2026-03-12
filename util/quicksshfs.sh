@@ -230,13 +230,24 @@ if [ -n "$go_to_path" ];then
   open_path="${mountPoint}/${go_to_path}"
 fi
 
+
+open_wait(){
+  for i in `seq 10`; do
+    if [ ! -e "$open_path" ]; then
+      sleep 1
+    fi
+  done
+}
+
 if (( "$openInSublimeNewWindow" )); then
+  open_wait
   if [ -e "$open_path" ]; then
     subl -n "$open_path"
   else
     echo "path '$open_path' does not exist"
   fi
 elif (( "$openInSublime" )); then
+  open_wait
   if [ -e "$open_path" ]; then
     subl -a "$open_path"
   else
@@ -245,9 +256,8 @@ elif (( "$openInSublime" )); then
 fi
 
 
-
 domain="${connection/:*}"
-path="${connection/*:}"
+path="${connection/*:}/${go_to_path}"
 
 
 ifEcho "$domain => \"$path\"" $echoOut

@@ -1,7 +1,7 @@
 {
   "folders": [
-    { "path": "~/.config/bash", },
-    { "path": "~/.config/fish", },
+    { "path": "/Users/dothtm/.config/bash", },
+    { "path": "/Users/dothtm/.config/fish", },
     { "path": ".", },
     { "path": "~/", },
     { "path": "~/Documents/config/private_profile", },
