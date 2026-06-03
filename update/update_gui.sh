@@ -25,12 +25,16 @@ if [[ "Darwin" == $(uname) ]]; then
         echo
     fi
 
-    updater="/Applications/JetBrains Toolbox.app"
-    if [[ -e "$updater" ]]; then
-        echo "==== JetBrains ================================"
-        echo "  -> Opening JetBrains Toolbox"
-        open "$updater"
-        echo
+    if [[ -n $(which brew) ]]; then
+        osascript -e 'tell application "JetBrains Toolbox" to quit'
+        brew upgrade --cask jetbrains-toolbox --greedy
+        updater="/Applications/JetBrains Toolbox.app"
+        if [[ -e "$updater" ]]; then
+            echo "==== JetBrains ================================"
+            echo "  -> Opening JetBrains Toolbox"
+            open "$updater"
+            echo
+        fi
     fi
 
 fi
