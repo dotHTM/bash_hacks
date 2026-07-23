@@ -5,8 +5,8 @@ set -e
 if [[ -n $(which brew) ]]; then
     echo "==== Homebrew ================================"
     brew update
-    brew upgrade
-    brew upgrade --cask --greedy
+    brew upgrade --yes
+    brew upgrade --cask --greedy --yes
     brew autoremove
     brew cleanup
     echo
